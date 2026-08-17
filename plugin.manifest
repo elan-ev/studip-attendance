@@ -1,0 +1,10 @@
+pluginname=ElanAttendancePlugin
+displayname=ElanAttendancePlugin
+pluginclassname=ElanAttendancePlugin
+origin=elan-ev
+version=0.1.0
+category=todo
+summary=todo
+description=todo
+studipMinVersion=5.4
+studipMaxVersion=5.5.99
