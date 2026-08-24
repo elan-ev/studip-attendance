@@ -1,0 +1,16 @@
+default:
+  suites:
+    default:
+      paths:
+        - '%paths.base%/tests/behat/features'
+      contexts:
+        - StudipAttendance\Tests\Behat\ApiContext:
+            username: root@studip
+            password: testing
+  extensions:
+    Behat\MinkExtension:
+      base_url: 'http://localhost:8032'
+      default_session: browserkit_http
+      sessions:
+        browserkit_http:
+          browserkit_http: ~

@@ -1,0 +1,60 @@
+{
+    "name": "studip-attendance",
+    "private": true,
+    "version": "0.1.0",
+    "author": "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
+    "contributors": [
+        "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
+        "Farbod Zamani <zamani@elan-ev.de> (elan e.V.)"
+    ],
+    "license": "GPL-3.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/elan-ev/studip-attendance.git"
+    },
+    "homepage": "https://elan-ev.de",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/studip-attendance-lib.umd.cjs",
+    "module": "./dist/studip-attendance-lib.js",
+    "exports": {
+        ".": {
+            "import": "./dist/studip-attendance-lib.js",
+            "require": "./dist/studip-attendance-lib.umd.cjs"
+        }
+    },
+    "scripts": {
+        "dev": "vite build --watch",
+        "build": "vite build",
+        "dev-build": "vite build --mode development",
+        "github-dev-build": "npm install && composer install && npm run dev-build",
+        "gettext:extract": "node scripts/extract.js",
+        "gettext:compile": "node scripts/compile-translations.js",
+        "preview": "vite preview",
+        "prezip": "npm install && npm run build && composer install --no-dev",
+        "zip": "zip -r studip-attendance-v$npm_package_version.zip controllers dist lib migrations vendor views LICENSE LICENSE-SUPPLEMENT.txt README.md ElanAttendancePlugin.php bootstrap.php plugin.manifest -x '*.editorconfig' -x 'vendor/*.git*' -x '*.DS_Store'",
+        "docs-build": "npx @redocly/cli build-docs docs/api/openapi.yaml -o docs/api/api-docs.html"
+    },
+    "dependencies": {
+        "pinia": "^3.0.3",
+        "vue": "^3.5.22",
+        "vue-router": "^4.6.4"
+    },
+    "devDependencies": {
+        "@ckeditor/ckeditor5-vue": "^7.3.0",
+        "@headlessui/vue": "^1.7.23",
+        "@redocly/cli": "^2.40.0",
+        "@vitejs/plugin-vue": "^6.0.1",
+        "gettext-extractor-vue": "^5.2.0",
+        "gettext-parser": "^9.0.2",
+        "glob": "^13.0.6",
+        "kitsu": "^11.1.0",
+        "po2json": "^0.4.5",
+        "sass": "^1.97.2",
+        "sass-loader": "^16.0.6",
+        "vite": "^7.1.12",
+        "vue3-gettext": "^4.0.0-beta.1"
+    }
+}

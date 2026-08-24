@@ -1,0 +1,39 @@
+{
+    "name": "elan-ev/studip-attendance",
+    "version": "0.1.0",
+    "type": "project",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Ron Lucke",
+            "email": "lucke@elan-ev.de"
+        },
+        {
+            "name": "Farbod Zamani",
+            "email": "zamani@elan-ev.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "StudipAttendance\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "StudipAttendance\\Tests\\Behat\\": "tests/behat/"
+        }
+    },
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5",
+        "behat/behat": "^3.15",
+        "behat/mink-browserkit-driver": "^2.3",
+        "symfony/http-client": "^7.4",
+        "behat/mink-selenium2-driver": "^1.7",
+        "behat/gherkin": "4.10.0",
+        "friends-of-behat/mink-extension": "^2.7",
+        "symfony/mime": "^7.4"
+    }
+}

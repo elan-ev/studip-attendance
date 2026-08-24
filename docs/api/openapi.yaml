@@ -1,0 +1,262 @@
+openapi: 3.1.0
+info:
+  title: 'API Routes of Elan Attendance plugin for Stud.IP'
+  license:
+    name: GPL-3.0 WITH License-Supplement (see LICENSE-SUPPLEMENT.txt)
+    identifier: GPL-3.0
+    url: https://github.com/elan-ev/studip-attendance/blob/main/LICENSE
+  version: 0.1.0
+servers:
+  - url: 'http://localhost/jsonapi.php/v1'
+  - url: 'http://localhost/studip/55/jsonapi.php/v1'
+paths:
+  ##### AUDIT LOGS
+  '/attendance-audit-logs':
+    get:
+      tags:
+        - Audit Log
+      summary: Get all audit logs
+      operationId: \StudipAttendance\JsonApi\Routes\AuditLog\Index
+      responses:
+        '200':
+          description: 'Returning list of Audit logs'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags:
+        - Audit Log
+      summary: Create an audit log
+      operationId: \StudipAttendance\JsonApi\Routes\AuditLog\Create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuditLogDataPostWrapper"
+      responses:
+        '201':
+          description: 'Created audit log'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLog'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /attendance-audit-logs/{id}:
+    get:
+      tags:
+        - Audit Log
+      summary: Show an audit log
+      operationId: \StudipAttendance\JsonApi\Routes\AuditLog\Show
+      parameters:
+        - $ref: "#/components/parameters/IdInPath"
+      responses:
+        '200':
+          description: 'Returning an audit log'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLog'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ###### AUDIT LOG
+    AuditLog:
+      title: Attendance Audit Log
+      description: 'Attendance Audit Log Schema'
+      properties:
+        id:
+          type: integer
+        object-type:
+          type: string
+        object-id:
+          type: integer
+        user-id:
+          type: string
+        action:
+          type: string
+          enum:
+            - manual_override
+        payload:
+          type: json
+        comment:
+          type: string
+      required:
+        - object-type
+        - object-id
+        - user-id
+        - action
+        - payload
+    AuditLogCollection:
+      description: List of Attendance Audit Log.
+      type: array
+      items:
+        $ref: "#/components/schemas/AuditLog"
+    AuditLogAttributesBase:
+      type: object
+      properties:
+        object-type:
+          type: string
+        object-id:
+          type: integer
+        action:
+          type: string
+        payload:
+          type: json
+        comment:
+          type: string
+    AuditLogAttributesPost:
+      allOf:
+        - $ref: '#/components/schemas/AuditLogAttributesBase'
+      required:
+        - object-type
+        - object-id
+        - action
+        - payload
+    AuditLogDataPostWrapper:
+      allOf:
+        - $ref: '#/components/schemas/JsonApiDataBase'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                attributes:
+                  $ref: '#/components/schemas/AuditLogAttributesPost'
+
+    ###### SESSIONS
+    Session:
+      title: Attendance Session
+      description: 'Attendance Session Schema'
+      type: object
+      properties:
+        id:
+          type: integer
+        termin_id:
+          type: string
+        seminar_id:
+          type: string
+        status:
+          description: Types of Sessions
+          type: string
+          enum:
+            - draft
+            - active
+            - closed
+        qr_seed:
+          type: String
+      required:
+        - termin_id
+        - seminar_id
+        - status
+        - qr_seed
+    SessionCollection:
+      description: List of Attendance Sessions.
+      type: array
+      items:
+        $ref: "#/components/schemas/Session"
+    SessionAttributesBase:
+      type: object
+      properties:
+        termin-id:
+          type: string
+        seminar-id:
+          type: string
+        status:
+          type: string
+        qr-seed:
+          type: String
+    SessionAttributesPost:
+      allOf:
+        - $ref: '#/components/schemas/SessionAttributesBase'
+      required:
+        - termin-id
+        - seminar-id
+        - status
+        - qr-seed
+    SessionAttributesPatch:
+      allOf:
+        - $ref: '#/components/schemas/SessionAttributesBase'
+      required:
+        - status
+        - qr-seed
+    SessionDataPostWrapper:
+      allOf:
+        - $ref: '#/components/schemas/JsonApiDataBase'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                attributes:
+                  $ref: '#/components/schemas/SessionAttributesPost'
+    SessionDataPatchWrapper:
+      allOf:
+        - $ref: '#/components/schemas/JsonApiDataBase'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                attributes:
+                  $ref: '#/components/schemas/SessionAttributesPatch'
+
+    ##### ERRORS
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          example: object
+        title:
+          type: string
+          example: Validation failed
+
+    ##### JsonApiDataBase
+    JsonApiDataBase:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - attributes
+          properties:
+            attributes:
+              type: object
+
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    IdInPath:
+      name: id
+      required: true
+      in: path
+      description: id of the entry in path
+      schema:
+        type: integer
