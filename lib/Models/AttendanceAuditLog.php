@@ -53,4 +53,30 @@ class AttendanceAuditLog extends SimpleORMap
     {
         return self::findBySQL('1');
     }
+
+    public static function write(string $objectType, int $objectId, string $action, array $payload = [], string $comment = null, string $userId = null): bool
+    {
+
+        $userId = $userId ?? $GLOBALS['user']->id;
+        $data = [
+            'object_type' => $objectType,
+            'object_id' => $objectId,
+            'action' => $action,
+            'payload' => $payload,
+            'comment' => $comment,
+            'user_id' => $userId,
+        ];
+        $record = AttendanceAuditLog::create($data);
+        return !empty($record);
+    }
+
+    public static function writeForEntry(int $id, string $action, array $payload = [], string $comment = null, string $userId = null): bool {
+        $objectType = AttendanceEntry::class;
+        return self::write($objectType, $id, $action, $payload, $comment, $userId);
+    }
+
+    public static function writForSession(int $id, string $action, array $payload = [], string $comment = null, string $userId = null): bool {
+        $objectType = AttendanceSession::class;
+        return self::write($objectType, $id, $action, $payload, $comment, $userId);
+    }
 }

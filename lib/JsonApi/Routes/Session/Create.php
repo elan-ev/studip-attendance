@@ -86,10 +86,6 @@ class Create extends JsonApiController
         if (!in_array($status, AttendanceSession::STATUSES)) {
             return 'Invalid value for attribute `status`.';
         }
-
-        if (!self::arrayHas($json, 'data.attributes.qr-seed')) {
-            return 'Missing `qr-seed` member of attributes block.';
-        }
     }
 
     /**
@@ -102,13 +98,11 @@ class Create extends JsonApiController
         $terminId = self::arrayGet($json, 'data.attributes.termin-id');
         $seminarId = self::arrayGet($json, 'data.attributes.seminar-id');
         $status = self::arrayGet($json, 'data.attributes.status');
-        $qrSeed = self::arrayGet($json, 'data.attributes.qr-seed');
 
         $session = new AttendanceSession();
         $session->termin_id = $terminId;
         $session->seminar_id = $seminarId;
         $session->status = $status;
-        $session->qr_seed = $qrSeed;
         $session->store();
 
         return $session;

@@ -2,8 +2,11 @@
 
 namespace StudipAttendance\Models;
 
-use SimpleORMap;
+use StudipAttendance\Helpers\Utils;
+
+use DBManager;
 use JSONArrayObject;
+use SimpleORMap;
 use User;
 
 /**
@@ -48,5 +51,47 @@ class AttendanceViewPreset extends SimpleORMap
     public static function getAll(): array
     {
         return self::findBySQL('1');
+    }
+
+    public static function getSome(array $ids): array
+    {
+        return self::findBySQL('id IN ( ? )', [$ids]);
+    }
+
+    public static function runQueries(array $ids = []): void
+    {
+        $records = [];
+        if (!empty($ids)) {
+            $records = self::getSome($ids);
+        } else {
+            $records = self::getAll();
+        }
+
+        if (!empty($records)) {
+            foreach ($records as $record) {
+                self::performFilter($record);
+            }
+        }
+    }
+
+    private static function performFilter(self $record): void
+    {
+        $db = DBManager::get();
+
+        Utils::startProcess($record->id);
+        $sql = self::generateSqlFrom($record);
+        $result = $db->exec($sql);
+        Utils::endProcess($record->id);
+
+        $record->cached_result = $result ?? [];
+        $record->last_calculated = Utils::getEnd($record->id);
+        $record->last_execution_time_ms = Utils::getDuration($record->id);
+        $record->store();
+    }
+
+    private static function generateSqlFrom(self $record): string
+    {
+        // TODO: convert filter_config to SQL!???
+        return '';
     }
 }

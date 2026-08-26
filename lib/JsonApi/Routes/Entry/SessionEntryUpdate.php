@@ -23,10 +23,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use StudipAttendance\JsonApi\Routes\Authority;
 use StudipAttendance\JsonApi\Schemas\AttendanceEntrySchema;
 use StudipAttendance\Helpers\Utils;
-use StudipAttendance\Models\AttendanceAuditLog;
 use StudipAttendance\Models\AttendanceEntry;
+use StudipAttendance\Models\AttendanceSession;
+use StudipAttendance\Models\AttendanceAuditLog;
 
-class Update extends JsonApiController
+class SessionEntryUpdate extends JsonApiController
 {
     use ValidationTrait;
 
@@ -51,7 +52,12 @@ class Update extends JsonApiController
         $json = $this->validate($request);
         $user = $this->getUser($request);
 
-        $entry = AttendanceEntry::find($args['id']);
+        $session = AttendanceSession::find($args['session_id']);
+        if (!$session) {
+            throw new RecordNotFoundException();
+        }
+
+        $entry = $session->entries->find($args['id']);
         if (!$entry) {
             throw new RecordNotFoundException();
         }
@@ -61,7 +67,7 @@ class Update extends JsonApiController
         }
 
         $source = AttendanceEntry::SOURCE_TEACHER;
-        if (Utils::isRoot($user) || Utils::isCourseAdmin($user, $entry->session->seminar_id)) {
+        if (Utils::isRoot($user) || Utils::isCourseAdmin($user, $session->seminar_id)) {
             $source = AttendanceEntry::SOURCE_ADMIN;
         }
 

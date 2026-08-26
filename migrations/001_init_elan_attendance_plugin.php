@@ -1,17 +1,29 @@
 <?php
 /**
- * InitElanAttendanceTables
+ * InitElanAttendancePlugin
  *
- * Migration step to creates InitAttendanceTables DB Tables.
+ * Migration step to creates Attendance plugin DB Tables, cronjobs and configs.
  *
- * @package   InitElanAttendanceTables
+ * @package   StudipAttendance
  * @since     0.1.0
  * @author    Farbod Zamnai <zamani@elan-ev.de>
  * @copyright 2026 elan e.V.
  * @license   GPL-3.0 WITH License-Supplement (see LICENSE-SUPPLEMENT.txt)
  */
-final class InitElanAttendanceTables extends Migration
+final class InitElanAttendancePlugin extends Migration
 {
+    const PLUGIN_CRONJOBS_DIR_PATH = 'public/plugins_packages/elan-ev/ElanAttendancePlugin/cronjobs';
+    // TODO: how often should the cronjobs be processed?
+    const CRONJOBS = [
+        'attendance_sessions_sync.php' => [59,1,null,null],
+        'attendance_view_presets_process.php' => [59,1,null,null],
+        'attendance_report_process.php' => [59,1,null,null],
+    ];
+
+    const PRE_BEGIN_BUFFER_MINUTES = 5;
+    const POST_BEGIN_BUFFER_MINUTES = 5;
+    const TOTP_TIMEWINDOW_SECONDS = 30;
+
     public function description()
     {
         return 'Creates database tables for StudipAttendance plugin.';
@@ -25,7 +37,7 @@ final class InitElanAttendanceTables extends Migration
                 `id`            INT(11) NOT NULL AUTO_INCREMENT,
                 `termin_id`     VARCHAR(32) NOT NULL,
                 `seminar_id`    VARCHAR(32) NOT NULL,
-                `status`        ENUM('draft','active','closed') CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+                `status`        ENUM('draft','active','ended','deleted') CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
                 `qr_seed`       VARCHAR(255) DEFAULT NULL,
                 `mkdate`        INT(11) UNSIGNED NOT NULL,
                 `chdate`        INT(11) UNSIGNED NOT NULL,
@@ -48,7 +60,8 @@ final class InitElanAttendanceTables extends Migration
                 `mkdate`                    INT(11) UNSIGNED NOT NULL,
                 `chdate`                    INT(11) UNSIGNED NOT NULL,
 
-                PRIMARY KEY (`id`)
+                PRIMARY KEY (`id`),
+                UNIQUE KEY `unique_user_session` (`user_id`,`attendance_session_id`)
             )"
         );
 
@@ -111,6 +124,45 @@ final class InitElanAttendanceTables extends Migration
                 PRIMARY KEY (`id`)
             )"
         );
+
+        // Add cronjobs.
+        $scheduler = CronjobScheduler::getInstance();
+        foreach (self::CRONJOBS as $cronjobFilename => $period) {
+            $cronjobPath =  self::PLUGIN_CRONJOBS_DIR_PATH . '/' . $cronjobFilename;
+            if (file_exists($GLOBALS['STUDIP_BASE_PATH'] . '/' . $cronjobPath)) {
+                $task_id = $scheduler->registerTask($cronjobPath, true);
+
+                if ($task_id && !empty($period)) {
+                    [$minute, $hour, $day, $month] = $period;
+                    $scheduler->schedulePeriodic($task_id, $minute, $hour, $day, $month);
+                }
+            }
+        }
+
+        // Add global configs.
+        Config::get()->create('ATTENDANCE_PRE_BEGIN_BUFFER', [
+            'value' => self::PRE_BEGIN_BUFFER_MINUTES,
+            'type' => 'integer',
+            'range' => 'global',
+            'section' => 'ElanAttendance',
+            'description' => _('Die Vorlaufzeit vor Sitzungsbeginn in Minuten.')
+        ]);
+
+        Config::get()->create('ATTENDANCE_POST_END_BUFFER', [
+            'value' => self::POST_BEGIN_BUFFER_MINUTES,
+            'type' => 'integer',
+            'range' => 'global',
+            'section' => 'ElanAttendance',
+            'description' => _('Die Nachlaufzeit nach Sitzungsende in Minuten.')
+        ]);
+
+        Config::get()->create('ATTENDANCE_TOTP_TIMEWINDOW', [
+            'value' => self::TOTP_TIMEWINDOW_SECONDS,
+            'type' => 'integer',
+            'range' => 'global',
+            'section' => 'ElanAttendance',
+            'description' => _('Das Zeitfenster, in dem der TOTP gültig bleibt, in Sekunden.')
+        ]);
     }
 
     public function down()
@@ -122,5 +174,20 @@ final class InitElanAttendanceTables extends Migration
         $db->exec("DROP TABLE IF EXISTS `elan_attendance_view_presets`");
         $db->exec("DROP TABLE IF EXISTS `elan_attendance_reports`");
         $db->exec("DROP TABLE IF EXISTS `elan_attendance_thresholds`");
+
+        // Remove cronjobs.
+        $scheduler = CronjobScheduler::getInstance();
+        foreach (array_keys(self::CRONJOBS) as $cronjobFilename) {
+            $cronjobPath =  self::PLUGIN_CRONJOBS_DIR_PATH . '/' . $cronjobFilename;
+            if (file_exists($GLOBALS['STUDIP_BASE_PATH'] . '/' . $cronjobPath)) {
+                $task_id = CronjobTask::findOneByFilename($cronjobPath)->task_id;
+                $scheduler->unregisterTask($task_id);
+            }
+        }
+
+        // Remove Configs.
+        Config::get()->delete('ATTENDANCE_PRE_BEGIN_BUFFER');
+        Config::get()->delete('ATTENDANCE_POST_END_BUFFER');
+        Config::get()->delete('ATTENDANCE_TOTP_TIMEWINDOW');
     }
 }

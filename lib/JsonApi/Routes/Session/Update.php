@@ -22,6 +22,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 use StudipAttendance\JsonApi\Routes\Authority;
 use StudipAttendance\JsonApi\Schemas\AttendanceSessionSchema;
+use StudipAttendance\Models\AttendanceAuditLog;
 use StudipAttendance\Models\AttendanceSession;
 
 class Update extends JsonApiController
@@ -58,7 +59,20 @@ class Update extends JsonApiController
             throw new AuthorizationFailedException();
         }
 
+        $logPayload = [];
+        $logPayload['old'] = $session->toArray();
+
         $session = $this->updateSession($json, $session);
+
+        $logPayload['new'] = $session->toArray();
+        AttendanceAuditLog::writeForSession(
+            $session->id,
+            AttendanceAuditLog::ACTION_MANUAL_OVERRIDE,
+            $logPayload,
+            '',
+            $user->id
+        );
+
         $session->id = '';
         return $this->getContentResponse($session);
     }
@@ -84,10 +98,6 @@ class Update extends JsonApiController
         if (!in_array($status, AttendanceSession::STATUSES)) {
             return 'Invalid value for attribute `status`.';
         }
-
-        if (!self::arrayHas($json, 'data.attributes.qr-seed')) {
-            return 'Missing `qr-seed` member of attributes block.';
-        }
     }
 
     /**
@@ -98,10 +108,8 @@ class Update extends JsonApiController
     private function updateSession(array $json, AttendanceSession $session)
     {
         $status = self::arrayGet($json, 'data.attributes.status');
-        $qrSeed = self::arrayGet($json, 'data.attributes.qr-seed');
 
         $session->status = $status;
-        $session->qr_seed = $qrSeed;
         $session->store();
 
         return $session;

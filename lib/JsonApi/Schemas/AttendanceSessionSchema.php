@@ -47,7 +47,6 @@ class AttendanceSessionSchema extends \JsonApi\Schemas\SchemaProvider
     {
         return [
             'status'  => $resource['status'],
-            'qr-seed' => $resource['qr_seed'],
         ];
     }
 

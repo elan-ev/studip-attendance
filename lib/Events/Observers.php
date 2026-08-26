@@ -12,6 +12,14 @@
 
 namespace StudipAttendance\Events;
 
+use CourseDate;
+
+use StudipAttendance\Helpers\SessionHandler;
+
 class Observers {
 
+    public static function subscribeToCourseDateCreation($event, CourseDate $courseDate): void
+    {
+        SessionHandler::ensureSessionExistsFrom($courseDate);
+    }
 }

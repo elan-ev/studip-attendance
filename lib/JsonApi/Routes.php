@@ -36,6 +36,7 @@ trait Routes
         $group->get('/attendance-sessions/{id}/entries', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryIndex::class);
         $group->post('/attendance-sessions/{id}/entries', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryCreate::class);
         $group->get('/attendance-sessions/{session_id}/entries/{id}', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryShow::class);
+        $group->patch('/attendance-sessions/{session_id}/entries/{id}', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryUpdate::class);
 
         // Reports.
         $group->get('/attendance-reports', \StudipAttendance\JsonApi\Routes\Report\Index::class);
@@ -49,6 +50,9 @@ trait Routes
 
         // Course-Sessions
         $group->get('/course/{id}/attendance-sessions', \StudipAttendance\JsonApi\Routes\Session\CourseIndex::class);
+
+        // Session-TOTP
+        $group->get('/attendance-sessions/{id}/totp', \StudipAttendance\JsonApi\Routes\Session\TOTPGenerate::class);
 
         // Course-Thresholds
         $group->get('/course/{id}/attendance-thresholds', \StudipAttendance\JsonApi\Routes\Threshold\Index::class);

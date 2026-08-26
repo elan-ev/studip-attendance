@@ -1,8 +1,8 @@
 <?php
 /**
- * Helper class for handling sessions
+ * Helper class for providing everything regarding sessions
  *
- * @package   StudipAttendance\JsonApi\Routes
+ * @package   StudipAttendance\Helpers
  * @since     0.1.0
  * @author    Farbod Zamani <zamani@elan-ev.de>
  * @copyright 2026 elan e.V.
@@ -12,7 +12,111 @@
 
 namespace StudipAttendance\Helpers;
 
+use CourseDate;
+use Config;
+use StudipAttendance\Models\AttendanceSession;
+use StudipAttendance\Models\AttendanceEntry;
+
 class SessionHandler
 {
+    const DEFAULT_PRE_BEGIN_BUFFER_MINUTES = 5;
+    const DEFAULT_POST_END_BUFFER_MINUTES = 5;
 
+    const VALIDATION_SUCCEED = 1;
+    const VALIDATION_FAILED_SESSION = 2;
+    const VALIDATION_FAILED_PARTICIPANT = 3;
+    const VALIDATION_FAILED_TIMEFRAME = 4;
+    const VALIDATION_FAILED_TOTP = 5;
+    const VALIDATION_FAILED_ENTRY = 6;
+
+    public static function discoverNonRecordedCourseDates(): array
+    {
+        $params = [];
+        $wheres = [];
+
+        $excludedTerminIds = \SimpleCollection::createFromArray(AttendanceSession::getAll())->pluck('termin_id');
+        if (!empty($excludedTerminIds)) {
+            $wheres[] = 'termin_id NOT IN ( :excluded_termin_ids )';
+            $params['excluded_termin_ids'] = $excludedTerminIds;
+        }
+        // TODO: check whether we should apply any time span?
+        $wheres[] = 'date > :today_midnight';
+        $params['today_midnight'] = (new \DateTimeImmutable('today'))->getTimestamp();
+
+        $sql = implode(' AND ', $wheres);
+        return CourseDate::findBySQL($sql, $params);
+    }
+
+    public static function ensureSessionExistsFrom(CourseDate $courseDate)
+    {
+        if (!AttendanceSession::isRecorded($courseDate->termin_id)) {
+            $session = new AttendanceSession();
+            $session->termin_id = $courseDate->termin_id;
+            $session->seminar_id = $courseDate->range_id;
+            $session->status = AttendanceSession::STATUS_DRAFT;
+            $session->store();
+        }
+    }
+
+    public static function validateCheckin(int $sessionId, string $userId, int $token): int
+    {
+        $session = AttendanceSession::find($sessionId);
+        if (!$session || $session->status !== AttendanceSession::STATUS_ACTIVE) {
+            return self::VALIDATION_FAILED_SESSION;
+        }
+
+        if (!self::isUserParticipant($session->course->id, $userId)) {
+            return self::VALIDATION_FAILED_PARTICIPANT;
+        }
+
+        if (!self::isValidTimeFrame($session->termin)) {
+            return self::VALIDATION_FAILED_TIMEFRAME;
+        }
+
+        if (!TOTPHandler::verifyTOTP($token, $session->qr_seed)) {
+            return self::VALIDATION_FAILED_TOTP;
+        }
+
+        if (AttendanceEntry::userHasEntryIn($sessionId, $userId)) {
+            return self::VALIDATION_FAILED_ENTRY;
+        }
+
+        return self::VALIDATION_SUCCEED;
+    }
+
+    public static function calculateLatency(AttendanceSession $session, int $recordingTime): int
+    {
+        if ($recordingTime > (int) $session->termin->date) {
+            return $recordingTime - (int) $session->termin->date;
+        }
+
+        return 0;
+    }
+
+    private static function isUserParticipant(string $courseId, string $userId): bool
+    {
+        return $GLOBALS['perm']->have_studip_perm('autor', $courseId, $userId);
+    }
+
+    private static function isValidTimeFrame(CourseDate $courseDate): bool
+    {
+        $now = time();
+        $startWithBuffer = (int) $courseDate->date - self::getPreBeginBuffer();
+        $endWithBuffer = (int) $courseDate->end_time - self::getPostEndBuffer();
+        return $now >= $startWithBuffer && $now <= $endWithBuffer;
+    }
+
+    private static function getPreBeginBuffer(bool $seconds = true): int
+    {
+        $preBeginBufferMinutes = (int) Config::get()->ATTENDANCE_PRE_BEGIN_BUFFER ?? self::DEFAULT_PRE_BEGIN_BUFFER_MINUTES;
+
+        return $seconds ? $preBeginBufferMinutes * 60 : $preBeginBufferMinutes;
+    }
+
+    private static function getPostEndBuffer(bool $seconds = true): int
+    {
+        $preBeginBufferMinutes = (int) Config::get()->ATTENDANCE_POST_END_BUFFER ?? self::DEFAULT_POST_END_BUFFER_MINUTES;
+
+        return $seconds ? $preBeginBufferMinutes * 60 : $preBeginBufferMinutes;
+    }
 }
