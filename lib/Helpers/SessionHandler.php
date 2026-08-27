@@ -13,9 +13,12 @@
 namespace StudipAttendance\Helpers;
 
 use CourseDate;
+use CourseExDate;
 use Config;
-use StudipAttendance\Models\AttendanceSession;
+use Seminar;
+use StudipAttendance\Models\AttendanceAuditLog;
 use StudipAttendance\Models\AttendanceEntry;
+use StudipAttendance\Models\AttendanceSession;
 
 class SessionHandler
 {
@@ -47,14 +50,67 @@ class SessionHandler
         return CourseDate::findBySQL($sql, $params);
     }
 
-    public static function ensureSessionExistsFrom(CourseDate $courseDate)
+    public static function determineStatus(CourseDate $courseDate): string
+    {
+        $now = time();
+
+        if ((int) $courseDate->date > $now) {
+            return AttendanceSession::STATUS_DRAFT;
+        }
+
+        if ($now >= (int) $courseDate->date && $now <= (int) $courseDate->end_time) {
+            return AttendanceSession::STATUS_ACTIVE;
+        }
+
+        return AttendanceSession::STATUS_ENDED;
+    }
+
+    public static function ensureSessionExistsFrom(CourseDate $courseDate): void
     {
         if (!AttendanceSession::isRecorded($courseDate->termin_id)) {
             $session = new AttendanceSession();
             $session->termin_id = $courseDate->termin_id;
             $session->seminar_id = $courseDate->range_id;
-            $session->status = AttendanceSession::STATUS_DRAFT;
+            $session->status = self::determineStatus($courseDate);
             $session->store();
+        }
+    }
+
+    public static function handleCourseDateDeletion(string $terminId): void
+    {
+        if (AttendanceSession::isRecorded($terminId)) {
+            $session = AttendanceSession::findOneByTermin_id($terminId);
+            $logPayload['prev_status'] = $session->status;
+            $session->status = AttendanceSession::STATUS_DELETED;
+            $session->store();
+            AttendanceAuditLog::writForSession(
+                $session->id,
+                AttendanceAuditLog::ACTION_SYSTEM_CHANGE,
+                $logPayload,
+                'termin deletion / cancellation detected',
+            );
+        }
+    }
+
+    public static function handleCourseChangedSchedule(Seminar $course): void
+    {
+        // We don't rely on the existing class offered by SeminarDB or Seminar or singleDate,
+        // because they are deprecated and will be removed in StudIP 6.x.
+        // In fact, this "CourseChangedSchedule" event will also be out in 6.x.
+        // We extract the dates the right way using only the course id!
+
+        $cancelledDates = CourseExDate::findBySQL('range_id = ?', [$course->getId()]);
+        if (!empty($cancelledDates)) {
+            foreach ($cancelledDates as $cDate) {
+                self::handleCourseDateDeletion($cDate->termin_id);
+            }
+        }
+
+        $currentDates = CourseDate::findBySQL('range_id = ?', [$course->getId()]);
+        if (!empty($currentDates)) {
+            foreach ($currentDates as $date) {
+                self::ensureSessionExistsFrom($date);
+            }
         }
     }
 

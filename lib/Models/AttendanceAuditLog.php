@@ -29,9 +29,11 @@ use User;
 class AttendanceAuditLog extends SimpleORMap
 {
     const ACTION_MANUAL_OVERRIDE = 'manual_override';
+    const ACTION_SYSTEM_CHANGE = 'system_change';
 
     const ACTIONS = [
         self::ACTION_MANUAL_OVERRIDE,
+        self::ACTION_SYSTEM_CHANGE,
     ];
 
     protected static function configure($config = [])

@@ -154,9 +154,9 @@ class Authority
         return Utils::isTeacher( $user, $courseId);
     }
 
-    public static function canIndexThreshold(User $user, string $courseId): bool
+    public static function canIndexThreshold(User $user): bool
     {
-        return Utils::isTeacher( $user, $courseId);
+        return Utils::isRoot( $user);
     }
 
     public static function canCreateViewPreset(User $user): bool

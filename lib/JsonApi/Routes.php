@@ -54,8 +54,9 @@ trait Routes
         // Session-TOTP
         $group->get('/attendance-sessions/{id}/totp', \StudipAttendance\JsonApi\Routes\Session\TOTPGenerate::class);
 
+        // Thresholds
+        $group->get('attendance-thresholds', \StudipAttendance\JsonApi\Routes\Threshold\Index::class);
         // Course-Thresholds
-        $group->get('/course/{id}/attendance-thresholds', \StudipAttendance\JsonApi\Routes\Threshold\Index::class);
         $group->get('/course/{course_id}/attendance-thresholds/{id}', \StudipAttendance\JsonApi\Routes\Threshold\Show::class);
         $group->post('/course/{id}/attendance-thresholds', \StudipAttendance\JsonApi\Routes\Threshold\Create::class);
         $group->patch('/course/{course_id}/attendance-thresholds/{id}', \StudipAttendance\JsonApi\Routes\Threshold\Update::class);

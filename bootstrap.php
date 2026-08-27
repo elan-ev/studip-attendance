@@ -5,7 +5,21 @@ StudipAutoloader::addAutoloadPath(__DIR__ . '/lib/Models', 'StudipAttendance\\Mo
 StudipAutoloader::addAutoloadPath(__DIR__ . '/lib/Events', 'StudipAttendance\\Events');
 
 // Observers.
-NotificationCenter::addObserver('StudipAttendance\Events\Observers', 'subscribeToCourseDateCreation', 'CourseDateDidCreate');
+NotificationCenter::addObserver(
+    'StudipAttendance\Events\Observers',
+    'subscribeToCourseDateCreation',
+    'CourseDateDidCreate'
+);
+// This would only work in StudIP 5.x!
+NotificationCenter::addObserver(
+    'StudipAttendance\Events\Observers',
+    'subscribeToCourseDidChangeSchedule',
+    'CourseDidChangeSchedule'
+);
+// This would only work in StudIP 6.x onward.
+NotificationCenter::addObserver(
+    'StudipAttendance\Events\Observers',
+    'subscribeToCourseDateDeletion',
+    'CourseDateDidDelete'
+);
 
-// TODO: find out if we are dealing with "Ex-CourseDates" as well? WTF :D
-// NotificationCenter::addObserver('StudipAttendance\Events\Observers', 'subscribeToCourseDateCreation', 'CourseExDateDidCreate');

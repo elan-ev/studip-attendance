@@ -54,8 +54,15 @@ class AttendanceSession extends SimpleORMap
             'class_name'  => CourseDate::class,
             'foreign_key' => 'termin_id',
             'on_delete' => function (AttendanceSession $session): void {
+                $logPayload['prev_status'] = $session->status;
                 $session->status = self::STATUS_DELETED;
-                $session->store(); //TODO: Check if the store works properly here?
+                $session->store();
+                AttendanceAuditLog::writForSession(
+                    $session->id,
+                    AttendanceAuditLog::ACTION_SYSTEM_CHANGE,
+                    $logPayload,
+                    'termin deletion / cancellation detected',
+                );
             },
         ];
 
@@ -75,7 +82,7 @@ class AttendanceSession extends SimpleORMap
         return self::findBySQL('1');
     }
 
-    public static function getAllCourseSessions(string $courseId): array
+    public static function findBySeminar_id(string $courseId): array
     {
         return self::findBySQL('seminar_id = ?', [$courseId]);
     }
@@ -83,6 +90,11 @@ class AttendanceSession extends SimpleORMap
     public static function isRecorded(string $terminId): bool
     {
         return self::countBySql('termin_id = ?', [$terminId]) === 1;
+    }
+
+    public static function findOneByTermin_id(string $terminId): self
+    {
+        return self::findOneBySQL('termin_id = ?', [$terminId]);
     }
 
     protected function cbGenerateQrSeed(): void

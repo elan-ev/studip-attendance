@@ -28,6 +28,9 @@ use Seminar;
 
 class AttendanceThreshold extends SimpleORMap
 {
+    const THRESHOLD_LEVEL_CRITICAL = 'critical';
+    const THRESHOLD_LEVEL_WARNING = 'warning';
+    const THRESHOLD_LEVEL_NORMAL = 'normal';
     protected static function configure($config = [])
     {
         $config['db_table'] = 'elan_attendance_thresholds';
@@ -46,8 +49,8 @@ class AttendanceThreshold extends SimpleORMap
         return self::findBySQL('1');
     }
 
-    public static function getAllCourseThresholds(string $courseId): array
+    public static function findBySeminar_id(string $courseId): self
     {
-        return self::findBySQL('seminar_id = ?', [$courseId]);
+        return self::findOneBySQL('seminar_id = ?', [$courseId]);
     }
 }

@@ -50,18 +50,13 @@ class Index extends JsonApiController
     {
         $user = $this->getUser($request);
 
-        $course = Seminar::getInstance($args['id']);
-        if (!$course) {
-            throw new RecordNotFoundException();
-        }
-
-        if (!Authority::canIndexThreshold($user, $course->id)) {
+        if (!Authority::canIndexThreshold($user)) {
             throw new AuthorizationFailedException();
         }
 
         [$offset, $limit] = $this->getOffsetAndLimit();
 
-        $thresholds = AttendanceThreshold::getAllCourseThresholds($course->id);
+        $thresholds = AttendanceThreshold::getAll();
         $total = count($thresholds);
         $data = array_slice($thresholds, $offset, $limit);
 

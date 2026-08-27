@@ -84,4 +84,9 @@ class AttendanceEntry extends SimpleORMap
     {
         return self::countBySql('attendance_session_id = ? AND user_id = ?', [$sessionId, $userId]) === 1;
     }
+
+    public static function getUserRecordInSession(int $sessionId, string $userId): self
+    {
+        return self::findOneBySQL('attendance_session_id = ? AND user_id = ?', [$sessionId, $userId]);
+    }
 }

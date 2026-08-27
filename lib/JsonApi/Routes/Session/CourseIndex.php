@@ -60,7 +60,7 @@ class CourseIndex extends JsonApiController
 
         [$offset, $limit] = $this->getOffsetAndLimit();
 
-        $sessions = AttendanceSession::getAllCourseSessions($course->id);
+        $sessions = AttendanceSession::findBySeminar_id($course->id);
         $total = count($sessions);
         $data = array_slice($sessions, $offset, $limit);
 
