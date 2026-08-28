@@ -28,7 +28,7 @@ class AttendanceViewPresetsProcess extends CronJob
      */
     public static function getDescription()
     {
-        return _('Tries to calculate and process the view presets.');
+        return _('Elan Attendance Plugin - Calculates and process the view presets.');
     }
 
     /**

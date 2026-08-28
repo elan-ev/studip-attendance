@@ -80,15 +80,8 @@ class SessionHandler
     {
         if (AttendanceSession::isRecorded($terminId)) {
             $session = AttendanceSession::findOneByTermin_id($terminId);
-            $logPayload['prev_status'] = $session->status;
             $session->status = AttendanceSession::STATUS_DELETED;
             $session->store();
-            AttendanceAuditLog::writForSession(
-                $session->id,
-                AttendanceAuditLog::ACTION_SYSTEM_CHANGE,
-                $logPayload,
-                'termin deletion / cancellation detected',
-            );
         }
     }
 

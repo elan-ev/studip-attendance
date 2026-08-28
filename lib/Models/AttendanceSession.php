@@ -6,6 +6,9 @@ use SimpleORMap;
 use CourseDate;
 use Seminar;
 
+use StudipAttendance\Classes\AuditLogTrait;
+use StudipAttendance\Classes\AuditLogInterface;
+
 /**
  * Attendance Session Model.
  *
@@ -25,9 +28,11 @@ use Seminar;
  * @property CourseDate $termin
  */
 
-class AttendanceSession extends SimpleORMap
+class AttendanceSession extends SimpleORMap implements AuditLogInterface
 {
-    const QR_SEED_LENGTH = 5;
+    use AuditLogTrait;
+
+    const QR_SEED_LENGTH = 6;
     const STATUS_DRAFT = 'draft';
     const STATUS_ACTIVE = 'active';
     const STATUS_ENDED = 'ended';
@@ -54,15 +59,8 @@ class AttendanceSession extends SimpleORMap
             'class_name'  => CourseDate::class,
             'foreign_key' => 'termin_id',
             'on_delete' => function (AttendanceSession $session): void {
-                $logPayload['prev_status'] = $session->status;
                 $session->status = self::STATUS_DELETED;
                 $session->store();
-                AttendanceAuditLog::writForSession(
-                    $session->id,
-                    AttendanceAuditLog::ACTION_SYSTEM_CHANGE,
-                    $logPayload,
-                    'termin deletion / cancellation detected',
-                );
             },
         ];
 
@@ -72,9 +70,21 @@ class AttendanceSession extends SimpleORMap
             'on_delete'         => 'delete', //TODO: Should we remove them as well?
         ];
 
-        $config['registered_callbacks']['after_create'][] = 'cbGenerateQrSeed';
+        $config['registered_callbacks']['before_create'][] = 'cbGenerateQrSeed';
+
+        // Using AuditLogTrait methods for the callbacks!
+        $config['registered_callbacks']['after_update'][] = 'cbLogAfterUpdate';
+        $config['registered_callbacks']['after_delete'][] = 'cbLogBeforeDelete';
 
         parent::configure($config);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getLogPayload(): array
+    {
+        return $this->toArray('status');
     }
 
     public static function getAll(): array
@@ -100,6 +110,6 @@ class AttendanceSession extends SimpleORMap
     protected function cbGenerateQrSeed(): void
     {
         $bytes = random_bytes(self::QR_SEED_LENGTH);
-        $this->qr_seed = $this->id . bin2hex($bytes);
+        $this->qr_seed = bin2hex($bytes);
     }
 }

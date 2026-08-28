@@ -28,7 +28,7 @@ class AttendanceReportProcess extends CronJob
      */
     public static function getDescription()
     {
-        return _('Tries to calculate Report in the background for performance reasons...');
+        return _('Elan Attendance Plugin - Calculates Report in the background for performance reasons...');
     }
 
     /**

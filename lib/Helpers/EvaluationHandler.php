@@ -150,12 +150,12 @@ class EvaluationHandler
                 (int) $threshold->absence_days_critical > 0 &&
                 (int) $threshold->absence_days_critical <= $absentPer
             ) {
-                $absentLevel = AttendanceThreshold::THRESHOLD_LEVEL_CRITICAL;
+                $absentDaysLevel = AttendanceThreshold::THRESHOLD_LEVEL_CRITICAL;
             } else if (
                 (int) $threshold->absence_days_warning > 0 &&
                 (int) $threshold->absence_days_warning <= $absentPer
             ) {
-                $absentDaysLevel = AttendanceThreshold::THRESHOLD_LEVEL_CRITICAL;
+                $absentDaysLevel = AttendanceThreshold::THRESHOLD_LEVEL_WARNING;
             }
 
             $unexcusedPer = (int) floor(($data['unexcused_absents'] / $data['total']) * 100);
@@ -169,11 +169,10 @@ class EvaluationHandler
                 (int) $threshold->unexcused_warning_percent > 0 &&
                 (int) $threshold->unexcused_warning_percent <= $unexcusedPer
             ) {
-                $unexcusedAbsentLevel = AttendanceThreshold::THRESHOLD_LEVEL_CRITICAL;
+                $unexcusedAbsentLevel = AttendanceThreshold::THRESHOLD_LEVEL_WARNING;
             }
 
             // TODO: what should we do with weeks?
-            // TODO: is there really a difference between unexcused & absent days?
 
         }
 

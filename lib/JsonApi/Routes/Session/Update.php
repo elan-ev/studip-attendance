@@ -59,19 +59,7 @@ class Update extends JsonApiController
             throw new AuthorizationFailedException();
         }
 
-        $logPayload = [];
-        $logPayload['old'] = $session->toArray();
-
         $session = $this->updateSession($json, $session);
-
-        $logPayload['new'] = $session->toArray();
-        AttendanceAuditLog::writeForSession(
-            $session->id,
-            AttendanceAuditLog::ACTION_MANUAL_OVERRIDE,
-            $logPayload,
-            '',
-            $user->id
-        );
 
         $session->id = '';
         return $this->getContentResponse($session);

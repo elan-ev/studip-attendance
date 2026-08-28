@@ -2,6 +2,7 @@
 
 namespace StudipAttendance\Models;
 
+use Exception;
 use SimpleORMap;
 use JSONArrayObject;
 use User;
@@ -31,6 +32,9 @@ class AttendanceAuditLog extends SimpleORMap
     const ACTION_MANUAL_OVERRIDE = 'manual_override';
     const ACTION_SYSTEM_CHANGE = 'system_change';
 
+    const ACTION_MANUAL_DELETE = 'manual_delete';
+    const ACTION_SYSTEM_DELETE = 'system_delete';
+
     const ACTIONS = [
         self::ACTION_MANUAL_OVERRIDE,
         self::ACTION_SYSTEM_CHANGE,
@@ -48,7 +52,14 @@ class AttendanceAuditLog extends SimpleORMap
 
         $config['serialized_fields']['payload'] = JSONArrayObject::class;
 
+        $config['registered_callbacks']['before_delete'][] = 'cbEnsureReadOnly';
+        $config['registered_callbacks']['before_update'][] = 'cbEnsureReadOnly';
+
         parent::configure($config);
+    }
+
+    public function cbEnsureReadOnly() {
+        throw new Exception("Unable to change or delete: Read-Only!");
     }
 
     public static function getAll(): array

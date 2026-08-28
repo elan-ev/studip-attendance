@@ -3,6 +3,7 @@ StudipAutoloader::addAutoloadPath(__DIR__ . '/lib/Helpers', 'StudipAttendance\\H
 StudipAutoloader::addAutoloadPath(__DIR__ . '/lib/JsonApi', 'StudipAttendance\\JsonApi');
 StudipAutoloader::addAutoloadPath(__DIR__ . '/lib/Models', 'StudipAttendance\\Models');
 StudipAutoloader::addAutoloadPath(__DIR__ . '/lib/Events', 'StudipAttendance\\Events');
+StudipAutoloader::addAutoloadPath(__DIR__ . '/lib/Classes', 'StudipAttendance\\Classes');
 
 // Observers.
 NotificationCenter::addObserver(

@@ -71,19 +71,7 @@ class SessionEntryUpdate extends JsonApiController
             $source = AttendanceEntry::SOURCE_ADMIN;
         }
 
-        $logPayload = [];
-        $logPayload['old'] = $entry->toArray();
-
         $entry = $this->updateEntry($json, $entry, $source);
-
-        $logPayload['new'] = $entry->toArray();
-        AttendanceAuditLog::writeForEntry(
-            $entry->id,
-            AttendanceAuditLog::ACTION_MANUAL_OVERRIDE,
-            $logPayload,
-            '',
-            $user->id
-        );
 
         $entry->id = '';
         return $this->getContentResponse($entry);

@@ -5,6 +5,9 @@ namespace StudipAttendance\Models;
 use SimpleORMap;
 use User;
 
+use StudipAttendance\Classes\AuditLogTrait;
+use StudipAttendance\Classes\AuditLogInterface;
+
 /**
  * Attendance Session Entry Model.
  *
@@ -28,8 +31,10 @@ use User;
  * @property AttendanceSession $session
  */
 
-class AttendanceEntry extends SimpleORMap
+class AttendanceEntry extends SimpleORMap implements AuditLogInterface
 {
+    use AuditLogTrait;
+
     const STATUS_PRESENT = 'present';
     const STATUS_ABSENT = 'absent';
     const STATUS_EXCUSED = 'excused';
@@ -72,7 +77,19 @@ class AttendanceEntry extends SimpleORMap
             'on_delete' => 'delete',
         ];
 
+        // Using AuditLogTrait methods for the callbacks!
+        $config['registered_callbacks']['after_update'][] = 'cbLogAfterUpdate';
+        $config['registered_callbacks']['after_delete'][] = 'cbLogBeforeDelete';
+
         parent::configure($config);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getLogPayload(): array
+    {
+        return $this->toArray('user_id status source comment teacher_input_reason late left_early');
     }
 
     public static function getAll(): array

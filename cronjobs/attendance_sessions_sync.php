@@ -28,7 +28,7 @@ class AttendanceSessionsSync extends CronJob
      */
     public static function getDescription()
     {
-        return _('Tries to discover and synchronize the course dates with attendance sessions.');
+        return _('Elan Attendance Plugin - Discovers and synchronizes the course dates with attendance sessions.');
     }
 
     /**
