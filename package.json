@@ -33,9 +33,10 @@
         "gettext:extract": "node scripts/extract.js",
         "gettext:compile": "node scripts/compile-translations.js",
         "preview": "vite preview",
-        "prezip": "npm install && npm run build && composer install --no-dev",
+         "prezip": "npm install && npm run build && npm run docs-build && composer install --no-dev",
         "zip": "zip -r studip-attendance-v$npm_package_version.zip controllers dist lib migrations vendor views LICENSE LICENSE-SUPPLEMENT.txt README.md ElanAttendancePlugin.php bootstrap.php plugin.manifest -x '*.editorconfig' -x 'vendor/*.git*' -x '*.DS_Store'",
-        "docs-build": "npx @redocly/cli build-docs docs/api/openapi.yaml -o docs/api/api-docs.html"
+        "docs-build": "npx @redocly/cli build-docs docs/api/openapi.yaml -o docs/api/api-docs.html && npm run docs-compliance",
+        "docs-compliance": "mkdir -p docs/compliance && npm sbom --sbom-format spdx --json > docs/compliance/npm-sbom.json && npm audit --json > docs/compliance/npm-audit.json && composer audit --format=json > docs/compliance/composer-audit.json && composer licenses --format=json > docs/compliance/composer-licenses.json"
     },
     "dependencies": {
         "pinia": "^3.0.3",
