@@ -79,15 +79,16 @@ class TOTPHandler
         string $token,
         string $secret,
         int $window = 1,
-        ?int $timeWindow = null
+        ?int $timeWindow = null,
+        ?int $currentTime = null
     ): bool {
-        $currentTime = time();
+        $currentTime = $currentTime ?? time();
         $timeWindow = $timeWindow ?? self::getTimeWindow();
 
         // Check current interval, previous intervals, and future intervals
         for ($i = -$window; $i <= $window; $i++) {
             $evalTime = $currentTime + ($i * $timeWindow);
-            $checkingToken = self::generateTOTP($secret, $timeWindow, strlen($token), $evalTime);
+            $checkingToken = self::generateTOTP($secret, $evalTime, $timeWindow, strlen($token));
             if (hash_equals($checkingToken, $token)) {
                 return true;
             }

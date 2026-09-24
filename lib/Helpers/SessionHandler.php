@@ -107,7 +107,7 @@ class SessionHandler
         }
     }
 
-    public static function validateCheckin(int $sessionId, string $userId, int $token): int
+    public static function validateCheckin(int $sessionId, string $userId, string $token): int
     {
         $session = AttendanceSession::find($sessionId);
         if (!$session || $session->status !== AttendanceSession::STATUS_ACTIVE) {
@@ -151,7 +151,7 @@ class SessionHandler
     {
         $now = time();
         $startWithBuffer = (int) $courseDate->date - self::getPreBeginBuffer();
-        $endWithBuffer = (int) $courseDate->end_time - self::getPostEndBuffer();
+        $endWithBuffer = (int) $courseDate->end_time + self::getPostEndBuffer();
         return $now >= $startWithBuffer && $now <= $endWithBuffer;
     }
 

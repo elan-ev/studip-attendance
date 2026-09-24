@@ -48,14 +48,21 @@ class TOTPGenerate extends NonJsonApiController
         $serverTimestamp = time();
         $token = TOTPHandler::generateTOTP($session->qr_seed, $serverTimestamp);
 
-        $data = [
-            'token' => $token,
-            'server-timestamp' => $serverTimestamp,
-            'time-window' => TOTPHandler::getTimeWindow(),
+        $payload = [
+            'data' => [
+                'type' => 'attendance-session-totps',
+                'id' => (string) $session->id,
+                'attributes' => [
+                    'token' => $token,
+                    'seed' => $session->qr_seed,
+                    'server-timestamp' => $serverTimestamp,
+                    'time-window' => TOTPHandler::getTimeWindow(),
+                ]
+            ]
         ];
 
-        $response = $response->withHeader('Content-Type', 'application/json');
-        $response->getBody()->write((string) json_encode($data));
+        $response = $response->withHeader('Content-Type', 'application/vnd.api+json');
+        $response->getBody()->write((string) json_encode($payload));
 
         return $response;
     }

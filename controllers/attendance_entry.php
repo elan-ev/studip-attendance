@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AttendanceController
+ * AttendanceEntryController
  *
  * Everything about attendance is provided in this controller.
  *
@@ -18,17 +18,20 @@ use StudipAttendance\Helpers\Utils;
 use StudipAttendance\Models\AttendanceEntry;
 use StudipAttendance\Models\AttendanceSession;
 
-class AttendanceController extends PluginController
+class AttendanceEntryController extends PluginController
 {
     public function before_filter(&$action, &$args)
     {
         parent::before_filter($action, $args);
-        // TODO: to be implemented.
     }
 
     public function index_action()
     {
-        // TODO: to be implemented.
+        global $perm;
+        $this->set_layout(null);
+        if (!$perm->have_perm('dozent')) {
+            $this->relocate(\URLHelper::getURL('dispatch.php/start'));
+        }
     }
 
     public function qr_code_action(int $sessionId, string $token)
@@ -47,12 +50,23 @@ class AttendanceController extends PluginController
     private function perform_entry_record(int $sessionId, string $token, string $source): void
     {
         $recordingTime = time();
-
         $userId = $GLOBALS['user']->id;
+
+        $session = AttendanceSession::find($sessionId);
+        if (!$session) {
+            PageLayout::postError(_('Die gewählte Sitzung wurde nicht gefunden.'));
+            $this->redirect($this->action_url('index'));
+            return;
+        }
+
         $validationStatus = SessionHandler::validateCheckin($sessionId, $userId, $token);
+
         if ($validationStatus === SessionHandler::VALIDATION_SUCCEED) {
-            $session = AttendanceSession::find($sessionId);
-            $entry = new AttendanceEntry();
+            $entry = AttendanceEntry::findOneBySQL(
+                'attendance_session_id = ? AND user_id = ?',
+                [$session->id, $userId]
+            ) ?? new AttendanceEntry();
+
             $entry->attendance_session_id = $session->id;
             $entry->user_id = $userId;
             $entry->source = $source;
@@ -64,13 +78,19 @@ class AttendanceController extends PluginController
             Utils::sendFeeback($session, $entry, $userId);
             PageLayout::postSuccess(_('Ihre Teilnahme an dieser Sitzung wurde erfolgreich erfasst.'));
             $this->redirect($this->action_url('index'));
+            return;
         }
 
-        $errorMessage = _('Ihre Teilnahme an dieser Sitzung konnte nicht erfasst werden.');
-        if ($validationStatus === SessionHandler::VALIDATION_FAILED_TOTP) {
-            $errorMessage = _('Ungültiger Token!');
-        }
+        $errorMessage = match ($validationStatus) {
+            SessionHandler::VALIDATION_FAILED_SESSION => _('Die Anwesenheitssitzung ist nicht aktiv oder existiert nicht.'),
+            SessionHandler::VALIDATION_FAILED_PARTICIPANT => _('Sie sind nicht als Teilnehmer für diesen Kurs eingetragen.'),
+            SessionHandler::VALIDATION_FAILED_TIMEFRAME => _('Der Check-In befindet sich außerhalb des zulässigen Zeitfensters.'),
+            SessionHandler::VALIDATION_FAILED_TOTP => _('Ungültiger oder abgelaufener QR-Code / Code.'),
+            SessionHandler::VALIDATION_FAILED_ENTRY => _('Ihre Anwesenheit wurde für diese Sitzung bereits erfasst.'),
+            default => _('Ihre Teilnahme an dieser Sitzung konnte nicht erfasst werden.')
+        };
 
-        PageLayout::postError(_($errorMessage));
+        PageLayout::postError($errorMessage);
+        $this->redirect($this->action_url('index'));
     }
 }

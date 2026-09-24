@@ -39,22 +39,23 @@
         "docs-compliance": "mkdir -p docs/compliance && npm sbom --sbom-format spdx --json > docs/compliance/npm-sbom.json && npm audit --json > docs/compliance/npm-audit.json && composer audit --format=json > docs/compliance/composer-audit.json && composer licenses --format=json > docs/compliance/composer-licenses.json"
     },
     "dependencies": {
-        "pinia": "^3.0.3",
-        "vue": "^3.5.22",
-        "vue-router": "^4.6.4"
+        "pinia": "4.0.3",
+        "vue": "3.5.43",
+        "vue-router": "4.6.4"
     },
     "devDependencies": {
-        "@ckeditor/ckeditor5-vue": "^7.3.0",
         "@headlessui/vue": "^1.7.23",
         "@redocly/cli": "^2.40.0",
         "@vitejs/plugin-vue": "^6.0.1",
-        "gettext-extractor-vue": "^5.2.0",
-        "gettext-parser": "^9.0.2",
-        "glob": "^13.0.6",
-        "kitsu": "^11.1.0",
-        "sass": "^1.97.2",
-        "sass-loader": "^16.0.6",
-        "vite": "^7.1.12",
-        "vue3-gettext": "^4.0.0-beta.1"
+        "gettext-extractor-vue": "5.2.0",
+        "gettext-parser": "9.1.1",
+        "glob": "13.0.6",
+        "kitsu": "11.1.0",
+        "sass": "1.105.0",
+        "sass-loader": "17.0.1",
+        "vite": "7.3.6",
+        "vue3-gettext": "4.0.1",
+        "otpauth": "9.5.2",
+        "qrcode.vue": "3.11.0"
     }
 }

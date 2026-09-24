@@ -4,7 +4,7 @@ namespace StudipAttendance\Models;
 
 use SimpleORMap;
 use CourseDate;
-use Seminar;
+use Course;
 
 use StudipAttendance\Classes\AuditLogTrait;
 use StudipAttendance\Classes\AuditLogInterface;
@@ -24,7 +24,7 @@ use StudipAttendance\Classes\AuditLogInterface;
  * @property string $status
  * @property string $qr_seed
  *
- * @property Seminar $course
+ * @property Course $course
  * @property CourseDate $termin
  */
 
@@ -50,7 +50,7 @@ class AttendanceSession extends SimpleORMap implements AuditLogInterface
         $config['db_table'] = 'elan_attendance_sessions';
 
         $config['belongs_to']['course'] = [
-            'class_name'  => Seminar::class,
+            'class_name'  => Course::class,
             'foreign_key' => 'seminar_id',
             'on_delete' => 'delete',
         ];

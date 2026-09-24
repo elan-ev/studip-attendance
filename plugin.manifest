@@ -5,6 +5,6 @@ origin=elan-ev
 version=0.1.0
 category=todo
 summary=todo
-description=todo
+description=Dieses Widget ermöglicht die einfache Verwaltung der Anwesenheitserfassung
 studipMinVersion=5.4
 studipMaxVersion=5.5.99

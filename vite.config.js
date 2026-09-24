@@ -19,6 +19,8 @@ export default defineConfig(({ mode }) => {
                 input: {
                     'studip-attendance': 'src/studip-attendance.js',
                     'studip-attendance-admin': 'src/studip-attendance-admin.js',
+                    'studip-attendance-widget-teacher': 'src/studip-attendance-widget-teacher.js',
+                    'studip-attendance-widget-student': 'src/studip-attendance-widget-student.js',
                 },
                 output: {
                     entryFileNames: `[name].js`,
