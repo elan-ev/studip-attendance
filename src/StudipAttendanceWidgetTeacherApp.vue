@@ -20,37 +20,61 @@
             </div>
         </div>
 
-        <QrCodeFullscreen ref="fullscreenRef" title="Staatsrecht I – Vorlesung" />
+        <QrCodeFullscreen ref="fullscreenRef" :title="courseName" />
     </div>
 </template>
 
 <script setup>
-import { ref, render, h, getCurrentInstance } from 'vue'
+import { ref, render, h, getCurrentInstance, onMounted, computed } from 'vue'
 import KPICard from './components/widget/KPICard.vue'
 import StudentCard from './components/widget/StudentCard.vue'
 import QrCodePip from './components/widget/QrCodePip.vue'
 import QrCodeFullscreen from './components/widget/QrCodeFullscreen.vue'
 
 import { useAttendanceSessionStore } from './store/session.js'
+import { useContextStore } from './store/context.js'
+import { useStudentStore } from './store/students.js';
 
 const sessionStore = useAttendanceSessionStore()
+const contextStore = useContextStore();
+const studentsStore = useStudentStore();
 const currentInstance = getCurrentInstance()
 
 const fullscreenRef = ref(null)
 
-// Dummy Data entsprechend dem Mockup
-const students = ref([
-    { id: 1, name: 'Anna Meier', status: 'present', avatar: 'https://i.pravatar.cc/150?img=1' },
-    { id: 2, name: 'Clara Lehmann', status: 'absent_unexcused', avatar: 'https://i.pravatar.cc/150?img=5' },
-    { id: 3, name: 'Ben Schmidt', status: 'absent_unexcused', avatar: 'https://i.pravatar.cc/150?img=12' },
-    { id: 4, name: 'Elena Weber', status: 'absent_unexcused', avatar: 'https://i.pravatar.cc/150?img=9' },
-    { id: 5, name: 'David Koch', status: 'absent_unexcused', avatar: 'https://i.pravatar.cc/150?img=13' },
-    { id: 6, name: 'Lena Schulz', status: 'absent_unexcused', avatar: 'https://i.pravatar.cc/150?img=20' },
-    { id: 7, name: 'Thomas Rain', status: 'present', avatar: 'https://i.pravatar.cc/150?img=11' },
-    { id: 8, name: 'Veronika Frei', status: 'absent_excused', avatar: 'https://i.pravatar.cc/150?img=32' },
-    { id: 9, name: 'Dara Müller', status: 'present', avatar: 'https://i.pravatar.cc/150?img=26' },
-    { id: 10, name: 'Anton Wolf', status: 'absent_excused', avatar: 'https://i.pravatar.cc/150?img=53' },
-])
+//dummy helper:
+function getAvatarIdFromString(str, max = 70) {
+    if (!str) return 1;
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return (Math.abs(hash) % max) + 1;
+}
+
+const courseName = computed(() => {
+    return contextStore.nextSessionCourse?.name ?? '';
+})
+
+const students = computed(() => {
+    const seminarId = contextStore.nextSessionCourse?.seminar_id;
+    if (!seminarId) {
+        return [];
+    }
+
+    const rawStudents = studentsStore.byCourseId(seminarId) || [];
+
+    return rawStudents.map(student => {
+        const avatarImgId = getAvatarIdFromString(student.id);
+
+        return {
+            id: student.id,
+            name: `${student.vorname || ''} ${student.nachname || ''}`.trim() || 'Unbekannt',
+            avatar: student.avatar || `https://i.pravatar.cc/150?img=${avatarImgId}`,
+            status: 'present'
+        };
+    });
+});
 
 
 async function openFullscreen() {
@@ -99,6 +123,13 @@ async function openQrPiP() {
         render(null, container)
     })
 }
+
+onMounted(async () => {
+    await contextStore.loadNextSession();
+    console.log(contextStore.nextSessionCourse.name);
+    console.log(sessionStore.records);
+    console.log(studentsStore.byCourseId(contextStore.nextSessionCourse.seminar_id));
+})
 </script>
 
 <style scoped>

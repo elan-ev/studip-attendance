@@ -53,6 +53,8 @@ trait Routes
 
         // Session-TOTP
         $group->get('/attendance-sessions/{id}/totp', \StudipAttendance\JsonApi\Routes\Session\TOTPGenerate::class);
+        // Widget
+        $group->get('/users/me/next-attendance-session', \StudipAttendance\JsonApi\Routes\Session\NextSession::class);
 
         // Thresholds
         $group->get('attendance-thresholds', \StudipAttendance\JsonApi\Routes\Threshold\Index::class);
@@ -68,6 +70,8 @@ trait Routes
         $group->post('/attendance-view-presets', \StudipAttendance\JsonApi\Routes\ViewPreset\Create::class);
         $group->patch('/attendance-view-presets/{id}', \StudipAttendance\JsonApi\Routes\ViewPreset\Update::class);
         $group->delete('/attendance-view-presets/{id}', \StudipAttendance\JsonApi\Routes\ViewPreset\Delete::class);
+
+        
     }
 
     public function registerUnauthenticatedRoutes(RouteCollectorProxy $group)
