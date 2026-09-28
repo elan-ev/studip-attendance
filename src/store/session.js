@@ -12,6 +12,10 @@ export const useAttendanceSessionStore = defineStore('sessionStore', () => {
 
     const totpCalculator = useTotp();
 
+    function setActiveSessionId(id) {
+        activeSessionId.value = String(id);
+    }
+
     function storeRecord(newRecord) {
         records.value.set(String(newRecord.id), newRecord);
     }
@@ -145,6 +149,7 @@ export const useAttendanceSessionStore = defineStore('sessionStore', () => {
         errors,
         activeSessionId,
         clearRecords,
+        storeRecord,
         all,
         byId,
         fetchAll,
@@ -154,5 +159,6 @@ export const useAttendanceSessionStore = defineStore('sessionStore', () => {
         activeRecord,
         currentToken,
         remainingSeconds,
+        setActiveSessionId,
     };
 });

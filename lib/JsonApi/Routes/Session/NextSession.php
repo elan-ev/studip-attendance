@@ -22,7 +22,7 @@ use StudipAttendance\Models\AttendanceSession;
 
 class NextSession extends NonJsonApiController
 {
-    private const DEFAULT_LIMIT = 100;
+    private const DEFAULT_LIMIT = 200;
 
     /**
      * @param Request $request
@@ -84,7 +84,10 @@ class NextSession extends NonJsonApiController
                 break;
             }
             if ($member->user) {
-                $students[] = $member->toArray();
+                $userData = $member->toArray();
+                $userData['formatted_name'] = $member->user->getFullname();
+                $userData['avatar'] = \Avatar::getAvatar($member->user_id)->getURL(\Avatar::NORMAL);
+                $students[] = $userData;
                 $count++;
             }
         }

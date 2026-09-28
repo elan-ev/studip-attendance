@@ -1,12 +1,15 @@
 <template>
     <div class="attendance-widget-teacher-wrapper">
+        <header>
+            <h3>{{ courseName }}</h3>
+        </header>
         <div class="kpi-row">
-            <KPICard value="3 / 10" label="Anwesend" :active="true" />
-            <KPICard value="5" label="Fehlt" />
-            <KPICard value="2" label="Entschuldigt" />
+            <KPICard :value="kpiStudentsPresent + ' / ' + students.length" :label="$gettext('Anwesend')" :active="true" />
+            <KPICard :value="kpiStudentsAbsent" :label="$gettext('Fehlt')" />
+            <KPICard :value="kpiStudentsExcused" :label="$gettext('Entschuldigt')" />
         </div>
 
-        <h3 class="section-title">{{ $gettext('Teilnehmende') }}</h3>
+        <h4 class="section-title">{{ $gettext('Teilnehmende') }}</h4>
 
         <div class="student-grid">
             <StudentCard v-for="student in students" :key="student.id" :student="student" />
@@ -34,23 +37,15 @@ import QrCodeFullscreen from './components/widget/QrCodeFullscreen.vue'
 import { useAttendanceSessionStore } from './store/session.js'
 import { useContextStore } from './store/context.js'
 import { useStudentStore } from './store/students.js';
+import { useEntryStore } from './store/entries.js'
 
 const sessionStore = useAttendanceSessionStore()
 const contextStore = useContextStore();
 const studentsStore = useStudentStore();
+const entriesStore = useEntryStore();
 const currentInstance = getCurrentInstance()
 
 const fullscreenRef = ref(null)
-
-//dummy helper:
-function getAvatarIdFromString(str, max = 70) {
-    if (!str) return 1;
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return (Math.abs(hash) % max) + 1;
-}
 
 const courseName = computed(() => {
     return contextStore.nextSessionCourse?.name ?? '';
@@ -62,23 +57,49 @@ const students = computed(() => {
         return [];
     }
 
+    const sessionId = sessionStore.activeSessionId;
+
     const rawStudents = studentsStore.byCourseId(seminarId) || [];
+    const sessionEntries = sessionId ? (entriesStore.bySessionId(sessionId) || []) : [];
+
+    const entryByUserId = new Map(
+        sessionEntries.map(entry => [entry.user_id, entry])
+    );
 
     return rawStudents.map(student => {
-        const avatarImgId = getAvatarIdFromString(student.id);
+        const record = entryByUserId.get(student.user_id);
 
         return {
             id: student.id,
             name: `${student.vorname || ''} ${student.nachname || ''}`.trim() || 'Unbekannt',
-            avatar: student.avatar || `https://i.pravatar.cc/150?img=${avatarImgId}`,
-            status: 'present'
+            avatar: student.avatar,
+            status: record ? record.status : 'absent',
+            entry: record || null
         };
     });
 });
 
+const kpiStudentsPresent = computed(() => {
+    const present = students.value.filter((student) => student.status === 'present').length;
+
+    return present;
+});
+
+const kpiStudentsAbsent = computed(() => {
+    const absent = students.value.filter((student) => student.status === 'absent').length;
+
+    return absent;
+});
+
+const kpiStudentsExcused = computed(() => {
+    const excused = students.value.filter((student) => student.status === 'excused').length;
+
+    return excused;
+});
+
 
 async function openFullscreen() {
-    await sessionStore.generateTOTP(1)
+    await sessionStore.generateTOTP(sessionStore.activeSessionId)
     fullscreenRef.value?.enterFullscreen()
 }
 
@@ -88,7 +109,7 @@ async function openQrPiP() {
         return
     }
 
-    await sessionStore.generateTOTP(1)
+    await sessionStore.generateTOTP(sessionStore.activeSessionId)
 
     const pipWindow = await window.documentPictureInPicture.requestWindow({
         width: 360,
@@ -109,9 +130,7 @@ async function openQrPiP() {
     container.id = 'pip-vue-root'
     pipWindow.document.body.appendChild(container)
 
-    const vnode = h(QrCodePip, {
-        title: 'Staatsrecht I – Vorlesung'
-    })
+    const vnode = h(QrCodePip)
 
     if (currentInstance?.appContext) {
         vnode.appContext = currentInstance.appContext
@@ -126,9 +145,6 @@ async function openQrPiP() {
 
 onMounted(async () => {
     await contextStore.loadNextSession();
-    console.log(contextStore.nextSessionCourse.name);
-    console.log(sessionStore.records);
-    console.log(studentsStore.byCourseId(contextStore.nextSessionCourse.seminar_id));
 })
 </script>
 

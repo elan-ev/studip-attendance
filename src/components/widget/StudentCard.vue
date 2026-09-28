@@ -35,8 +35,8 @@ defineEmits(['action'])
 const badgeClass = computed(() => {
     switch (props.student.status) {
         case 'present': return 'badge--present'
-        case 'absent_unexcused': return 'badge--absent'
-        case 'absent_excused': return 'badge--excused'
+        case 'absent': return 'badge--absent'
+        case 'excused': return 'badge--excused'
         default: return ''
     }
 })
@@ -44,8 +44,8 @@ const badgeClass = computed(() => {
 const statusText = computed(() => {
     switch (props.student.status) {
         case 'present': return 'Anwesend'
-        case 'absent_unexcused': return 'Fehlt'
-        case 'absent_excused': return 'Entschuldigt'
+        case 'absent': return 'Fehlt'
+        case 'excused': return 'Entschuldigt'
         default: return ''
     }
 })
@@ -53,7 +53,7 @@ const statusText = computed(() => {
 const actionLabel = computed(() => {
     switch (props.student.status) {
         case 'present': return 'Vorzeitig verlassen'
-        case 'absent_unexcused': return 'Manuell eintragen'
+        case 'absent': return 'Manuell eintragen'
         default: return 'Status ändern'
     }
 })

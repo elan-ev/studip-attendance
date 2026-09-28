@@ -42,9 +42,9 @@ export const useContextStore = defineStore('contextStore', () => {
                     studentsStore.storeRecords(data.students, data.course.seminar_id);
                 }
             }
-
             if (data.session) {
                 sessionStore.storeRecord(data.session);
+                sessionStore.setActiveSessionId(data.session.id);
 
                 if (data.entries && Array.isArray(data.entries)) {
                     entriesStore.storeRecords(data.entries, data.session.id);
