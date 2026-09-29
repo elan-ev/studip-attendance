@@ -1,13 +1,13 @@
 <template>
     <div class="qr-card" style="width: 100%; max-width: 320px; padding: 16px; box-sizing: border-box; text-align: center;">
         <div class="card-top-bar" v-if="title" style="font-weight: bold; margin-bottom: 12px; font-size: 14px; color: #1e293b;">
-            {{ courseName }}
+            {{ title }}
         </div>
         
         <div class="qr-container" style="display: flex; justify-content: center; margin: 12px 0;">
             <QRCodeVue 
                 v-if="sessionStore.currentToken" 
-                :value="sessionStore.currentToken" 
+                :value="sessionStore.currentTokenURL" 
                 :size="200" 
                 level="H" 
                 render-as="svg" 
@@ -36,7 +36,6 @@
 import { computed } from 'vue';
 import QRCodeVue from 'qrcode.vue'
 import { useAttendanceSessionStore } from './../../store/session'
-import { useContextStore } from './../../store/context'
 
 defineProps({
     title: {
@@ -46,9 +45,5 @@ defineProps({
 })
 
 const sessionStore = useAttendanceSessionStore()
-const contextStore = useContextStore();
 
-const courseName = computed(() => {
-    return contextStore.nextSessionCourse?.name ?? '';
-})
 </script>

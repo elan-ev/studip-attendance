@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /**
  * AttendanceEntryController
@@ -34,8 +34,13 @@ class AttendanceEntryController extends PluginController
         }
     }
 
-    public function qr_code_action(int $sessionId, string $token)
+    public function qr_code_action()
     {
+        $sessionId = Request::int('sessionid');
+        $token = Request::option('token');
+
+        var_dump($sessionId); var_dump($token); die;
+
         $entrySource = AttendanceEntry::SOURCE_USER_QR;
         $this->perform_entry_record($sessionId, $token, $entrySource);
     }

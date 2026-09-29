@@ -136,7 +136,11 @@ export const useAttendanceSessionStore = defineStore('sessionStore', () => {
     });
 
     const currentToken = computed(() => {
-        return totpCalculator.currentToken.value || activeRecord.value?.token || '';
+        return totpCalculator.currentToken.value || '';
+    });
+
+    const currentTokenURL = computed(() => {
+        return STUDIP.URLHelper.getURL('plugins.php/ElanAttendancePlugin/attendance_entry/qr_code') + `?token=${currentToken.value}&sessionid=${activeSessionId.value}`;
     });
 
     const remainingSeconds = computed(() => {
@@ -158,6 +162,7 @@ export const useAttendanceSessionStore = defineStore('sessionStore', () => {
         stopTOTP,
         activeRecord,
         currentToken,
+        currentTokenURL,
         remainingSeconds,
         setActiveSessionId,
     };

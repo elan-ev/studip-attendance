@@ -130,7 +130,9 @@ async function openQrPiP() {
     container.id = 'pip-vue-root'
     pipWindow.document.body.appendChild(container)
 
-    const vnode = h(QrCodePip)
+    const vnode = h(QrCodePip, {
+        title: courseName.value
+    })
 
     if (currentInstance?.appContext) {
         vnode.appContext = currentInstance.appContext

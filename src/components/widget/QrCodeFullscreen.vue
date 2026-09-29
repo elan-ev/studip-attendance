@@ -18,7 +18,7 @@
             <div class="qr-container">
                 <QRCodeVue 
                     v-if="sessionStore.currentToken" 
-                    :value="sessionStore.currentToken" 
+                    :value="sessionStore.currentTokenURL" 
                     :size="420" 
                     level="H" 
                     render-as="svg" 
