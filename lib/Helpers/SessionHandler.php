@@ -14,6 +14,7 @@ namespace StudipAttendance\Helpers;
 
 use CourseDate;
 use CourseExDate;
+use CourseMember;
 use Config;
 use Seminar;
 use StudipAttendance\Models\AttendanceAuditLog;
@@ -31,6 +32,15 @@ class SessionHandler
     const VALIDATION_FAILED_TIMEFRAME = 4;
     const VALIDATION_FAILED_TOTP = 5;
     const VALIDATION_FAILED_ENTRY = 6;
+
+    const VALIDATION_STATUSES = [
+        self::VALIDATION_SUCCEED,
+        self::VALIDATION_FAILED_SESSION,
+        self::VALIDATION_FAILED_PARTICIPANT,
+        self::VALIDATION_FAILED_TIMEFRAME,
+        self::VALIDATION_FAILED_TOTP,
+        self::VALIDATION_FAILED_ENTRY,
+    ];
 
     public static function discoverNonRecordedCourseDates(): array
     {
@@ -50,28 +60,13 @@ class SessionHandler
         return CourseDate::findBySQL($sql, $params);
     }
 
-    public static function determineStatus(CourseDate $courseDate): string
-    {
-        $now = time();
-
-        if ((int) $courseDate->date > $now) {
-            return AttendanceSession::STATUS_DRAFT;
-        }
-
-        if ($now >= (int) $courseDate->date && $now <= (int) $courseDate->end_time) {
-            return AttendanceSession::STATUS_ACTIVE;
-        }
-
-        return AttendanceSession::STATUS_ENDED;
-    }
-
     public static function ensureSessionExistsFrom(CourseDate $courseDate): void
     {
         if (!AttendanceSession::isRecorded($courseDate->termin_id)) {
             $session = new AttendanceSession();
             $session->termin_id = $courseDate->termin_id;
             $session->seminar_id = $courseDate->range_id;
-            $session->status = self::determineStatus($courseDate);
+            $session->status = AttendanceSession::STATUS_IDLE;
             $session->store();
         }
     }
@@ -110,7 +105,7 @@ class SessionHandler
     public static function validateCheckin(int $sessionId, string $userId, string $token): int
     {
         $session = AttendanceSession::find($sessionId);
-        if (!$session || $session->status !== AttendanceSession::STATUS_ACTIVE) {
+        if (!$session || $session->status !== AttendanceSession::STATUS_IDLE) {
             return self::VALIDATION_FAILED_SESSION;
         }
 
@@ -144,7 +139,9 @@ class SessionHandler
 
     private static function isUserParticipant(string $courseId, string $userId): bool
     {
-        return $GLOBALS['perm']->have_studip_perm('autor', $courseId, $userId);
+        // return $GLOBALS['perm']->have_studip_perm('autor', $courseId, $userId);
+        $member = CourseMember::find([$courseId, $userId]);
+        return $member !== null && $member->status === 'autor';
     }
 
     private static function isValidTimeFrame(CourseDate $courseDate): bool

@@ -19,10 +19,11 @@ use StudipAttendance\Classes\AuditLogInterface;
  * @license   GPL-3.0 WITH License-Supplement (see LICENSE-SUPPLEMENT.txt)
  *
  * @property int $id
- * @property string $termin_id
- * @property string $seminar_id
- * @property string $status
- * @property string $qr_seed
+ * @property string  $termin_id
+ * @property string  $seminar_id
+ * @property string  $status
+ * @property string  $qr_seed
+ * @property boolean $qr_shown
  *
  * @property Course $course
  * @property CourseDate $termin
@@ -33,15 +34,13 @@ class AttendanceSession extends SimpleORMap implements AuditLogInterface
     use AuditLogTrait;
 
     const QR_SEED_LENGTH = 6;
-    const STATUS_DRAFT = 'draft';
-    const STATUS_ACTIVE = 'active';
-    const STATUS_ENDED = 'ended';
+    const STATUS_IDLE = 'idle';
+    const STATUS_CANCELED = 'canceled';
     const STATUS_DELETED = 'deleted';
 
     const STATUSES = [
-        self::STATUS_DRAFT,
-        self::STATUS_ACTIVE,
-        self::STATUS_ENDED,
+        self::STATUS_IDLE,
+        self::STATUS_CANCELED,
         self::STATUS_DELETED,
     ];
 
@@ -67,7 +66,7 @@ class AttendanceSession extends SimpleORMap implements AuditLogInterface
         $config['has_many']['entries'] = [
             'class_name'        => AttendanceEntry::class,
             'assoc_foreign_key' => 'attendance_session_id',
-            'on_delete'         => 'delete', //TODO: Should we remove them as well?
+            // 'on_delete'         => 'delete', //TODO: Should we remove them as well?
         ];
 
         $config['registered_callbacks']['before_create'][] = 'cbGenerateQrSeed';

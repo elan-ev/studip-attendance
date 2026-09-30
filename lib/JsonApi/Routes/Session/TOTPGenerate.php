@@ -64,6 +64,9 @@ class TOTPGenerate extends NonJsonApiController
         $response = $response->withHeader('Content-Type', 'application/vnd.api+json');
         $response->getBody()->write((string) json_encode($payload));
 
+        $session->qr_shown = true;
+        $session->store();
+
         return $response;
     }
 }

@@ -50,7 +50,7 @@ class EvaluationHandler
         $excusedAbsents = [];
 
         $noSessions = [];
-        $future = [];
+        $deleted = [];
         $cancelled = [];
         $active = null; // TODO: decide whether there is a need for this!?
 
@@ -66,18 +66,20 @@ class EvaluationHandler
 
                 $session = $this->sessionsCollection->findOneBy('termin_id', $terminId);
 
-                if ($session->status !== AttendanceSession::STATUS_DRAFT) {
-                    $future[] = $terminId;
-                    continue;
-                }
 
-                if ($session->status !== AttendanceSession::STATUS_ACTIVE) {
+
+                if ($session->status !== AttendanceSession::STATUS_IDLE) {
                     $active = $terminId;
                     continue;
                 }
 
-                if ($session->status !== AttendanceSession::STATUS_DELETED) {
+                if ($session->status !== AttendanceSession::STATUS_CANCELED) {
                     $cancelled[] = $terminId;
+                    continue;
+                }
+
+                if ($session->status !== AttendanceSession::STATUS_DELETED) {
+                    $deleted[] = $terminId;
                     continue;
                 }
 
@@ -115,13 +117,13 @@ class EvaluationHandler
             'presents' => count($presents),
             'unexcused_absents' => count($unexcusedAbsents),
             'excused_absents' => count($excusedAbsents),
-            'future' => count($future),
+            'deleted' => count($deleted),
             'cancelled' => count($cancelled),
             'termin_ids' => [
                 'presents' => $presents,
                 'unexcused_absents' => $unexcusedAbsents,
                 'excused_absents' => $excusedAbsents,
-                'future' => $future,
+                'deleted' => $deleted,
                 'cancelled' => $cancelled,
             ],
         ];

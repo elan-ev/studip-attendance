@@ -37,8 +37,9 @@ final class InitElanAttendancePlugin extends Migration
                 `id`            INT(11) NOT NULL AUTO_INCREMENT,
                 `termin_id`     VARCHAR(32) NOT NULL,
                 `seminar_id`    VARCHAR(32) NOT NULL,
-                `status`        ENUM('draft','active','ended','deleted') CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+                `status`        ENUM('idle','canceled','deleted') CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
                 `qr_seed`       VARCHAR(255) DEFAULT NULL,
+                `qr_shown`      TINYINT(1) NOT NULL DEFAULT 0,
                 `mkdate`        INT(11) UNSIGNED NOT NULL,
                 `chdate`        INT(11) UNSIGNED NOT NULL,
 

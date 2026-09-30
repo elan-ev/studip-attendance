@@ -14,7 +14,6 @@
  */
 
 use StudipAttendance\Helpers\SessionHandler;
-use StudipAttendance\Helpers\Utils;
 use StudipAttendance\Models\AttendanceEntry;
 use StudipAttendance\Models\AttendanceSession;
 
@@ -38,11 +37,10 @@ class AttendanceEntryController extends PluginController
     {
         $sessionId = Request::int('sessionid');
         $token = Request::option('token');
-
-        var_dump($sessionId); var_dump($token); die;
+        $this->set_layout(null);
 
         $entrySource = AttendanceEntry::SOURCE_USER_QR;
-        $this->perform_entry_record($sessionId, $token, $entrySource);
+        $this->messages = $this->perform_entry_record($sessionId, $token, $entrySource);
     }
 
     public function code_action(int $sessionId, string $token)
@@ -51,18 +49,24 @@ class AttendanceEntryController extends PluginController
         $this->perform_entry_record($sessionId, $token, $entrySource);
     }
 
-    // TODO: recheck and polish the implementation here.
-    private function perform_entry_record(int $sessionId, string $token, string $source): void
+    private function perform_entry_record(int $sessionId, string $token, string $source): array
     {
         $recordingTime = time();
         $userId = $GLOBALS['user']->id;
 
+        $messages = [];
+
         $session = AttendanceSession::find($sessionId);
         if (!$session) {
-            PageLayout::postError(_('Die gewählte Sitzung wurde nicht gefunden.'));
-            $this->redirect($this->action_url('index'));
-            return;
+            $messages['error'] = _('Die gewählte Sitzung wurde nicht gefunden.');
+            return $messages;
         }
+
+        $messages['meta'] = [
+            'course_name' => $session->course ? $session->course->getFullname('name') : _('Unbekannte Veranstaltung'),
+            'session_date' => $session->termin ? $session->termin->date : null,
+            'session_enddate' => $session->termin ? $session->termin->end_time : null,
+        ];
 
         $validationStatus = SessionHandler::validateCheckin($sessionId, $userId, $token);
 
@@ -79,23 +83,20 @@ class AttendanceEntryController extends PluginController
             $entry->late = SessionHandler::calculateLatency($session, $recordingTime);
             $entry->store();
 
-            // Feedback
-            Utils::sendFeeback($session, $entry, $userId);
-            PageLayout::postSuccess(_('Ihre Teilnahme an dieser Sitzung wurde erfolgreich erfasst.'));
-            $this->redirect($this->action_url('index'));
-            return;
+            $messages['success'] = _('Ihre Teilnahme an dieser Sitzung wurde erfolgreich erfasst.');
+        }
+        else {
+            $messages['error'] = match ($validationStatus) {
+                SessionHandler::VALIDATION_FAILED_SESSION => _('Die Anwesenheitssitzung ist nicht aktiv oder existiert nicht.'),
+                SessionHandler::VALIDATION_FAILED_PARTICIPANT => _('Sie sind nicht als Teilnehmer für diesen Kurs eingetragen.'),
+                SessionHandler::VALIDATION_FAILED_TIMEFRAME => _('Der Check-In befindet sich außerhalb des zulässigen Zeitfensters.'),
+                SessionHandler::VALIDATION_FAILED_TOTP => _('Ungültiger oder abgelaufener QR-Code / Code.'),
+                SessionHandler::VALIDATION_FAILED_ENTRY => _('Ihre Anwesenheit wurde für diese Sitzung bereits erfasst.'),
+                default => _('Ihre Teilnahme an dieser Sitzung konnte nicht erfasst werden.')
+            };
+
         }
 
-        $errorMessage = match ($validationStatus) {
-            SessionHandler::VALIDATION_FAILED_SESSION => _('Die Anwesenheitssitzung ist nicht aktiv oder existiert nicht.'),
-            SessionHandler::VALIDATION_FAILED_PARTICIPANT => _('Sie sind nicht als Teilnehmer für diesen Kurs eingetragen.'),
-            SessionHandler::VALIDATION_FAILED_TIMEFRAME => _('Der Check-In befindet sich außerhalb des zulässigen Zeitfensters.'),
-            SessionHandler::VALIDATION_FAILED_TOTP => _('Ungültiger oder abgelaufener QR-Code / Code.'),
-            SessionHandler::VALIDATION_FAILED_ENTRY => _('Ihre Anwesenheit wurde für diese Sitzung bereits erfasst.'),
-            default => _('Ihre Teilnahme an dieser Sitzung konnte nicht erfasst werden.')
-        };
-
-        PageLayout::postError($errorMessage);
-        $this->redirect($this->action_url('index'));
+        return $messages;
     }
 }
