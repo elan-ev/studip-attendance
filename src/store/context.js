@@ -10,6 +10,7 @@ export const useContextStore = defineStore('contextStore', () => {
     const errors = ref(false);
     const nextSessionCourse = ref(null);
     const preferredLanguage = ref('de_DE');
+    const nextSessionDate = ref(null);
 
     const languageIsGerman = computed(() => preferredLanguage.value === 'de-DE');
 
@@ -26,6 +27,9 @@ export const useContextStore = defineStore('contextStore', () => {
     }
 
     async function loadNextSession() {
+        if (isLoading.value) {
+            return;
+        }
         clearErrors();
         isLoading.value = true;
 
@@ -35,6 +39,7 @@ export const useContextStore = defineStore('contextStore', () => {
 
         try {
             const data = await api.fetch(`/users/me/next-attendance-session`);
+            nextSessionDate.value = data['course-date'] ?? null;
             if (data.course) {
                 nextSessionCourse.value = data.course;
 
@@ -64,6 +69,7 @@ export const useContextStore = defineStore('contextStore', () => {
         isLoading,
         errors,
         nextSessionCourse,
+        nextSessionDate,
         langSelector,
         setPreferredLanguage,
         loadNextSession,

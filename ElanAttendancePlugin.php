@@ -17,6 +17,9 @@ use JsonApi\Contracts\JsonApiPlugin;
 use StudipAttendance\JsonApi\Routes;
 use StudipAttendance\JsonApi\Schemas;
 
+use StudipAttendance\Helpers\TeacherWidgetHelper;
+use StudipAttendance\Models\AttendanceSession;
+
 class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin, PortalPlugin
 {
     use Routes;
@@ -26,6 +29,46 @@ class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, JsonApi
     {
         parent::__construct();
         PageLayout::addStylesheet($this->getPluginUrl() . '/dist/attendance.css');
+
+        $this->updateTeacherWidget();
+    }
+
+    private function updateTeacherWidget()
+    {
+        global $user;
+
+        $now = time();
+        $customParameters = Request::getArray('page_info');
+        $params = $customParameters['attendance_widget_teacher'] ?? [];
+
+        $sessionId = $params['active-session-id'] ?? null;
+        $knownEntries = $params['known-entries'] ?? [];
+        $courseDate = $params['course-date'] ?? null;
+        $isExpired = $courseDate && $now >= ($courseDate['end_time'] ?? 0);
+
+        $changedEntries = [];
+
+        if ($sessionId) {
+            $session = AttendanceSession::find($sessionId);
+            if ($session) {
+                $changedEntries = TeacherWidgetHelper::getUpdatedEntriesForSession($session, $knownEntries);
+            }
+        }
+
+        if (!$courseDate) {
+            $updateSession = true;
+        } elseif ($isExpired) {
+            $updateSession = (bool) TeacherWidgetHelper::getNextTerminIdForUser($user);
+        } else {
+            $updateSession = false;
+        }
+
+            \UpdateInformation::setInformation('attendance_widget_teacher', [
+                'status' => 'ok',
+                'update-next-session' => $updateSession,
+                'update-entries' => !empty($changedEntries),
+                'updated-entries' => $changedEntries,
+            ]);
     }
 
     public function perform($unconsumedPath)

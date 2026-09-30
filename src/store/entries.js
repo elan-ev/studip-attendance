@@ -23,7 +23,7 @@ export const useEntryStore = defineStore('entryStore', () => {
     }
 
     function storeRecord(newRecord, sessionId = null) {
-        const targetSessionId = sessionId || newRecord['attendance-session-id'] || newRecord['session-id'];
+        const targetSessionId = sessionId || newRecord['attendance_session_id'];
         records.value.set(String(newRecord.id), newRecord);
 
         if (targetSessionId) {

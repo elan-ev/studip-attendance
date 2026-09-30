@@ -1,34 +1,46 @@
 <template>
-    <div class="attendance-widget-teacher-wrapper">
-        <header>
-            <h3>{{ courseName }}</h3>
-        </header>
-        <div class="kpi-row">
-            <KPICard :value="kpiStudentsPresent + ' / ' + students.length" :label="$gettext('Anwesend')" :active="true" />
-            <KPICard :value="kpiStudentsAbsent" :label="$gettext('Fehlt')" />
-            <KPICard :value="kpiStudentsExcused" :label="$gettext('Entschuldigt')" />
-        </div>
-
-        <h4 class="section-title">{{ $gettext('Teilnehmende') }}</h4>
-
-        <div class="student-grid">
-            <StudentCard v-for="student in students" :key="student.id" :student="student" />
-        </div>
-
-        <div class="action-bar">
-            <span class="action-title">{{ $gettext('QR-Code Anzeigen') }}</span>
-            <div class="action-buttons">
-                <button class="btn-secondary" @click="openQrPiP">{{ $gettext('Picture-in-Picture-Modus') }}</button>
-                <button class="btn-primary" @click="openFullscreen">{{ $gettext('Vollbildansicht') }}</button>
+    <template v-if="isLoading"></template>
+    <template v-else>
+        <div v-if="hasNextSession" class="attendance-widget-teacher-wrapper">
+            <header>
+                <h3>{{ courseName }}</h3>
+            </header>
+            <div class="kpi-row">
+                <KPICard :value="kpiStudentsPresent + ' / ' + students.length" :label="$gettext('Anwesend')"
+                    :active="true" />
+                <KPICard :value="kpiStudentsAbsent.toString()" :label="$gettext('Fehlt')" />
+                <KPICard :value="kpiStudentsExcused.toString()" :label="$gettext('Entschuldigt')" />
             </div>
-        </div>
 
-        <QrCodeFullscreen ref="fullscreenRef" :title="courseName" />
-    </div>
+            <h4 class="section-title">{{ $gettext('Teilnehmende') }}</h4>
+
+            <div class="student-grid">
+                <StudentCard v-for="student in students" :key="student.id" :student="student" />
+            </div>
+
+            <div class="action-bar">
+                <span class="action-title">{{ $gettext('QR-Code Anzeigen') }}</span>
+                <div class="action-buttons">
+                    <button class="btn-secondary" @click="openQrPiP">{{ $gettext('Picture-in-Picture-Modus') }}</button>
+                    <button class="btn-primary" @click="openFullscreen">{{ $gettext('Vollbildansicht') }}</button>
+                </div>
+            </div>
+
+            <QrCodeFullscreen ref="fullscreenRef" :title="courseName" />
+        </div>
+        <article v-else>
+            <header>
+                <h2>{{ $gettext('Keine Aktuelle Veranstaltung vorhanden') }}</h2>
+            </header>
+            <p>
+                {{ $gettext('Innerhalb der nächsten 30 Minuten findet kein Termin für Ihre Veranstaltungen statt.') }}
+            </p>
+        </article>
+    </template>
 </template>
 
 <script setup>
-import { ref, render, h, getCurrentInstance, onMounted, computed } from 'vue'
+import { ref, render, h, getCurrentInstance, onMounted, computed, onBeforeUnmount } from 'vue'
 import KPICard from './components/widget/KPICard.vue'
 import StudentCard from './components/widget/StudentCard.vue'
 import QrCodePip from './components/widget/QrCodePip.vue'
@@ -51,19 +63,27 @@ const courseName = computed(() => {
     return contextStore.nextSessionCourse?.name ?? '';
 })
 
+const sessionEntries = computed(() => {
+    const sessionId = sessionStore.activeSessionId;
+    return sessionId ? (entriesStore.bySessionId(sessionId) || []) : [];
+})
+
+const hasNextSession = computed(() => {
+    return contextStore.nextSessionDate !== null;
+});
+
+const isLoading = ref(true);
+
 const students = computed(() => {
     const seminarId = contextStore.nextSessionCourse?.seminar_id;
     if (!seminarId) {
         return [];
     }
 
-    const sessionId = sessionStore.activeSessionId;
-
     const rawStudents = studentsStore.byCourseId(seminarId) || [];
-    const sessionEntries = sessionId ? (entriesStore.bySessionId(sessionId) || []) : [];
 
     const entryByUserId = new Map(
-        sessionEntries.map(entry => [entry.user_id, entry])
+        sessionEntries.value.map(entry => [entry.user_id, entry])
     );
 
     return rawStudents.map(student => {
@@ -147,7 +167,32 @@ async function openQrPiP() {
 
 onMounted(async () => {
     await contextStore.loadNextSession();
-})
+    isLoading.value = false;
+    STUDIP.JSUpdater.register('attendance_widget_teacher', function (data) {
+        if (data['update-next-session']) {
+            contextStore.loadNextSession();
+        }
+        if (data['update-entries']) {
+            const newEntries = data['updated-entries'];
+            newEntries.forEach((e) => {
+                entriesStore.storeRecord(e);
+            });
+        }
+    }, function () {
+        return {
+            'course-date': contextStore.nextSessionDate,
+            'known-entries': sessionEntries.value.map(e => ({
+                id: e.id,
+                chdate: e.chdate
+            })),
+            'active-session-id': sessionStore.activeSessionId,
+        }
+    });
+});
+
+onBeforeUnmount(() => {
+    STUDIP.JSUpdater.unregister('attendance_widget_teacher');
+});
 </script>
 
 <style scoped>
