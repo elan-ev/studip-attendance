@@ -28,9 +28,9 @@
 
             <QrCodeFullscreen ref="fullscreenRef" :title="courseName" />
         </div>
-        <article v-else>
+        <article class="attendance-widget-wrapper-idle" v-else>
             <header>
-                <h2>{{ $gettext('Keine Aktuelle Veranstaltung vorhanden') }}</h2>
+                <h2>{{ $gettext('Keine Aktuelle Veranstaltung gefunden') }}</h2>
             </header>
             <p>
                 {{ $gettext('Innerhalb der nächsten 30 Minuten findet kein Termin für Ihre Veranstaltungen statt.') }}
@@ -196,6 +196,10 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+.attendance-widget-wrapper-idle {
+    padding: 0 1rem;
+}
+
 .attendance-widget-teacher-wrapper {
     background-color: #f0f7ff;
     padding: 16px;

@@ -27,10 +27,14 @@ class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, JsonApi
 
     public function __construct()
     {
+        global $perm;
+
         parent::__construct();
         PageLayout::addStylesheet($this->getPluginUrl() . '/dist/attendance.css');
 
-        $this->updateTeacherWidget();
+        if ($perm->have_perm('dozent')) {
+            $this->updateTeacherWidget();
+        }
     }
 
     private function updateTeacherWidget()
@@ -63,12 +67,12 @@ class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, JsonApi
             $updateSession = false;
         }
 
-            \UpdateInformation::setInformation('attendance_widget_teacher', [
-                'status' => 'ok',
-                'update-next-session' => $updateSession,
-                'update-entries' => !empty($changedEntries),
-                'updated-entries' => $changedEntries,
-            ]);
+        \UpdateInformation::setInformation('attendance_widget_teacher', [
+            'status' => 'ok',
+            'update-next-session' => $updateSession,
+            'update-entries' => !empty($changedEntries),
+            'updated-entries' => $changedEntries,
+        ]);
     }
 
     public function perform($unconsumedPath)
@@ -93,6 +97,7 @@ class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, JsonApi
         $template_path = $this->getPluginPath() . '/templates';
         $template_factory = new Flexi_TemplateFactory($template_path);
         if ($perm->have_perm('dozent')) {
+            $this->updateTeacherWidget();
             PageLayout::addScript($this->getPluginUrl() . '/dist/studip-attendance-widget-teacher.js', [
                 'type' => 'module',
                 'rel' => 'preload',
@@ -107,6 +112,9 @@ class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, JsonApi
             'type' => 'module',
             'rel' => 'preload',
         ]);
-        return $template_factory->open('widget_student');
+        $template = $template_factory->open('widget_student');
+        $template->preferredLanguage = str_replace('_', '-', $_SESSION['_language']);
+        $template->userId = $user->id;
+        return $template;
     }
 }

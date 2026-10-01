@@ -74,7 +74,7 @@ class TeacherWidgetHelper
         ];
     }
 
-    public static function getNextTerminIdForUser(string $userId, int $windowMinutes = 30): ?\CourseDate
+    public static function getNextTerminIdForTeacher(string $userId, int $windowMinutes = 30): ?\CourseDate
     {
         $db = \DBManager::get();
 
@@ -86,6 +86,35 @@ class TeacherWidgetHelper
             JOIN termine t ON t.range_id = su.Seminar_id
             WHERE su.user_id = :user_id
               AND su.status = 'dozent'
+              AND t.end_time >= :now   
+              AND t.date <= :max_start_time
+            ORDER BY t.date ASC
+            LIMIT 1";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute([
+            'user_id' => $userId,
+            'now' => $now,
+            'max_start_time' => $maxStartTime,
+        ]);
+
+        $terminId = $stmt->fetchColumn();
+
+        return \CourseDate::find($terminId ?: null);
+    }
+
+    public static function getNextTerminIdForStudent(string $userId, int $windowMinutes = 30): ?\CourseDate
+    {
+        $db = \DBManager::get();
+
+        $now = time();
+        $maxStartTime = $now + ($windowMinutes * 60);
+
+        $sql = "SELECT t.termin_id
+            FROM seminar_user su
+            JOIN termine t ON t.range_id = su.Seminar_id
+            WHERE su.user_id = :user_id
+              AND su.status = 'autor'
               AND t.end_time >= :now   
               AND t.date <= :max_start_time
             ORDER BY t.date ASC

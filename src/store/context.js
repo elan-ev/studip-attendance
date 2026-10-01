@@ -7,9 +7,12 @@ import { useAttendanceSessionStore } from './session.js';
 
 export const useContextStore = defineStore('contextStore', () => {
     const isLoading = ref(false);
+    const isTeacher = ref(false);
+    const isStudent = ref(false);
     const errors = ref(false);
     const nextSessionCourse = ref(null);
     const preferredLanguage = ref('de_DE');
+    const userId = ref(null);
     const nextSessionDate = ref(null);
 
     const languageIsGerman = computed(() => preferredLanguage.value === 'de-DE');
@@ -20,6 +23,10 @@ export const useContextStore = defineStore('contextStore', () => {
 
     function setPreferredLanguage(language) {
         preferredLanguage.value = language;
+    }
+
+    function setUserId(id) {
+        userId.value = id;
     }
 
     function clearErrors() {
@@ -39,21 +46,30 @@ export const useContextStore = defineStore('contextStore', () => {
 
         try {
             const data = await api.fetch(`/users/me/next-attendance-session`);
+            isTeacher.value = data['user-status'] === 'teacher';
+            isStudent.value = data['user-status'] === 'student';
             nextSessionDate.value = data['course-date'] ?? null;
+
             if (data.course) {
                 nextSessionCourse.value = data.course;
 
-                if (data.students && Array.isArray(data.students)) {
+                if (isTeacher.value && data.students && Array.isArray(data.students)) {
                     studentsStore.storeRecords(data.students, data.course.seminar_id);
                 }
             }
-            if (data.session) {
+
+            if (data.session && isTeacher.value) {
                 sessionStore.storeRecord(data.session);
                 sessionStore.setActiveSessionId(data.session.id);
 
                 if (data.entries && Array.isArray(data.entries)) {
                     entriesStore.storeRecords(data.entries, data.session.id);
                 }
+            }
+
+            if (isStudent.value) {
+                sessionStore.setActiveSessionId(data['session-id']);
+                entriesStore.storeRecord(data.entry);
             }
 
             
@@ -66,12 +82,16 @@ export const useContextStore = defineStore('contextStore', () => {
 
     return {
         preferredLanguage,
+        userId,
         isLoading,
+        isTeacher,
+        isStudent,
         errors,
         nextSessionCourse,
         nextSessionDate,
         langSelector,
         setPreferredLanguage,
+        setUserId,
         loadNextSession,
     };
 });
