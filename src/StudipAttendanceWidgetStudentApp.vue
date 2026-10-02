@@ -140,11 +140,12 @@ const submitPin = async () => {
 
     isSubmitting.value = true
     errorMessage.value = ''
+    const sessionId = sessionStore.activeSessionId
 
     const code = pinDigits.value.join('')
 
     try {
-        await sessionStore.checkinWithPin(code)
+        await entriesStore.checkinWithPin(sessionId, code)
     } catch (err) {
         errorMessage.value = err.message || $gettext('Der Code ist ungültig oder abgelaufen.')
     } finally {

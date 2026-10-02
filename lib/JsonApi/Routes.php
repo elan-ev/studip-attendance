@@ -35,6 +35,7 @@ trait Routes
         // Session - Entries
         $group->get('/attendance-sessions/{id}/entries', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryIndex::class);
         $group->post('/attendance-sessions/{id}/entries', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryCreate::class);
+        $group->post('/attendance-sessions/{id}/pin-checkin', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryPinCheckin::class);
         $group->get('/attendance-sessions/{session_id}/entries/{id}', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryShow::class);
         $group->patch('/attendance-sessions/{session_id}/entries/{id}', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryUpdate::class);
 

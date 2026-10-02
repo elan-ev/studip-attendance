@@ -76,17 +76,22 @@ class Authority
 
     public static function canCreateEntry(User $user, string $courseId): bool
     {
+        return Utils::isTeacherOrAdmin($user, $courseId);
+    }
+
+    public static function canStudentCheckin(User $user, string $courseId): bool
+    {
         return Utils::isAutor($user, $courseId);
     }
 
     public static function canDeleteEntry(User $user, string $courseId): bool
     {
-        return Utils::isTeacher($user, $courseId);
+        return Utils::isTeacherOrAdmin($user, $courseId);
     }
 
     public static function canUpdateEntry(User $user, string $courseId): bool
     {
-        return Utils::isTeacher($user, $courseId);
+        return Utils::isTeacherOrAdmin($user, $courseId);
     }
 
     public static function canIndexEntry(User $user): bool

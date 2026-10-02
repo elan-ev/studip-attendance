@@ -177,6 +177,47 @@ export const useEntryStore = defineStore('entryStore', () => {
         }
     }
 
+    async function checkinWithPin(sessionId, pin) {
+        isLoading.value = true;
+        errors.value = null;
+
+        try {
+            const { data } = await api.post(`attendance-sessions/${sessionId}/pin-checkin`, {
+                type: 'attendance-entries',
+                pin: pin,
+            });
+            const formattedRecord = formatAttendanceEntry(data);
+            storeRecord(formattedRecord);
+        } catch (err) {
+            console.error('Error while creating attendance entry record:', err);
+            errors.value = err;
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
+    function formatAttendanceEntry(rawEntry, fallbackSessionId = '') {
+        if (!rawEntry) return null;
+
+        const nowTimestamp = String(Math.floor(Date.now() / 1000));
+
+        return {
+            id: String(rawEntry.id),
+            attendance_session_id: String(
+                rawEntry.session?.data?.id || rawEntry.attendance_session_id || fallbackSessionId
+            ),
+            user_id: rawEntry.user?.data?.id || rawEntry.user_id || '',
+            status: rawEntry.status || 'present',
+            source: rawEntry.source || rawEntry['entry-type'] || 'user_code',
+            comment: rawEntry.comment ?? null,
+            teacher_input_reason: rawEntry.teacher_input_reason ?? null,
+            late: String(rawEntry.late ?? 0),
+            left_early: String(rawEntry['left-early'] ?? rawEntry.left_early ?? 0),
+            mkdate: rawEntry.mkdate ? String(rawEntry.mkdate) : nowTimestamp,
+            chdate: rawEntry.chdate ? String(rawEntry.chdate) : nowTimestamp,
+        };
+    }
+
     return {
         records,
         recordsBySession,
@@ -195,5 +236,6 @@ export const useEntryStore = defineStore('entryStore', () => {
         updateEntryStatus,
         createRecord,
         getPaginationForSession,
+        checkinWithPin,
     };
 });
