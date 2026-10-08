@@ -14,9 +14,7 @@
      </StudipDialog>
 </template>
 <script setup>
-import { computed, ref } from 'vue';
 import StudipDialog from '@/components/studip/StudipDialog.vue';
-import StudipIcon from '@/components/studip/StudipIcon.vue';
 
 const props = defineProps({
     open: { type: Boolean, default: false },

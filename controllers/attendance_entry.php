@@ -43,12 +43,6 @@ class AttendanceEntryController extends PluginController
         $this->messages = $this->perform_entry_record($sessionId, $token, $entrySource);
     }
 
-    // public function code_action(int $sessionId, string $token)
-    // {
-    //     $entrySource = AttendanceEntry::SOURCE_USER_CODE;
-    //     $this->perform_entry_record($sessionId, $token, $entrySource);
-    // }
-
     private function perform_entry_record(int $sessionId, string $token, string $source): array
     {
         $recordingTime = time();

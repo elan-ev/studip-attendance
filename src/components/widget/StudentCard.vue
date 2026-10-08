@@ -18,7 +18,6 @@
 </template>
 
 <script setup>
-import StudipIcon from '@/components/studip/StudipIcon.vue';
 import { computed } from 'vue'
 
 const props = defineProps({
