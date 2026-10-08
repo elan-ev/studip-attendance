@@ -11,9 +11,9 @@
             </span>
         </div>
 
-        <button class="action-btn" @click="$emit('action', student)">
+        <button v-if="showActionButton" class="action-btn" @click="$emit('action', student)">
             <span class="btn-icon" v-if="student.status === 'present'">🚪</span>
-            <span class="btn-icon" v-else-if="student.status === 'absent_unexcused'">+</span>
+            <span class="btn-icon" v-else-if="student.status === 'absent'">+</span>
             <span class="btn-icon" v-else>✏️</span>
             {{ actionLabel }}
         </button>
@@ -50,11 +50,17 @@ const statusText = computed(() => {
     }
 })
 
+const showActionButton = computed(() => {
+    // enhance to present and excused if actions are needed
+    return props.student.status === 'absent';
+});
+
 const actionLabel = computed(() => {
     switch (props.student.status) {
         case 'present': return 'Vorzeitig verlassen'
         case 'absent': return 'Manuell eintragen'
-        default: return 'Status ändern'
+        case 'excused': return 'Status ändern'
+        default: return ''
     }
 })
 </script>

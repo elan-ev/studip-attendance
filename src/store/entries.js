@@ -177,6 +177,28 @@ export const useEntryStore = defineStore('entryStore', () => {
         }
     }
 
+    async function createSessionEntry(sessionId, userId, status, comment, source) {
+        isLoading.value = true;
+        errors.value = null;
+
+        try {
+            const { data } = await api.post(`attendance-sessions/${sessionId}/entries`, {
+                type: 'attendance-entries',
+                'user-id': userId,
+                'comment': comment ?? '',
+                'status': status ?? 'absent',
+                'source': source 
+            });
+            const formattedRecord = formatAttendanceEntry(data);
+            storeRecord(formattedRecord);
+        } catch (err) {
+            console.error('Error while creating attendance entry record:', err);
+            errors.value = err;
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
     async function checkinWithPin(sessionId, pin) {
         isLoading.value = true;
         errors.value = null;
@@ -237,5 +259,6 @@ export const useEntryStore = defineStore('entryStore', () => {
         createRecord,
         getPaginationForSession,
         checkinWithPin,
+        createSessionEntry,
     };
 });

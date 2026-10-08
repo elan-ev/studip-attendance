@@ -54,6 +54,7 @@
         "sass": "1.105.0",
         "sass-loader": "17.0.1",
         "vite": "7.3.6",
+        "vue-resizable": "2.1.7",
         "vue3-gettext": "4.0.1",
         "otpauth": "9.5.2",
         "qrcode.vue": "3.11.0"

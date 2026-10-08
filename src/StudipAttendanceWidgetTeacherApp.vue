@@ -15,7 +15,8 @@
             <h4 class="section-title">{{ $gettext('Teilnehmende') }}</h4>
 
             <div class="student-grid">
-                <StudentCard v-for="student in students" :key="student.id" :student="student" />
+                <StudentCard v-for="student in students" :key="student.id" :student="student"
+                    @action="performStudentAction" />
             </div>
 
             <div class="action-bar">
@@ -36,13 +37,21 @@
                 {{ $gettext('Innerhalb der nächsten 30 Minuten findet kein Termin für Ihre Veranstaltungen statt.') }}
             </p>
         </article>
+
+        <StudentActionAddDialog v-model:open="showStudentActionAddDialog" :student="selectedStudent" :session-id="sessionId" />
+        <StudentActionDismissDialog v-model:open="showStudentActionDismissDialog" :student="selectedStudent" :session-id="sessionId" />
+        <StudentActionUpdateDialog v-model:open="showStudentActionUpdateDialog" :student="selectedStudent" :session-id="sessionId" />
+
     </template>
 </template>
 
 <script setup>
-import { ref, render, h, getCurrentInstance, onMounted, computed, onBeforeUnmount } from 'vue'
+import { ref, render, h, getCurrentInstance, onMounted, computed, onBeforeUnmount, watch } from 'vue'
 import KPICard from './components/widget/KPICard.vue'
 import StudentCard from './components/widget/StudentCard.vue'
+import StudentActionAddDialog from './components/widget/dialogs/StudentActionAddDialog.vue'
+import StudentActionDismissDialog from './components/widget/dialogs/StudentActionDismissDialog.vue'
+import StudentActionUpdateDialog from './components/widget/dialogs/StudentActionUpdateDialog.vue'
 import QrCodePip from './components/widget/QrCodePip.vue'
 import QrCodeFullscreen from './components/widget/QrCodeFullscreen.vue'
 
@@ -58,9 +67,19 @@ const entriesStore = useEntryStore();
 const currentInstance = getCurrentInstance()
 
 const fullscreenRef = ref(null)
+const showStudentActionAddDialog = ref(false)
+const showStudentActionDismissDialog = ref(false);
+const showStudentActionUpdateDialog = ref(false);
+const selectedStudent = ref(null);
 
 const courseName = computed(() => {
     return contextStore.nextSessionCourse?.name ?? '';
+})
+
+const sessionId = computed(() => {
+    const sessionId = sessionStore.activeSessionId ?? '';
+
+    return sessionId;
 })
 
 const sessionEntries = computed(() => {
@@ -90,7 +109,7 @@ const students = computed(() => {
         const record = entryByUserId.get(student.user_id);
 
         return {
-            id: student.id,
+            id: student.user_id,
             name: `${student.vorname || ''} ${student.nachname || ''}`.trim() || 'Unbekannt',
             avatar: student.avatar,
             status: record ? record.status : 'absent',
@@ -165,6 +184,21 @@ async function openQrPiP() {
     })
 }
 
+const dialogStateMap = {
+    absent: showStudentActionAddDialog,
+    present: showStudentActionDismissDialog,
+    excused: showStudentActionUpdateDialog,
+};
+
+const performStudentAction = (participant) => {
+    const dialogRef = dialogStateMap[participant.status];
+    
+    if (dialogRef) {
+        selectedStudent.value = participant;
+        dialogRef.value = true;
+    }
+}
+
 onMounted(async () => {
     await contextStore.loadNextSession();
     isLoading.value = false;
@@ -193,6 +227,17 @@ onMounted(async () => {
 onBeforeUnmount(() => {
     STUDIP.JSUpdater.unregister('attendance_widget_teacher');
 });
+
+watch(
+    [showStudentActionAddDialog, showStudentActionDismissDialog, showStudentActionUpdateDialog],
+    ([addOpen, dismissOpen, updateOpen]) => {
+        const isAnyDialogOpen = addOpen || dismissOpen || updateOpen;
+        
+        if (!isAnyDialogOpen) {
+            selectedStudent.value = null;
+        }
+    }
+);
 </script>
 
 <style scoped>
