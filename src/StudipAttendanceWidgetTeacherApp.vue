@@ -2,12 +2,12 @@
     <template v-if="isLoading"></template>
     <template v-else>
         <div v-if="hasNextSession" class="attendance-widget-teacher-wrapper">
-            <header>
-                <h3>{{ courseName }}</h3>
+            <header class="attendance-widget-teacher-header">
+                <h3 class="attendance-widget-teacher-header-title">{{ courseName }}</h3>
+                <time class="attendance-widget-teacher-header-subtitle">{{ courseDateText }}</time>
             </header>
             <div class="kpi-row">
-                <KPICard :value="kpiStudentsPresent + ' / ' + students.length" :label="$gettext('Anwesend')"
-                    :active="true" />
+                <KPICard :value="kpiStudentsPresent + ' / ' + students.length" :label="$gettext('Anwesend')" />
                 <KPICard :value="kpiStudentsAbsent.toString()" :label="$gettext('Fehlt')" />
                 <KPICard :value="kpiStudentsExcused.toString()" :label="$gettext('Entschuldigt')" />
             </div>
@@ -22,12 +22,12 @@
             <div class="action-bar">
                 <span class="action-title">{{ $gettext('QR-Code Anzeigen') }}</span>
                 <div class="action-buttons">
-                    <button class="btn-secondary" @click="openQrPiP">{{ $gettext('Picture-in-Picture-Modus') }}</button>
-                    <button class="btn-primary" @click="openFullscreen">{{ $gettext('Vollbildansicht') }}</button>
+                    <button class="button" @click="openQrPiP">{{ $gettext('Picture-in-Picture-Modus') }}</button>
+                    <button class="button" @click="openFullscreen">{{ $gettext('Vollbildansicht') }}</button>
                 </div>
             </div>
 
-            <QrCodeFullscreen ref="fullscreenRef" :title="courseName" />
+            <QrCodeFullscreen ref="fullscreenRef" :title="courseName" :date-range="courseDateText"/>
         </div>
         <article class="attendance-widget-wrapper-idle" v-else>
             <header>
@@ -60,6 +60,8 @@ import { useContextStore } from './store/context.js'
 import { useStudentStore } from './store/students.js';
 import { useEntryStore } from './store/entries.js'
 
+import { useFormattedDateRange } from '@/composables/useFormattedDateRange.js';
+
 const sessionStore = useAttendanceSessionStore()
 const contextStore = useContextStore();
 const studentsStore = useStudentStore();
@@ -75,6 +77,15 @@ const selectedStudent = ref(null);
 const courseName = computed(() => {
     return contextStore.nextSessionCourse?.name ?? '';
 })
+
+const courseDateText = computed(() => {
+    if (!hasNextSession.value) {
+        return ''
+    }
+    const { formattedRange } = useFormattedDateRange(contextStore.nextSessionDate.date, contextStore.nextSessionDate.end_time);
+
+    return formattedRange;
+});
 
 const sessionId = computed(() => {
     const sessionId = sessionStore.activeSessionId ?? '';
@@ -170,7 +181,8 @@ async function openQrPiP() {
     pipWindow.document.body.appendChild(container)
 
     const vnode = h(QrCodePip, {
-        title: courseName.value
+        title: courseName.value,
+        dateRange: courseDateText.value
     })
 
     if (currentInstance?.appContext) {
@@ -240,16 +252,22 @@ watch(
 );
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .attendance-widget-wrapper-idle {
     padding: 0 1rem;
 }
 
 .attendance-widget-teacher-wrapper {
-    background-color: #f0f7ff;
+    background-color: var(--dark-gray-color-5);
     padding: 16px;
-    border-radius: 8px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    .attendance-widget-teacher-header {
+        margin-bottom: 1rem;
+    
+        .attendance-widget-teacher-header-title {
+            margin: 0 0 0.5rem 0;
+        }
+    }
 }
 
 .info-banner {
@@ -275,33 +293,12 @@ watch(
 
 .action-title {
     font-size: 14px;
-    color: #334155;
     font-weight: 500;
 }
 
 .action-buttons {
     display: flex;
     gap: 8px;
-}
-
-.btn-secondary,
-.btn-primary {
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 12px;
-    cursor: pointer;
-    border: 1px solid transparent;
-}
-
-.btn-secondary {
-    background-color: #ffffff;
-    color: #1e293b;
-    border-color: #cbd5e1;
-}
-
-.btn-primary {
-    background-color: #1e40af;
-    color: #ffffff;
 }
 
 .kpi-row {

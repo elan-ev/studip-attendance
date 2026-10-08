@@ -1,49 +1,135 @@
 <template>
-    <div class="qr-card" style="width: 100%; max-width: 320px; padding: 16px; box-sizing: border-box; text-align: center;">
-        <div class="card-top-bar" v-if="title" style="font-weight: bold; margin-bottom: 12px; font-size: 14px; color: #1e293b;">
-            {{ title }}
-        </div>
-        
-        <div class="qr-container" style="display: flex; justify-content: center; margin: 12px 0;">
-            <QRCodeVue 
-                v-if="sessionStore.currentToken" 
-                :value="sessionStore.currentTokenURL" 
-                :size="200" 
-                level="H" 
-                render-as="svg" 
-            />
-            <div v-else style="width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; background: #e2e8f0; border-radius: 8px;">
-                <span style="font-size: 12px; color: #64748b;">{{ $gettext('Lade Token...') }}</span>
+    <article class="qr-card">
+        <header v-if="title || dateRange" class="card-header">
+            <h3 v-if="title" class="card-title">{{ title }}</h3>
+            <time v-if="dateRange" class="card-date">{{ dateRange }}</time>
+        </header>
+
+        <main class="qr-content">
+            <div class="qr-container">
+                <QRCodeVue
+                    v-if="sessionStore.currentToken"
+                    :value="sessionStore.currentTokenURL"
+                    :size="200"
+                    level="H"
+                    render-as="svg"
+                />
+                <div v-else class="qr-placeholder">
+                    <span>{{ $gettext('Lade Token...') }}</span>
+                </div>
             </div>
-        </div>
 
-        <p class="instruction-text" style="font-size: 12px; margin-top: 8px; color: #475569;">
-            {{ $gettext('Scannen Sie diesen Code ein') }}
-        </p>
+            <p class="instruction-text">
+                {{ $gettext('Scannen Sie diesen Code ein') }}
+            </p>
+        </main>
 
-        <div class="token-box" style="margin-top: 8px;">
-            <span class="token-code" style="font-size: 24px; font-weight: bold; letter-spacing: 2px; font-family: monospace; display: block; color: #0f172a;">
+        <footer class="token-box">
+            <span class="token-code">
                 {{ sessionStore.currentToken || '------' }}
             </span>
-            <small style="font-size: 11px; color: #64748b; margin-top: 4px; display: block;">
+            <small class="token-timer">
                 {{ $gettext('Erneuerung in:') }} {{ sessionStore.remainingSeconds }}s
             </small>
-        </div>
-    </div>
+        </footer>
+    </article>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import QRCodeVue from 'qrcode.vue'
-import { useAttendanceSessionStore } from './../../store/session'
+import QRCodeVue from 'qrcode.vue';
+import { useAttendanceSessionStore } from './../../store/session';
 
 defineProps({
     title: {
         type: String,
         default: ''
+    },
+    dateRange: {
+        type: String,
+        default: ''
     }
-})
+});
 
-const sessionStore = useAttendanceSessionStore()
-
+const sessionStore = useAttendanceSessionStore();
 </script>
+
+<style lang="scss" scoped>
+.qr-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: var(--white, #ffffff);
+    border-radius: 8px;
+
+    .card-header {
+        margin-bottom: 12px;
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .card-date {
+            display: block;
+            font-size: 14px;
+            color: var(--dark-gray-color-80);
+            margin-top: 2px;
+        }
+    }
+
+    .qr-content {
+        .qr-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 12px 0;
+
+            .qr-placeholder {
+                width: 200px;
+                height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #e2e8f0;
+                border-radius: 8px;
+
+                span {
+                    font-size: 14px;
+                    color: var(--dark-gray-color-80);
+                }
+            }
+        }
+
+        .instruction-text {
+            font-size: 14px;
+            margin: 8px 0 0 0;
+            color: var(--dark-gray-color-80);
+        }
+    }
+
+    .token-box {
+        margin-top: 8px;
+
+        .token-code {
+            display: block;
+            font-family: monospace;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--text-color);
+        }
+
+        .token-timer {
+            display: block;
+            font-size: 14px;
+            color: var(--dark-gray-color-80);
+            margin-top: 4px;
+        }
+    }
+}
+</style>

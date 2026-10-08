@@ -11,16 +11,14 @@
             </span>
         </div>
 
-        <button v-if="showActionButton" class="action-btn" @click="$emit('action', student)">
-            <span class="btn-icon" v-if="student.status === 'present'">🚪</span>
-            <span class="btn-icon" v-else-if="student.status === 'absent'">+</span>
-            <span class="btn-icon" v-else>✏️</span>
+        <button v-if="showActionButton" class="button" :class="[actionIcon]" @click="$emit('action', student)">
             {{ actionLabel }}
         </button>
     </div>
 </template>
 
 <script setup>
+import StudipIcon from '@/components/studip/StudipIcon.vue';
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -63,6 +61,15 @@ const actionLabel = computed(() => {
         default: return ''
     }
 })
+
+const actionIcon = computed(() => {
+    switch (props.student.status) {
+        case 'present': return ''
+        case 'absent': return 'add'
+        case 'excused': return 'edit'
+        default: return ''
+    }
+})
 </script>
 
 <style scoped>
@@ -74,6 +81,10 @@ const actionLabel = computed(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.student-card button.button {
+    margin: 1rem 0 0 0;
 }
 
 .avatar-wrapper {
