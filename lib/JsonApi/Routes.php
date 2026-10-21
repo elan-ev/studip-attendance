@@ -58,7 +58,7 @@ trait Routes
         $group->get('/users/me/next-attendance-session', \StudipAttendance\JsonApi\Routes\Session\NextSession::class);
 
         // Thresholds
-        $group->get('attendance-thresholds', \StudipAttendance\JsonApi\Routes\Threshold\Index::class);
+        $group->get('/attendance-thresholds', \StudipAttendance\JsonApi\Routes\Threshold\Index::class);
         // Course-Thresholds
         $group->get('/course/{course_id}/attendance-thresholds/{id}', \StudipAttendance\JsonApi\Routes\Threshold\Show::class);
         $group->post('/course/{id}/attendance-thresholds', \StudipAttendance\JsonApi\Routes\Threshold\Create::class);

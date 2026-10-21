@@ -39,7 +39,7 @@ class TOTPHandler
         string $secret,
         ?int $time = null,
         ?int $timeWindow = null,
-        ?int $digits = null,
+        ?int $digits = null
     ): string {
         $time = $time ?? time();
         $timeWindow = $timeWindow ?? self::getTimeWindow();

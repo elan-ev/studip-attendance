@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 /**
  * AttendanceEntryController
@@ -78,17 +78,37 @@ class AttendanceEntryController extends PluginController
             $entry->store();
 
             $messages['success'] = _('Ihre Teilnahme an dieser Sitzung wurde erfolgreich erfasst.');
-        }
-        else {
-            $messages['error'] = match ($validationStatus) {
-                SessionHandler::VALIDATION_FAILED_SESSION => _('Die Anwesenheitssitzung ist nicht aktiv oder existiert nicht.'),
-                SessionHandler::VALIDATION_FAILED_PARTICIPANT => _('Sie sind nicht als Teilnehmer für diesen Kurs eingetragen.'),
-                SessionHandler::VALIDATION_FAILED_TIMEFRAME => _('Der Check-In befindet sich außerhalb des zulässigen Zeitfensters.'),
-                SessionHandler::VALIDATION_FAILED_TOTP => _('Ungültiger oder abgelaufener QR-Code / Code.'),
-                SessionHandler::VALIDATION_FAILED_ENTRY => _('Ihre Anwesenheit wurde für diese Sitzung bereits erfasst.'),
-                default => _('Ihre Teilnahme an dieser Sitzung konnte nicht erfasst werden.')
-            };
+        } else {
+            // $messages['error'] = match ($validationStatus) {
+            //     SessionHandler::VALIDATION_FAILED_SESSION => _('Die Anwesenheitssitzung ist nicht aktiv oder existiert nicht.'),
+            //     SessionHandler::VALIDATION_FAILED_PARTICIPANT => _('Sie sind nicht als Teilnehmer für diesen Kurs eingetragen.'),
+            //     SessionHandler::VALIDATION_FAILED_TIMEFRAME => _('Der Check-In befindet sich außerhalb des zulässigen Zeitfensters.'),
+            //     SessionHandler::VALIDATION_FAILED_TOTP => _('Ungültiger oder abgelaufener QR-Code / Code.'),
+            //     SessionHandler::VALIDATION_FAILED_ENTRY => _('Ihre Anwesenheit wurde für diese Sitzung bereits erfasst.'),
+            //     default => _('Ihre Teilnahme an dieser Sitzung konnte nicht erfasst werden.')
+            // };
 
+            // PHP 7.4 use code above for future releases
+            switch ($validationStatus) {
+                case SessionHandler::VALIDATION_FAILED_SESSION:
+                    $messages['error'] = _('Die Anwesenheitssitzung ist nicht aktiv oder existiert nicht.');
+                    break;
+                case SessionHandler::VALIDATION_FAILED_PARTICIPANT:
+                    $messages['error'] = _('Sie sind nicht als Teilnehmer für diesen Kurs eingetragen.');
+                    break;
+                case SessionHandler::VALIDATION_FAILED_TIMEFRAME:
+                    $messages['error'] = _('Der Check-In befindet sich außerhalb des zulässigen Zeitfensters.');
+                    break;
+                case SessionHandler::VALIDATION_FAILED_TOTP:
+                    $messages['error'] = _('Ungültiger oder abgelaufener QR-Code / Code.');
+                    break;
+                case SessionHandler::VALIDATION_FAILED_ENTRY:
+                    $messages['error'] = _('Ihre Anwesenheit wurde für diese Sitzung bereits erfasst.');
+                    break;
+                default:
+                    $messages['error'] = _('Ihre Teilnahme an dieser Sitzung konnte nicht erfasst werden.');
+                    break;
+            }
         }
 
         return $messages;

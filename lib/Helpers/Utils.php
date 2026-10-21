@@ -30,11 +30,11 @@ class Utils
         $end = time();
         if (
             !isset($currentProcesses[$recordId]['start']) ||
-            $currentProcesses[$recordId]['start'] > $end
+            self::$currentProcesses[$recordId]['start'] > $end
         ) {
             throw new Exception("Invalid process start timestamp");
         }
-        $start = (int) $currentProcesses[$recordId]['start'];
+        $start = (int) self::$currentProcesses[$recordId]['start'];
         $duration = $end - $start;
 
         $currentProcesses[$recordId]['end'] = $end;
@@ -47,7 +47,7 @@ class Utils
             throw new Exception("No end timestamp recorded");
         }
 
-        return $currentProcesses[$recordId]['end'];
+        return self::$currentProcesses[$recordId]['end'];
     }
 
     public static function getStart(int $recordId): int
@@ -56,7 +56,7 @@ class Utils
             throw new Exception("No start timestamp recorded");
         }
 
-        return $currentProcesses[$recordId]['start'];
+        return self::$currentProcesses[$recordId]['start'];
     }
 
     public static function getDuration(int $recordId): int
@@ -65,7 +65,7 @@ class Utils
             throw new Exception("No duration timestamp recorded");
         }
 
-        return $currentProcesses[$recordId]['duration'];
+        return self::$currentProcesses[$recordId]['duration'];
     }
 
     public static function sendFeeback(AttendanceSession $session, AttendanceEntry $entry, string $userId): bool

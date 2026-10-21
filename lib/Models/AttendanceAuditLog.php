@@ -88,7 +88,7 @@ class AttendanceAuditLog extends SimpleORMap
         return self::write($objectType, $id, $action, $payload, $comment, $userId);
     }
 
-    public static function writForSession(int $id, string $action, array $payload = [], string $comment = null, string $userId = null): bool {
+    public static function writeForSession(int $id, string $action, array $payload = [], string $comment = null, string $userId = null): bool {
         $objectType = AttendanceSession::class;
         return self::write($objectType, $id, $action, $payload, $comment, $userId);
     }
