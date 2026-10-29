@@ -70,6 +70,7 @@ export const useEntryStore = defineStore('entryStore', () => {
         records.value = new Map();
         recordsBySession.value = new Map();
         paginationBySession.value = new Map();
+        console.log('clearRecords');
     }
 
     const all = computed(() => {
@@ -151,13 +152,13 @@ export const useEntryStore = defineStore('entryStore', () => {
         }
     }
 
-    async function updateEntryStatus(entryId, statusData) {
+    async function updateEntry(updateData) {
         isLoading.value = true;
         try {
-            const { data } = await api.patch(`attendance-entries/${entryId}`, statusData);
+            const { data } = await api.patch('attendance-entries', updateData);
             storeRecord(data);
         } catch (err) {
-            console.error(`Error while updating entry record with id: ${entryId}`, err);
+            console.error(`Error while updating entry record with id: ${updateData.id}`, err);
             errors.value = err;
         } finally {
             isLoading.value = false;
@@ -177,7 +178,7 @@ export const useEntryStore = defineStore('entryStore', () => {
         }
     }
 
-    async function createSessionEntry(sessionId, userId, status, comment, source) {
+    async function createSessionEntry(sessionId, userId, status, comment, reason, source) {
         isLoading.value = true;
         errors.value = null;
 
@@ -185,9 +186,10 @@ export const useEntryStore = defineStore('entryStore', () => {
             const { data } = await api.post(`attendance-sessions/${sessionId}/entries`, {
                 type: 'attendance-entries',
                 'user-id': userId,
-                'comment': comment ?? '',
-                'status': status ?? 'absent',
-                'source': source 
+                comment: comment ?? '',
+                'teacher-input-reason': reason ?? '',
+                status: status ?? 'absent',
+                source: source,
             });
             const formattedRecord = formatAttendanceEntry(data);
             storeRecord(formattedRecord);
@@ -218,17 +220,44 @@ export const useEntryStore = defineStore('entryStore', () => {
         }
     }
 
-    function formatAttendanceEntry(rawEntry, fallbackSessionId = '') {
+    async function loadUsersCourseEntries(courseId)  {
+        isLoading.value = true;
+        try {
+            const { data } = await api.fetch(`course/${courseId}/attendance-entries`, {
+                params: {},
+            });
+            console.log(data);
+            data.forEach((rec) => {
+                const sessionId = rec.session.data.id;
+                storeRecord(rec, sessionId);
+            });
+
+        } catch (err) {
+            console.error(`Error while loading user entries for Course: ${courseId}`, err);
+            errors.value = err;
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
+    function formatAttendanceEntry(rawEntry, fallbackSessionId = '', userStore = null) {
         if (!rawEntry) return null;
 
         const nowTimestamp = String(Math.floor(Date.now() / 1000));
+
+        const rawUserId = rawEntry.user?.data?.id || rawEntry.user_id || '';
+        let userData = null;
+        if (userStore && typeof userStore.byId === 'function' && rawUserId) {
+            userData = userStore.byId(rawUserId);
+        }
 
         return {
             id: String(rawEntry.id),
             attendance_session_id: String(
                 rawEntry.session?.data?.id || rawEntry.attendance_session_id || fallbackSessionId
             ),
-            user_id: rawEntry.user?.data?.id || rawEntry.user_id || '',
+            user_id: rawUserId,
+            user: userData || rawEntry.user || null,
             status: rawEntry.status || 'present',
             source: rawEntry.source || rawEntry['entry-type'] || 'user_code',
             comment: rawEntry.comment ?? null,
@@ -255,10 +284,11 @@ export const useEntryStore = defineStore('entryStore', () => {
         bySessionId,
         fetchBySessionId,
         fetchAllBySessionId,
-        updateEntryStatus,
+        updateEntry,
         createRecord,
         getPaginationForSession,
         checkinWithPin,
+        loadUsersCourseEntries,
         createSessionEntry,
     };
 });

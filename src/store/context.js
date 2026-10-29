@@ -13,6 +13,7 @@ export const useContextStore = defineStore('contextStore', () => {
     const nextSessionCourse = ref(null);
     const preferredLanguage = ref('de_DE');
     const userId = ref(null);
+    const courseId = ref(null);
     const nextSessionDate = ref(null);
 
     const languageIsGerman = computed(() => preferredLanguage.value === 'de-DE');
@@ -27,6 +28,10 @@ export const useContextStore = defineStore('contextStore', () => {
 
     function setUserId(id) {
         userId.value = id;
+    }
+
+    function setCourseId(id) {
+        courseId.value = id;   
     }
 
     function clearErrors() {
@@ -83,6 +88,7 @@ export const useContextStore = defineStore('contextStore', () => {
     return {
         preferredLanguage,
         userId,
+        courseId,
         isLoading,
         isTeacher,
         isStudent,
@@ -92,6 +98,7 @@ export const useContextStore = defineStore('contextStore', () => {
         langSelector,
         setPreferredLanguage,
         setUserId,
+        setCourseId,
         loadNextSession,
     };
 });

@@ -1,7 +1,7 @@
 {
     "name": "studip-attendance",
     "private": true,
-    "version": "0.1.0",
+    "version": "0.2.0",
     "author": "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
     "contributors": [
         "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",

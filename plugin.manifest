@@ -1,10 +1,12 @@
 pluginname=ElanAttendancePlugin
-displayname=ElanAttendancePlugin
+displayname=Anwesenheitserfassung
 pluginclassname=ElanAttendancePlugin
 origin=elan-ev
-version=0.1.0
+version=0.2.0
 category=todo
-summary=todo
-description=Dieses Widget ermöglicht die einfache Verwaltung der Anwesenheitserfassung
+summary=Ermöglicht die einfache Verwaltung der Anwesenheit
+icon=../../../assets/images/icons/black/date.svg
+icon_clickable=../../../assets/images/icons/blue/date.svg
+description=
 studipMinVersion=5.4
 studipMaxVersion=5.5.99

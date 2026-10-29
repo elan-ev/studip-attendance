@@ -54,7 +54,7 @@ const showActionButton = computed(() => {
 
 const actionLabel = computed(() => {
     switch (props.student.status) {
-        case 'present': return 'Vorzeitig verlassen'
+        case 'present': return 'Kommentar eintragen'
         case 'absent': return 'Manuell eintragen'
         case 'excused': return 'Status ändern'
         default: return ''

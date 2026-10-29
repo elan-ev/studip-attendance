@@ -20,7 +20,7 @@ use StudipAttendance\JsonApi\Schemas;
 use StudipAttendance\Helpers\TeacherWidgetHelper;
 use StudipAttendance\Models\AttendanceSession;
 
-class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin, PortalPlugin
+class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, StandardPlugin, JsonApiPlugin, PortalPlugin
 {
     use Routes;
     use Schemas;
@@ -116,5 +116,23 @@ class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, JsonApi
         $template->preferredLanguage = str_replace('_', '-', $_SESSION['_language']);
         $template->userId = $user->id;
         return $template;
+    }
+
+    public function getTabNavigation($courseId)
+    {
+        $tabs = array();
+
+        $nav = new Navigation($this->getPluginName(), PluginEngine::getURL($this, [], 'index'));
+        $tabs['elanattendanceplugin'] = $nav;
+        $nav->addSubNavigation('index', new Navigation(
+            'Übersicht',
+            PluginEngine::getURL($this, [], 'index')
+        ));
+        return $tabs;
+    }
+
+    public function getIconNavigation($courseId, $lastVisit, $userId)
+    {
+        return null;
     }
 }

@@ -101,14 +101,18 @@ export const useStudentStore = defineStore('studentStore', () => {
         const currentOffset = loadMore ? pagination.offset + pagination.limit : 0;
 
         try {
-            const { data, meta } = await api.fetch(`courses/${courseId}/members`, {
+            const { data, meta, included } = await api.fetch(`courses/${courseId}/memberships`, {
                 params: {
                     'page[offset]': currentOffset,
                     'page[limit]': pagination.limit,
+                    'include': 'user'
                 },
             });
-
-            storeRecords(data, courseId);
+            if (data) {
+            data.forEach((member) => {
+                    storeRecord(member.user.data, courseId);
+                });
+            }
 
             if (meta?.page) {
                 const total = meta.page.total ?? 0;

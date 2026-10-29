@@ -39,6 +39,8 @@ trait Routes
         $group->get('/attendance-sessions/{session_id}/entries/{id}', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryShow::class);
         $group->patch('/attendance-sessions/{session_id}/entries/{id}', \StudipAttendance\JsonApi\Routes\Entry\SessionEntryUpdate::class);
 
+        $group->get('/course/{course_id}/attendance-entries', \StudipAttendance\JsonApi\Routes\Entry\CourseUserEntryIndex::class);
+
         // Reports.
         $group->get('/attendance-reports', \StudipAttendance\JsonApi\Routes\Report\Index::class);
 

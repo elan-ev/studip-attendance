@@ -86,9 +86,13 @@ class AttendanceEntrySchema extends \JsonApi\Schemas\SchemaProvider
      */
     public function getResourceMeta($resource)
     {
+        $session = $resource->session;
+        $termin = $session->termin;
         return [
             'statuses' => AttendanceEntry::STATUSES,
             'sources' => AttendanceEntry::SOURCES,
+            'termin-start' => $termin->date,
+            'termin-end' => $termin->end_time
         ];
     }
 }

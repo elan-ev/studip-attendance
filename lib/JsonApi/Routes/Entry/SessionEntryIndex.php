@@ -61,7 +61,8 @@ class SessionEntryIndex extends JsonApiController
 
         [$offset, $limit] = $this->getOffsetAndLimit();
 
-        $entries = AttendanceEntry::getAll();
+        $entries = AttendanceEntry::getBySession($session->id);
+
         $total = count($entries);
         $data = array_slice($entries, $offset, $limit);
 

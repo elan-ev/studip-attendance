@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "studip-attendance@0.1.0",
-  "documentNamespace": "http://spdx.org/spdxdocs/studip-attendance-0.1.0-4d62a560-8fd9-4090-9db6-45dedf121f66",
+  "documentNamespace": "http://spdx.org/spdxdocs/studip-attendance-0.1.0-58230b71-9329-4204-bb3e-56f28376858f",
   "creationInfo": {
-    "created": "2026-10-08T11:51:10.712Z",
+    "created": "2026-10-08T13:00:30.445Z",
     "creators": [
       "Tool: npm/cli-10.9.8"
     ]

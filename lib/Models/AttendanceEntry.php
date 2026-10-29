@@ -97,6 +97,11 @@ class AttendanceEntry extends SimpleORMap implements AuditLogInterface
         return self::findBySQL('1');
     }
 
+    public static function getBySession(int $sessionId): array
+    {
+        return self::findBySQL('attendance_session_id = ?',  [$sessionId]);
+    }
+
     public static function userHasEntryIn(int $sessionId, string $userId): bool
     {
         return self::countBySql('attendance_session_id = ? AND user_id = ?', [$sessionId, $userId]) === 1;

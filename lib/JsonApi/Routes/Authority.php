@@ -104,6 +104,11 @@ class Authority
         return Utils::isTeacher($user, $courseId);
     }
 
+    public static function canIndexCourseUserEntry(User $user, string $courseId): bool
+    {
+        return $GLOBALS['perm']->have_studip_perm('author', $courseId, $user->id);
+    }
+
     public static function canShowEntry(User $user): bool
     {
         return Utils::isRoot($user);

@@ -58,6 +58,26 @@ export const useAttendanceSessionStore = defineStore('sessionStore', () => {
         }
     }
 
+    async function fetchByCourse(cid, includePaths = []) {
+        clearErrors();
+        isLoading.value = true;
+        try {
+            const config = prepareRequestConfig(includePaths);
+            const { data } = await api.fetch(`course/${cid}/attendance-sessions`, config);
+            if (data) {
+                clearRecords();
+                data.forEach((form) => {
+                    storeRecord(form);
+                });
+            }
+        } catch (err) {
+            console.error('Error while fetching sessions', err);
+            errors.value = err;
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
     async function fetchById(id, includePaths = []) {
         clearErrors();
         isLoading.value = true;
@@ -157,6 +177,7 @@ export const useAttendanceSessionStore = defineStore('sessionStore', () => {
         all,
         byId,
         fetchAll,
+        fetchByCourse,
         fetchById,
         generateTOTP,
         stopTOTP,
