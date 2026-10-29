@@ -2,22 +2,22 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "studip-attendance@0.1.0",
-  "documentNamespace": "http://spdx.org/spdxdocs/studip-attendance-0.1.0-58230b71-9329-4204-bb3e-56f28376858f",
+  "name": "studip-attendance@0.2.0",
+  "documentNamespace": "http://spdx.org/spdxdocs/studip-attendance-0.2.0-e24f9d05-1a11-4cdb-80e9-8f9448022eb2",
   "creationInfo": {
-    "created": "2026-10-08T13:00:30.445Z",
+    "created": "2026-10-29T09:32:29.839Z",
     "creators": [
-      "Tool: npm/cli-10.9.8"
+      "Tool: npm/cli-11.19.1"
     ]
   },
   "documentDescribes": [
-    "SPDXRef-Package-studip-attendance-0.1.0"
+    "SPDXRef-Package-studip-attendance-0.2.0"
   ],
   "packages": [
     {
       "name": "studip-attendance",
-      "SPDXID": "SPDXRef-Package-studip-attendance-0.1.0",
-      "versionInfo": "0.1.0",
+      "SPDXID": "SPDXRef-Package-studip-attendance-0.2.0",
+      "versionInfo": "0.2.0",
       "packageFileName": "",
       "primaryPackagePurpose": "LIBRARY",
       "downloadLocation": "NOASSERTION",
@@ -28,7 +28,7 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/studip-attendance@0.1.0"
+          "referenceLocator": "pkg:npm/studip-attendance@0.2.0"
         }
       ]
     },
@@ -64,7 +64,7 @@
       "description": "Validate identifier/keywords name",
       "downloadLocation": "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.29.7.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/babel/babel#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -136,7 +136,7 @@
       "description": "The Linux 64-bit binary for esbuild, a JavaScript bundler.",
       "downloadLocation": "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.28.2.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/evanw/esbuild#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -160,7 +160,7 @@
       "description": "A set of completely unstyled, fully accessible UI components for Vue 3, designed to integrate beautifully with Tailwind CSS.",
       "downloadLocation": "https://registry.npmjs.org/@headlessui/vue/-/vue-1.7.23.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/tailwindlabs/headlessui#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -208,7 +208,7 @@
       "description": "lzma / lzma2 / xz compression for Node.js and the browser, backed by pure-Rust lzma-rust2 via https://napi.rs",
       "downloadLocation": "https://registry.npmjs.org/@napi-rs/lzma-linux-x64-gnu/-/lzma-linux-x64-gnu-1.5.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/Brooooooklyn/lzma#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -256,7 +256,7 @@
       "description": "A native C++ Node module for querying and subscribing to filesystem events. Used by Parcel 2.",
       "downloadLocation": "https://registry.npmjs.org/@parcel/watcher/-/watcher-2.6.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/parcel-bundler/watcher#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -280,7 +280,7 @@
       "description": "A native C++ Node module for querying and subscribing to filesystem events. Used by Parcel 2.",
       "downloadLocation": "https://registry.npmjs.org/@parcel/watcher-linux-x64-glibc/-/watcher-linux-x64-glibc-2.6.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/parcel-bundler/watcher#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -304,7 +304,7 @@
       "description": "A native C++ Node module for querying and subscribing to filesystem events. Used by Parcel 2.",
       "downloadLocation": "https://registry.npmjs.org/@parcel/watcher-linux-x64-musl/-/watcher-linux-x64-musl-2.6.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/parcel-bundler/watcher#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -567,7 +567,7 @@
       "description": "TypeScript definitions for parse5",
       "downloadLocation": "https://registry.npmjs.org/@types/parse5/-/parse5-5.0.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -710,7 +710,7 @@
       "packageFileName": "node_modules/@vue/devtools-api",
       "downloadLocation": "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-8.2.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/vuejs/devtools#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -733,7 +733,7 @@
       "packageFileName": "node_modules/@vue/devtools-kit",
       "downloadLocation": "https://registry.npmjs.org/@vue/devtools-kit/-/devtools-kit-8.2.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/vuejs/devtools#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -756,7 +756,7 @@
       "packageFileName": "node_modules/@vue/devtools-shared",
       "downloadLocation": "https://registry.npmjs.org/@vue/devtools-shared/-/devtools-shared-8.2.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/vuejs/devtools#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -900,7 +900,7 @@
       "description": "Turn a function into an `http.Agent` instance",
       "downloadLocation": "https://registry.npmjs.org/agent-base/-/agent-base-6.0.2.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/TooTallNate/node-agent-base#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -924,7 +924,7 @@
       "description": "Guarantees an array back",
       "downloadLocation": "https://registry.npmjs.org/array-back/-/array-back-6.2.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/75lb/array-back#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -996,7 +996,7 @@
       "description": "Match balanced character pairs, like \"{\" and \"}\"",
       "downloadLocation": "https://registry.npmjs.org/balanced-match/-/balanced-match-4.0.4.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/juliangruber/balanced-match#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1044,7 +1044,7 @@
       "description": "Brace expansion as known from sh/bash",
       "downloadLocation": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-5.0.12.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/juliangruber/brace-expansion#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1164,7 +1164,7 @@
       "description": "concatenative mapdashery",
       "downloadLocation": "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/substack/node-concat-map#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1188,7 +1188,7 @@
       "description": "Create and parse HTTP Content-Type header",
       "downloadLocation": "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/jshttp/content-type#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1212,7 +1212,7 @@
       "description": "Just a CSS selector parser.",
       "downloadLocation": "https://registry.npmjs.org/css-selector-parser/-/css-selector-parser-1.4.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/mdevils/css-selector-parser#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1236,7 +1236,7 @@
       "description": "Strict TypeScript and Flow types for style based on MDN data",
       "downloadLocation": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/frenic/csstype#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1260,7 +1260,7 @@
       "description": "Lightweight debugging utility for Node.js and the browser",
       "downloadLocation": "https://registry.npmjs.org/debug/-/debug-4.4.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/debug-js/debug#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1308,7 +1308,7 @@
       "description": "Node.js module to detect the C standard library (libc) implementation family and version",
       "downloadLocation": "https://registry.npmjs.org/detect-libc/-/detect-libc-2.1.2.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/lovell/detect-libc#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "Apache-2.0",
       "externalRefs": [
         {
@@ -1356,7 +1356,7 @@
       "description": "Convert encodings, uses iconv-lite",
       "downloadLocation": "https://registry.npmjs.org/encoding/-/encoding-0.1.13.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/andris9/encoding#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1380,7 +1380,7 @@
       "description": "Encode & decode XML and HTML entities with ease & speed",
       "downloadLocation": "https://registry.npmjs.org/entities/-/entities-7.0.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/fb55/entities#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "BSD-2-Clause",
       "externalRefs": [
         {
@@ -1500,7 +1500,7 @@
       "description": "An extremely fast JavaScript and CSS bundler and minifier.",
       "downloadLocation": "https://registry.npmjs.org/esbuild/-/esbuild-0.28.2.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/evanw/esbuild#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1524,7 +1524,7 @@
       "description": "Traverse an ESTree-compliant AST",
       "downloadLocation": "https://registry.npmjs.org/estree-walker/-/estree-walker-2.0.2.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/Rich-Harris/estree-walker#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1572,7 +1572,7 @@
       "description": "Replace or remove multiple items in an array.",
       "downloadLocation": "https://registry.npmjs.org/find-replace/-/find-replace-5.0.2.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/75lb/find-replace#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1620,7 +1620,7 @@
       "description": "A library to create readable \"multipart/form-data\" streams. Can be used to submit forms and file uploads to other web applications.",
       "downloadLocation": "https://registry.npmjs.org/form-data/-/form-data-4.0.6.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/form-data/form-data#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1644,7 +1644,7 @@
       "description": "Use node's fs.realpath, but fall back to the JS implementation if the native one fails",
       "downloadLocation": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/fs.realpath#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "ISC",
       "externalRefs": [
         {
@@ -1740,7 +1740,7 @@
       "description": "Gettext extractor for JavaScript, TypeScript, JSX and HTML",
       "downloadLocation": "https://registry.npmjs.org/gettext-extractor/-/gettext-extractor-3.8.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/lukasgeiter/gettext-extractor#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1764,7 +1764,7 @@
       "description": "Extend gettext-extractor with the possibility to parse Vue single file components",
       "downloadLocation": "https://registry.npmjs.org/gettext-extractor-vue/-/gettext-extractor-vue-5.2.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://gitlab.com/gitlab-org/frontend/gettext-extractor-vue#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -1836,7 +1836,7 @@
       "description": "a little globber",
       "downloadLocation": "https://registry.npmjs.org/glob/-/glob-7.2.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/node-glob#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "ISC",
       "externalRefs": [
         {
@@ -1860,103 +1860,7 @@
       "description": "a glob matcher in javascript",
       "downloadLocation": "https://registry.npmjs.org/minimatch/-/minimatch-3.1.5.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/minimatch#readme",
-      "licenseDeclared": "ISC",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:npm/minimatch@3.1.5"
-        }
-      ],
-      "checksums": [
-        {
-          "algorithm": "SHA512",
-          "checksumValue": "5608d652c9e74fa9fe35493a799abbef37857695b62d60f33facc51ab09b1d789836e9790f3aa4d871d0e6e147d83356e576e9f3e8d5cda78db7de2cb04125e3"
-        }
-      ]
-    },
-    {
-      "name": "balanced-match",
-      "SPDXID": "SPDXRef-Package-balanced-match-1.0.2",
-      "versionInfo": "1.0.2",
-      "packageFileName": "node_modules/gettext-extractor/node_modules/balanced-match",
-      "description": "Match balanced character pairs, like \"{\" and \"}\"",
-      "downloadLocation": "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz",
-      "filesAnalyzed": false,
-      "homepage": "https://github.com/juliangruber/balanced-match",
-      "licenseDeclared": "MIT",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:npm/balanced-match@1.0.2"
-        }
-      ],
-      "checksums": [
-        {
-          "algorithm": "SHA512",
-          "checksumValue": "de849e50ed13315ebb84dd4099b5ec2b8c9aa94eed8e21e56f144364ea47d0a5bdf82797e1b440697d009f1b74b71d8cae94695b041a3f02252121098585393f"
-        }
-      ]
-    },
-    {
-      "name": "brace-expansion",
-      "SPDXID": "SPDXRef-Package-brace-expansion-1.1.21",
-      "versionInfo": "1.1.21",
-      "packageFileName": "node_modules/gettext-extractor/node_modules/brace-expansion",
-      "description": "Brace expansion as known from sh/bash",
-      "downloadLocation": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-1.1.21.tgz",
-      "filesAnalyzed": false,
-      "homepage": "https://github.com/juliangruber/brace-expansion",
-      "licenseDeclared": "MIT",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:npm/brace-expansion@1.1.21"
-        }
-      ],
-      "checksums": [
-        {
-          "algorithm": "SHA512",
-          "checksumValue": "f73780f8a2d934dce0945d933ca450103cb1e986f2edd68092ecbc3223f3a573ec6035a2fc344cf239b0503c689108d8a81a6fe4380f8b00f88786594b2d548f"
-        }
-      ]
-    },
-    {
-      "name": "glob",
-      "SPDXID": "SPDXRef-Package-glob-7.2.3",
-      "versionInfo": "7.2.3",
-      "packageFileName": "node_modules/gettext-extractor/node_modules/glob",
-      "description": "a little globber",
-      "downloadLocation": "https://registry.npmjs.org/glob/-/glob-7.2.3.tgz",
-      "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/node-glob#readme",
-      "licenseDeclared": "ISC",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:npm/glob@7.2.3"
-        }
-      ],
-      "checksums": [
-        {
-          "algorithm": "SHA512",
-          "checksumValue": "9c5474ccba54d9809a471c28089bcbe94bc21f6245c85548bf04cbb087f6d40b8794cb240358614dd93e2e5609b4e958b7dbfa76fb330f604646a04bfa240af5"
-        }
-      ]
-    },
-    {
-      "name": "minimatch",
-      "SPDXID": "SPDXRef-Package-minimatch-3.1.5",
-      "versionInfo": "3.1.5",
-      "packageFileName": "node_modules/gettext-extractor/node_modules/minimatch",
-      "description": "a glob matcher in javascript",
-      "downloadLocation": "https://registry.npmjs.org/minimatch/-/minimatch-3.1.5.tgz",
-      "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/minimatch#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "ISC",
       "externalRefs": [
         {
@@ -2004,7 +1908,7 @@
       "description": "the most correct and second fastest glob implementation in JavaScript",
       "downloadLocation": "https://registry.npmjs.org/glob/-/glob-13.0.6.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/node-glob#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "BlueOak-1.0.0",
       "externalRefs": [
         {
@@ -2124,7 +2028,7 @@
       "description": "Awaitable hook system",
       "downloadLocation": "https://registry.npmjs.org/hookable/-/hookable-5.5.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/unjs/hookable#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2148,7 +2052,7 @@
       "description": "An HTTP(s) proxy `http.Agent` implementation for HTTPS",
       "downloadLocation": "https://registry.npmjs.org/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/TooTallNate/node-https-proxy-agent#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2244,7 +2148,7 @@
       "description": "Browser-friendly inheritance fully compatible with standard node.js inherits()",
       "downloadLocation": "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/inherits#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "ISC",
       "externalRefs": [
         {
@@ -2364,7 +2268,7 @@
       "description": "A zero-dependency alternative to cosmiconfig",
       "downloadLocation": "https://registry.npmjs.org/lilconfig/-/lilconfig-3.1.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/antonk52/lilconfig#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2412,7 +2316,7 @@
       "description": "A cache object that deletes the least-recently-used items.",
       "downloadLocation": "https://registry.npmjs.org/lru-cache/-/lru-cache-11.5.2.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/node-lru-cache#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "BlueOak-1.0.0",
       "externalRefs": [
         {
@@ -2436,7 +2340,7 @@
       "description": "Modify strings, generate sourcemaps",
       "downloadLocation": "https://registry.npmjs.org/magic-string/-/magic-string-0.30.21.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/Rich-Harris/magic-string#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2484,7 +2388,7 @@
       "description": "Media Type Database",
       "downloadLocation": "https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/jshttp/mime-db#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2508,7 +2412,7 @@
       "description": "The ultimate javascript content-type utility.",
       "downloadLocation": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/jshttp/mime-types#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2532,7 +2436,7 @@
       "description": "a glob matcher in javascript",
       "downloadLocation": "https://registry.npmjs.org/minimatch/-/minimatch-10.2.6.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/minimatch#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "BlueOak-1.0.0",
       "externalRefs": [
         {
@@ -2556,7 +2460,7 @@
       "description": "minimal implementation of a PassThrough stream",
       "downloadLocation": "https://registry.npmjs.org/minipass/-/minipass-7.1.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/minipass#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "BlueOak-1.0.0",
       "externalRefs": [
         {
@@ -2580,7 +2484,7 @@
       "description": "Tiny millisecond conversion utility",
       "downloadLocation": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/vercel/ms#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2604,7 +2508,7 @@
       "description": "A tiny (116 bytes), secure URL-friendly unique string ID generator",
       "downloadLocation": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.19.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/ai/nanoid#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2676,7 +2580,7 @@
       "description": "Run a function exactly one time",
       "downloadLocation": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/once#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "ISC",
       "externalRefs": [
         {
@@ -2748,7 +2652,7 @@
       "description": "Node.js 0.12 path.isAbsolute() ponyfill",
       "downloadLocation": "https://registry.npmjs.org/path-is-absolute/-/path-is-absolute-1.0.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/sindresorhus/path-is-absolute#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2772,7 +2676,7 @@
       "description": "walk paths fast and efficiently",
       "downloadLocation": "https://registry.npmjs.org/path-scurry/-/path-scurry-2.0.2.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/isaacs/path-scurry#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "BlueOak-1.0.0",
       "externalRefs": [
         {
@@ -2795,7 +2699,7 @@
       "packageFileName": "node_modules/perfect-debounce",
       "downloadLocation": "https://registry.npmjs.org/perfect-debounce/-/perfect-debounce-2.1.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/unjs/perfect-debounce#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -2819,7 +2723,7 @@
       "description": "The tiniest and the fastest library for terminal output formatting with ANSI colors",
       "downloadLocation": "https://registry.npmjs.org/picocolors/-/picocolors-1.1.1.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/alexeyraspopov/picocolors#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "ISC",
       "externalRefs": [
         {
@@ -2891,7 +2795,7 @@
       "description": "Pluralize and singularize any word",
       "downloadLocation": "https://registry.npmjs.org/pluralize/-/pluralize-8.0.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/blakeembrey/pluralize#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -3059,7 +2963,7 @@
       "description": "Modern Buffer API polyfill without footguns",
       "downloadLocation": "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/ChALkeR/safer-buffer#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -3203,7 +3107,7 @@
       "description": "Isomorphic, functional type-checking for Javascript",
       "downloadLocation": "https://registry.npmjs.org/typical/-/typical-7.3.0.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/75lb/typical#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -3346,7 +3250,7 @@
       "description": "Interact with the Vue devtools from the page",
       "downloadLocation": "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.6.4.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/vuejs/vue-devtools#readme",
+      "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
@@ -3438,92 +3342,92 @@
   "relationships": [
     {
       "spdxElementId": "SPDXRef-DOCUMENT",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DESCRIBES"
     },
     {
       "spdxElementId": "SPDXRef-Package-pinia-4.0.3",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue-3.5.43",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue-router-4.6.4",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-headlessui.vue-1.7.23",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-redocly.cli-2.53.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vitejs.plugin-vue-6.0.9",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-gettext-extractor-vue-5.2.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-gettext-parser-9.1.1",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-glob-13.0.6",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-kitsu-11.1.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-sass-1.105.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-sass-loader-17.0.1",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vite-7.3.6",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue-resizable-2.1.7",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue3-gettext-4.0.1",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-otpauth-9.5.2",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-qrcode.vue-3.11.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
