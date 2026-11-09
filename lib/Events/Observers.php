@@ -13,7 +13,6 @@
 namespace StudipAttendance\Events;
 
 use CourseDate;
-use Seminar;
 
 use StudipAttendance\Helpers\SessionHandler;
 
@@ -35,7 +34,7 @@ class Observers {
         SessionHandler::handleCourseDateDeletion($courseDate->termin_id);
     }
 
-    public static function subscribeToCourseDidChangeSchedule($event, Seminar $course): void
+    public static function subscribeToCourseDidChangeSchedule($event, $course): void
     {
         SessionHandler::handleCourseChangedSchedule($course);
     }

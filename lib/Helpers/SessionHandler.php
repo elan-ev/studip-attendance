@@ -16,7 +16,6 @@ use CourseDate;
 use CourseExDate;
 use CourseMember;
 use Config;
-use Seminar;
 use StudipAttendance\Models\AttendanceAuditLog;
 use StudipAttendance\Models\AttendanceEntry;
 use StudipAttendance\Models\AttendanceSession;
@@ -80,7 +79,7 @@ class SessionHandler
         }
     }
 
-    public static function handleCourseChangedSchedule(Seminar $course): void
+    public static function handleCourseChangedSchedule($course): void
     {
         // We don't rely on the existing class offered by SeminarDB or Seminar or singleDate,
         // because they are deprecated and will be removed in StudIP 6.x.
