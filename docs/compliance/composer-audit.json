@@ -1,0 +1,8 @@
+{
+    "advisories": [],
+    "abandoned": {
+        "behat/transliterator": null
+    },
+    "filter": [],
+    "cooldown": []
+}

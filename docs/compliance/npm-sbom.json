@@ -2,22 +2,22 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "studip-attendance@0.2.0",
-  "documentNamespace": "http://spdx.org/spdxdocs/studip-attendance-0.2.0-e24f9d05-1a11-4cdb-80e9-8f9448022eb2",
+  "name": "studip-attendance@0.3.0",
+  "documentNamespace": "http://spdx.org/spdxdocs/studip-attendance-0.3.0-7bfb7463-f727-4b7b-af0b-62bbf81bb55d",
   "creationInfo": {
-    "created": "2026-10-29T09:32:29.839Z",
+    "created": "2026-11-10T14:07:41.470Z",
     "creators": [
-      "Tool: npm/cli-11.19.1"
+      "Tool: npm/cli-11.16.0"
     ]
   },
   "documentDescribes": [
-    "SPDXRef-Package-studip-attendance-0.2.0"
+    "SPDXRef-Package-studip-attendance-0.3.0"
   ],
   "packages": [
     {
       "name": "studip-attendance",
-      "SPDXID": "SPDXRef-Package-studip-attendance-0.2.0",
-      "versionInfo": "0.2.0",
+      "SPDXID": "SPDXRef-Package-studip-attendance-0.3.0",
+      "versionInfo": "0.3.0",
       "packageFileName": "",
       "primaryPackagePurpose": "LIBRARY",
       "downloadLocation": "NOASSERTION",
@@ -28,17 +28,17 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/studip-attendance@0.2.0"
+          "referenceLocator": "pkg:npm/studip-attendance@0.3.0"
         }
       ]
     },
     {
       "name": "@babel/helper-string-parser",
-      "SPDXID": "SPDXRef-Package-babel.helper-string-parser-7.29.7",
-      "versionInfo": "7.29.7",
+      "SPDXID": "SPDXRef-Package-babel.helper-string-parser-7.29.13",
+      "versionInfo": "7.29.13",
       "packageFileName": "node_modules/@babel/helper-string-parser",
       "description": "A utility package to parse strings",
-      "downloadLocation": "https://registry.npmjs.org/@babel/helper-string-parser/-/helper-string-parser-7.29.7.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@babel/helper-string-parser/-/helper-string-parser-7.29.13.tgz",
       "filesAnalyzed": false,
       "homepage": "https://babel.dev/docs/en/next/babel-helper-string-parser",
       "licenseDeclared": "MIT",
@@ -46,13 +46,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40babel/helper-string-parser@7.29.7"
+          "referenceLocator": "pkg:npm/%40babel/helper-string-parser@7.29.13"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "3dbe628cfad9f3d1831fcdb6dcbe143fc8ba400a56c6cd3845b3d02537960d5d3f91e476137e8c78a9f2afa2d899452fa91448f88bfced2b85d56e84ac837363"
+          "checksumValue": "7d67a0afe5ac12c88c556e0a50d748233ccc4d94b3362aa1cb4fffebed8c462d9de4d14db0bfc06300505bc7819d16d30554670d5ce3689114a8a6825a330c75"
         }
       ]
     },
@@ -82,11 +82,11 @@
     },
     {
       "name": "@babel/parser",
-      "SPDXID": "SPDXRef-Package-babel.parser-7.29.9",
-      "versionInfo": "7.29.9",
+      "SPDXID": "SPDXRef-Package-babel.parser-7.29.13",
+      "versionInfo": "7.29.13",
       "packageFileName": "node_modules/@babel/parser",
       "description": "A JavaScript parser",
-      "downloadLocation": "https://registry.npmjs.org/@babel/parser/-/parser-7.29.9.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@babel/parser/-/parser-7.29.13.tgz",
       "filesAnalyzed": false,
       "homepage": "https://babel.dev/docs/en/next/babel-parser",
       "licenseDeclared": "MIT",
@@ -94,23 +94,23 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40babel/parser@7.29.9"
+          "referenceLocator": "pkg:npm/%40babel/parser@7.29.13"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "0a35eb3474e7bea055a8781d072b18def9364fcb692476f9fd131e1c9053c956bdc60ba0081d02253c7fde83bc455d904503f7f75456a41ec3ea12e39bc57db8"
+          "checksumValue": "7c9339d186239538818607641a60b5b41a6ff85300ca8e1a9e77f65fa024b3ed324656a2564616ff77f4ef101f55591822867d7c5669fa6113854167bb26e191"
         }
       ]
     },
     {
       "name": "@babel/types",
-      "SPDXID": "SPDXRef-Package-babel.types-7.29.8",
-      "versionInfo": "7.29.8",
+      "SPDXID": "SPDXRef-Package-babel.types-7.29.11",
+      "versionInfo": "7.29.11",
       "packageFileName": "node_modules/@babel/types",
       "description": "Babel Types is a Lodash-esque utility library for AST nodes",
-      "downloadLocation": "https://registry.npmjs.org/@babel/types/-/types-7.29.8.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@babel/types/-/types-7.29.11.tgz",
       "filesAnalyzed": false,
       "homepage": "https://babel.dev/docs/en/next/babel-types",
       "licenseDeclared": "MIT",
@@ -118,13 +118,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40babel/types@7.29.8"
+          "referenceLocator": "pkg:npm/%40babel/types@7.29.11"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "563d6317770f7f183b3807e823b42754a2e820b966d8917da67547ad7f2ac7b0073226164fe343000ee30a194d8114b85932dcfdf0f59572e63e2c65ba3fb71a"
+          "checksumValue": "582b1e996e340a973a828b82d52ad8e8f05a67ea0b46511563d5c1bd9048ee297f1f252b6f69c9e74e70135307105c8364d9eb58312ecb88cbe745951df4d349"
         }
       ]
     },
@@ -201,30 +201,6 @@
       ]
     },
     {
-      "name": "@napi-rs/lzma-linux-x64-gnu",
-      "SPDXID": "SPDXRef-Package-napi-rs.lzma-linux-x64-gnu-1.5.1",
-      "versionInfo": "1.5.1",
-      "packageFileName": "node_modules/@napi-rs/lzma-linux-x64-gnu",
-      "description": "lzma / lzma2 / xz compression for Node.js and the browser, backed by pure-Rust lzma-rust2 via https://napi.rs",
-      "downloadLocation": "https://registry.npmjs.org/@napi-rs/lzma-linux-x64-gnu/-/lzma-linux-x64-gnu-1.5.1.tgz",
-      "filesAnalyzed": false,
-      "homepage": "NOASSERTION",
-      "licenseDeclared": "MIT",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40napi-rs/lzma-linux-x64-gnu@1.5.1"
-        }
-      ],
-      "checksums": [
-        {
-          "algorithm": "SHA512",
-          "checksumValue": "a135c42216b84acb97753038232b248f4929771db255776177be5cdafdf11ab1c57d532c6e14cf654fe730f2f8b162a8e290479b76ae70b6aa1a517af7a753c9"
-        }
-      ]
-    },
-    {
       "name": "@noble/hashes",
       "SPDXID": "SPDXRef-Package-noble.hashes-2.4.0",
       "versionInfo": "2.4.0",
@@ -297,35 +273,11 @@
       ]
     },
     {
-      "name": "@parcel/watcher-linux-x64-musl",
-      "SPDXID": "SPDXRef-Package-parcel.watcher-linux-x64-musl-2.6.0",
-      "versionInfo": "2.6.0",
-      "packageFileName": "node_modules/@parcel/watcher-linux-x64-musl",
-      "description": "A native C++ Node module for querying and subscribing to filesystem events. Used by Parcel 2.",
-      "downloadLocation": "https://registry.npmjs.org/@parcel/watcher-linux-x64-musl/-/watcher-linux-x64-musl-2.6.0.tgz",
-      "filesAnalyzed": false,
-      "homepage": "NOASSERTION",
-      "licenseDeclared": "MIT",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40parcel/watcher-linux-x64-musl@2.6.0"
-        }
-      ],
-      "checksums": [
-        {
-          "algorithm": "SHA512",
-          "checksumValue": "b640582aded842b8c82566039eda366203bc31192394c4d2368447cec5e29c1a9b2dd78e3372f7db03d926f219c6a68b31f4a54bfe2c5231ffe924d53ff5c32f"
-        }
-      ]
-    },
-    {
       "name": "@redocly/cli",
-      "SPDXID": "SPDXRef-Package-redocly.cli-2.53.0",
-      "versionInfo": "2.53.0",
+      "SPDXID": "SPDXRef-Package-redocly.cli-2.77.0",
+      "versionInfo": "2.77.0",
       "packageFileName": "node_modules/@redocly/cli",
-      "downloadLocation": "https://registry.npmjs.org/@redocly/cli/-/cli-2.53.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@redocly/cli/-/cli-2.77.0.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/Redocly/redocly-cli",
       "licenseDeclared": "MIT",
@@ -333,23 +285,23 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40redocly/cli@2.53.0"
+          "referenceLocator": "pkg:npm/%40redocly/cli@2.77.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "94cb731f8605d91156e7ea55f684a59288f6324bd348071e57afd0827ee5e7a3f0cc458cd53a3adaa5a394259a65c32bf40c4ea6f5ae4b45e813de36333ba0dc"
+          "checksumValue": "5d46b885444358b3c6f56ba4217a3e501a9af55a5e4e77662c8e4f1eef500e4c2dc07f7dd09b20cfd9e5da6d69663b16aca14f3fb6af9fa7ad471c436ee0f606"
         }
       ]
     },
     {
       "name": "@rolldown/pluginutils",
-      "SPDXID": "SPDXRef-Package-rolldown.pluginutils-1.0.1",
-      "versionInfo": "1.0.1",
+      "SPDXID": "SPDXRef-Package-rolldown.pluginutils-1.1.0",
+      "versionInfo": "1.1.0",
       "packageFileName": "node_modules/@rolldown/pluginutils",
       "description": "Plugin utilities for Rolldown",
-      "downloadLocation": "https://registry.npmjs.org/@rolldown/pluginutils/-/pluginutils-1.0.1.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@rolldown/pluginutils/-/pluginutils-1.1.0.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/rolldown/plugins/tree/main/packages/pluginutils#readme",
       "licenseDeclared": "MIT",
@@ -357,23 +309,23 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40rolldown/pluginutils@1.0.1"
+          "referenceLocator": "pkg:npm/%40rolldown/pluginutils@1.1.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "da3f5b1ade4987c863faf3ed8333ed97bda3d324711c0cae9a8a3a4cd7c08ec2c1d3852da52bcf6cf703701331cfb9fef42601d1cd46c501716118368e29aa1b"
+          "checksumValue": "2be354d870c211e9b8b029601c7e19657c1d25e345909a3e851938efd0c8c1d22f8803cdda11491f52871f083c0b11d05ef8b43395d8e1d7935c835f222486eb"
         }
       ]
     },
     {
       "name": "@rollup/rollup-linux-x64-gnu",
-      "SPDXID": "SPDXRef-Package-rollup.rollup-linux-x64-gnu-4.63.2",
-      "versionInfo": "4.63.2",
+      "SPDXID": "SPDXRef-Package-rollup.rollup-linux-x64-gnu-4.68.2",
+      "versionInfo": "4.68.2",
       "packageFileName": "node_modules/@rollup/rollup-linux-x64-gnu",
       "description": "Native bindings for Rollup",
-      "downloadLocation": "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.63.2.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.68.2.tgz",
       "filesAnalyzed": false,
       "homepage": "https://rollupjs.org/",
       "licenseDeclared": "MIT",
@@ -381,47 +333,23 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40rollup/rollup-linux-x64-gnu@4.63.2"
+          "referenceLocator": "pkg:npm/%40rollup/rollup-linux-x64-gnu@4.68.2"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "6dcab6876a642a61f6a68e1c655f155b33b894be34493caefe72e816960c429f42dad09535375c56ff3a3304ac9f70f9b351417b64f2d5ab6abd50144cc8a636"
-        }
-      ]
-    },
-    {
-      "name": "@rollup/rollup-linux-x64-musl",
-      "SPDXID": "SPDXRef-Package-rollup.rollup-linux-x64-musl-4.63.2",
-      "versionInfo": "4.63.2",
-      "packageFileName": "node_modules/@rollup/rollup-linux-x64-musl",
-      "description": "Native bindings for Rollup",
-      "downloadLocation": "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.63.2.tgz",
-      "filesAnalyzed": false,
-      "homepage": "https://rollupjs.org/",
-      "licenseDeclared": "MIT",
-      "externalRefs": [
-        {
-          "referenceCategory": "PACKAGE-MANAGER",
-          "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40rollup/rollup-linux-x64-musl@4.63.2"
-        }
-      ],
-      "checksums": [
-        {
-          "algorithm": "SHA512",
-          "checksumValue": "106a28e4331531191321df1fb930daa31565479653b0a50b51ecd18ddf600b0e5e798f838c2bc3a5900e94d52f28f197fbbad2d515b1ea3fb23a934fc7471481"
+          "checksumValue": "dc1b69e0b71afd6cec99b68abbd2e1f5dfd7c3244321e81dff9921441bac1c6c3f2e5e92a05e52867eb73ab8cf7642dca4d8b63c60c0a57ccd9b1ae24711988c"
         }
       ]
     },
     {
       "name": "@tanstack/virtual-core",
-      "SPDXID": "SPDXRef-Package-tanstack.virtual-core-3.17.11",
-      "versionInfo": "3.17.11",
+      "SPDXID": "SPDXRef-Package-tanstack.virtual-core-3.19.11",
+      "versionInfo": "3.19.11",
       "packageFileName": "node_modules/@tanstack/virtual-core",
       "description": "Headless UI for virtualizing scrollable elements in TS/JS + Frameworks",
-      "downloadLocation": "https://registry.npmjs.org/@tanstack/virtual-core/-/virtual-core-3.17.11.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@tanstack/virtual-core/-/virtual-core-3.19.11.tgz",
       "filesAnalyzed": false,
       "homepage": "https://tanstack.com/virtual",
       "licenseDeclared": "MIT",
@@ -429,23 +357,23 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40tanstack/virtual-core@3.17.11"
+          "referenceLocator": "pkg:npm/%40tanstack/virtual-core@3.19.11"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "f882e3bed1eea7a63687343a633c0c817d50fa8429c4418e5c212c08d68fa083f457131b8b32014e66130ed91eae42104bcfc26cfd4146ecadf15ffc042b32d6"
+          "checksumValue": "ff98876f444706f8fc0e2e7d143b38112366e398e5b37dda6408b8cdc7155d98dcffa66fc103fa9f3118793eb07978d37fd13afefae9d89858591c8ef993f5dc"
         }
       ]
     },
     {
       "name": "@tanstack/vue-virtual",
-      "SPDXID": "SPDXRef-Package-tanstack.vue-virtual-3.13.39",
-      "versionInfo": "3.13.39",
+      "SPDXID": "SPDXRef-Package-tanstack.vue-virtual-3.13.52",
+      "versionInfo": "3.13.52",
       "packageFileName": "node_modules/@tanstack/vue-virtual",
       "description": "Headless UI for virtualizing scrollable elements in Vue",
-      "downloadLocation": "https://registry.npmjs.org/@tanstack/vue-virtual/-/vue-virtual-3.13.39.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@tanstack/vue-virtual/-/vue-virtual-3.13.52.tgz",
       "filesAnalyzed": false,
       "homepage": "https://tanstack.com/virtual",
       "licenseDeclared": "MIT",
@@ -453,23 +381,23 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40tanstack/vue-virtual@3.13.39"
+          "referenceLocator": "pkg:npm/%40tanstack/vue-virtual@3.13.52"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "006f2c23eea77eb0ef37a8b1b8724bf4b6894dfdffff45795484d9616dd439a22e4957b19c4cec6ccbb82c7fc984c7d14f1c215173e72ea925d439739196d1b6"
+          "checksumValue": "a93c06ec736be68f853ddfeef93d3937bdc0f21a30b6407d160408ef555c073c7a2762ac633955ba0473ff48e2d7b925dba0fc48074abb1d569a4df28532352b"
         }
       ]
     },
     {
       "name": "@types/estree",
-      "SPDXID": "SPDXRef-Package-types.estree-1.0.9",
-      "versionInfo": "1.0.9",
+      "SPDXID": "SPDXRef-Package-types.estree-1.0.10",
+      "versionInfo": "1.0.10",
       "packageFileName": "node_modules/@types/estree",
       "description": "TypeScript definitions for estree",
-      "downloadLocation": "https://registry.npmjs.org/@types/estree/-/estree-1.0.9.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@types/estree/-/estree-1.0.10.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/estree",
       "licenseDeclared": "MIT",
@@ -477,13 +405,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40types/estree@1.0.9"
+          "referenceLocator": "pkg:npm/%40types/estree@1.0.10"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "1a174f832d5e978fc898fd395f4e54c38730dbf33ddc10949a712f599352b650b310a304e05924f98a680393a21cd426a12ec269f6fc5dadcfc9af26d50af37a"
+          "checksumValue": "953c8e32739c991073742bfaff8cd4642ac4855d31aea422519059b5571b98b1c15ca2e737cabcf6fff029117f4341dbc15b2a6c81b7a391c3a0597db1db8cfa"
         }
       ]
     },
@@ -537,11 +465,11 @@
     },
     {
       "name": "@types/node",
-      "SPDXID": "SPDXRef-Package-types.node-26.5.1",
-      "versionInfo": "26.5.1",
+      "SPDXID": "SPDXRef-Package-types.node-26.6.6",
+      "versionInfo": "26.6.6",
       "packageFileName": "node_modules/@types/node",
       "description": "TypeScript definitions for node",
-      "downloadLocation": "https://registry.npmjs.org/@types/node/-/node-26.5.1.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@types/node/-/node-26.6.6.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node",
       "licenseDeclared": "MIT",
@@ -549,13 +477,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40types/node@26.5.1"
+          "referenceLocator": "pkg:npm/%40types/node@26.6.6"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "0b3366d857b35b8551fcb8c6eb251d88480b13fac043d4a58f9802bbf0b656b75c5bb2346a1359f0345b1d3ef3399eabdce36077f6ec4087926a80c6addd42ea"
+          "checksumValue": "333423fbc2b1dd7238d0e994004e90a21e7c64c36cb4d34cc27da77dddea5ac7deee70cd4aa24dcdeb389e3873e801f0ad21ce7df48bc1753ac9be3be10e1aa2"
         }
       ]
     },
@@ -585,11 +513,11 @@
     },
     {
       "name": "@vitejs/plugin-vue",
-      "SPDXID": "SPDXRef-Package-vitejs.plugin-vue-6.0.9",
-      "versionInfo": "6.0.9",
+      "SPDXID": "SPDXRef-Package-vitejs.plugin-vue-6.0.10",
+      "versionInfo": "6.0.10",
       "packageFileName": "node_modules/@vitejs/plugin-vue",
       "description": "The official plugin for Vue SFC support in Vite.",
-      "downloadLocation": "https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-6.0.9.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-6.0.10.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#readme",
       "licenseDeclared": "MIT",
@@ -597,13 +525,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40vitejs/plugin-vue@6.0.9"
+          "referenceLocator": "pkg:npm/%40vitejs/plugin-vue@6.0.10"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "ac3fcc3919616993255d65b4ac49f8141e303229d60b4cff0fb61ed7ad12e7e46cd660bc64301d703a784a329f5211b9b7cab592d70f570e31b9390f465ceb48"
+          "checksumValue": "6fcd1a5108779fea84cf3666e68429deb4f640899e0b1e7c2ba78597f46427777ae4a5b4913bafe6536c2d15408db5bd611529a3fc339afccc815df86d3008b4"
         }
       ]
     },
@@ -966,11 +894,11 @@
     },
     {
       "name": "axios",
-      "SPDXID": "SPDXRef-Package-axios-1.20.0",
-      "versionInfo": "1.20.0",
+      "SPDXID": "SPDXRef-Package-axios-1.21.0",
+      "versionInfo": "1.21.0",
       "packageFileName": "node_modules/axios",
       "description": "Promise based HTTP client for the browser and node.js",
-      "downloadLocation": "https://registry.npmjs.org/axios/-/axios-1.20.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/axios/-/axios-1.21.0.tgz",
       "filesAnalyzed": false,
       "homepage": "https://axios-http.com",
       "licenseDeclared": "MIT",
@@ -978,13 +906,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/axios@1.20.0"
+          "referenceLocator": "pkg:npm/axios@1.21.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "afc68e87c8fd7062a981002aa73ad41e748873a6b9f58dd77ff72ff2ccb50eb1c29191f340612ea2ad6d01193aa92c8376d4064838296fd90596bbb33efae0c2"
+          "checksumValue": "602cd7301e7743d3d906c87bc8def0b5aa62b7859ea707074b67cff10846b01c52cf962d818a1b57b186956940262f91c5f53bec6413422d8348b5266b8d8460"
         }
       ]
     },
@@ -1350,11 +1278,11 @@
     },
     {
       "name": "encoding",
-      "SPDXID": "SPDXRef-Package-encoding-0.1.13",
-      "versionInfo": "0.1.13",
+      "SPDXID": "SPDXRef-Package-encoding-0.1.14",
+      "versionInfo": "0.1.14",
       "packageFileName": "node_modules/encoding",
       "description": "Convert encodings, uses iconv-lite",
-      "downloadLocation": "https://registry.npmjs.org/encoding/-/encoding-0.1.13.tgz",
+      "downloadLocation": "https://registry.npmjs.org/encoding/-/encoding-0.1.14.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -1362,13 +1290,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/encoding@0.1.13"
+          "referenceLocator": "pkg:npm/encoding@0.1.14"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "11305aba8c354f7e58fd664c922a3d8e2334679c631c7989e179a364eab597f757cf796bdac467f3b9c9cb6d11ba9a928751769b71c73d2a7c4a120f409ac9dc"
+          "checksumValue": "a6a1fe8c8c488705f9538c3e4e7bb78e3a304e8e504c009ba9e7f60b90b0d91840a6bec2390aa09da8b9deef156edaa3591712a007137fbb99eb674ee640bc23"
         }
       ]
     },
@@ -1590,11 +1518,11 @@
     },
     {
       "name": "follow-redirects",
-      "SPDXID": "SPDXRef-Package-follow-redirects-1.16.0",
-      "versionInfo": "1.16.0",
+      "SPDXID": "SPDXRef-Package-follow-redirects-1.16.3",
+      "versionInfo": "1.16.3",
       "packageFileName": "node_modules/follow-redirects",
       "description": "HTTP and HTTPS modules that follow redirects.",
-      "downloadLocation": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.16.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.16.3.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/follow-redirects/follow-redirects",
       "licenseDeclared": "MIT",
@@ -1602,13 +1530,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/follow-redirects@1.16.0"
+          "referenceLocator": "pkg:npm/follow-redirects@1.16.3"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "cb9acdfee3ac69d153fc97d8c21c514b947b41c7be837cc6f7bf89aed159942f64957fd6e610fb8a22f349c2389d9a944bb0cd51d84f830e3123c5b62ee5e553"
+          "checksumValue": "b68392a2a37a779d568dfd5a38525872856fd5a343f6b8ff0b08cb534573e34a03b92a560dac8278a7b82692f934bd16745be838e088dc1468ebd1da8636d1d4"
         }
       ]
     },
@@ -2070,35 +1998,35 @@
     },
     {
       "name": "iconv-lite",
-      "SPDXID": "SPDXRef-Package-iconv-lite-0.6.3",
-      "versionInfo": "0.6.3",
+      "SPDXID": "SPDXRef-Package-iconv-lite-0.7.3",
+      "versionInfo": "0.7.3",
       "packageFileName": "node_modules/iconv-lite",
       "description": "Convert character encodings in pure javascript.",
-      "downloadLocation": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz",
+      "downloadLocation": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.3.tgz",
       "filesAnalyzed": false,
-      "homepage": "https://github.com/ashtuchkin/iconv-lite",
+      "homepage": "https://github.com/pillarjs/iconv-lite",
       "licenseDeclared": "MIT",
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/iconv-lite@0.6.3"
+          "referenceLocator": "pkg:npm/iconv-lite@0.7.3"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "e1f0a4efdc2c84c773329dab1f4eaa5ab244e22a25a8b842507f8e8ae22053ef91074fbde0d9432fcd5ab4eec65f9e6e50ab9ea34b711cdb6f13223a0fb59d33"
+          "checksumValue": "20a5e9bc8ce39c2f574c051b54170c7c64b410f6885ed5babfecebf91469fa1a942c4a68d28c196b1eb0c91c0f3896d66f38d8b29430bac4ec7d5af489f878b9"
         }
       ]
     },
     {
       "name": "immutable",
-      "SPDXID": "SPDXRef-Package-immutable-5.1.9",
-      "versionInfo": "5.1.9",
+      "SPDXID": "SPDXRef-Package-immutable-5.1.10",
+      "versionInfo": "5.1.10",
       "packageFileName": "node_modules/immutable",
       "description": "Immutable Data Collections",
-      "downloadLocation": "https://registry.npmjs.org/immutable/-/immutable-5.1.9.tgz",
+      "downloadLocation": "https://registry.npmjs.org/immutable/-/immutable-5.1.10.tgz",
       "filesAnalyzed": false,
       "homepage": "https://immutable-js.com",
       "licenseDeclared": "MIT",
@@ -2106,13 +2034,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/immutable@5.1.9"
+          "referenceLocator": "pkg:npm/immutable@5.1.10"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "9bc9d57b3debc2b8265b1b4b32dd596170762efece2989ff762b32c409520d8025292945a0f3df20098033f339c6a2f89b80bfc003f0ed2dbf08d6948a2d47c6"
+          "checksumValue": "52eef6a995d4b66fa7f7cb8c2f75ebea95451e5e319e6782b80b2b9b456a1654229bf21be8dacf4892e9c7a0ab67f1ba0e7a06682520b71f2063ea3ea2fc670b"
         }
       ]
     },
@@ -2262,11 +2190,11 @@
     },
     {
       "name": "lilconfig",
-      "SPDXID": "SPDXRef-Package-lilconfig-3.1.3",
-      "versionInfo": "3.1.3",
+      "SPDXID": "SPDXRef-Package-lilconfig-3.1.4",
+      "versionInfo": "3.1.4",
       "packageFileName": "node_modules/lilconfig",
       "description": "A zero-dependency alternative to cosmiconfig",
-      "downloadLocation": "https://registry.npmjs.org/lilconfig/-/lilconfig-3.1.3.tgz",
+      "downloadLocation": "https://registry.npmjs.org/lilconfig/-/lilconfig-3.1.4.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -2274,13 +2202,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/lilconfig@3.1.3"
+          "referenceLocator": "pkg:npm/lilconfig@3.1.4"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "fef945280a07e4282ddc87be24b8516f03ac09078f001894ded2757a01afc90fb7dd1fef730336665d9047f2f38ec05e22d3edde84955daa67fa6e27403be9cf"
+          "checksumValue": "cc967206642102b0d179fb964f2a59c700e91432189ab8fcca9481bf0183e4fd7763de6ce838f32a0bb80d57466de41ae4f0c4b0038200f364e17f90391d34eb"
         }
       ]
     },
@@ -2310,11 +2238,11 @@
     },
     {
       "name": "lru-cache",
-      "SPDXID": "SPDXRef-Package-lru-cache-11.5.2",
-      "versionInfo": "11.5.2",
+      "SPDXID": "SPDXRef-Package-lru-cache-11.5.3",
+      "versionInfo": "11.5.3",
       "packageFileName": "node_modules/lru-cache",
       "description": "A cache object that deletes the least-recently-used items.",
-      "downloadLocation": "https://registry.npmjs.org/lru-cache/-/lru-cache-11.5.2.tgz",
+      "downloadLocation": "https://registry.npmjs.org/lru-cache/-/lru-cache-11.5.3.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "BlueOak-1.0.0",
@@ -2322,13 +2250,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/lru-cache@11.5.2"
+          "referenceLocator": "pkg:npm/lru-cache@11.5.3"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "e297ccd457f4c79d28d2d4306f9b9cc3f4733720f4fd824c13a215712b5a959b8c5b176ddec47786e4ad4edc73e0f526bd97d182ebc37a36acbd0da489f475d6"
+          "checksumValue": "53837c160ce65b173c935547f0aafa950835f14ec58ef6f2eb05c75515ff659ec8c166d1320ad16cfd16adbe6ae4d5629ebca9e1241a9a91ca76fb5e708b7152"
         }
       ]
     },
@@ -2502,11 +2430,11 @@
     },
     {
       "name": "nanoid",
-      "SPDXID": "SPDXRef-Package-nanoid-3.3.19",
-      "versionInfo": "3.3.19",
+      "SPDXID": "SPDXRef-Package-nanoid-3.3.20",
+      "versionInfo": "3.3.20",
       "packageFileName": "node_modules/nanoid",
       "description": "A tiny (116 bytes), secure URL-friendly unique string ID generator",
-      "downloadLocation": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.19.tgz",
+      "downloadLocation": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.20.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -2514,13 +2442,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/nanoid@3.3.19"
+          "referenceLocator": "pkg:npm/nanoid@3.3.20"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "636b54372e28bb0eadab9a0348a7906063b286450184d39c195ff4d8a0beea477d7831aa75977efa68cc8880e296b058be3127098bd5b6cb870ae3fea2449fba"
+          "checksumValue": "b8a760d86dc63422909fd6f260ea716c6aab4f67c63b9291b7927ff1bde9a24f2b4faab119617a871332262118b407fe155c98b83f6145a0ea5f9b8f15827865"
         }
       ]
     },
@@ -2837,11 +2765,11 @@
     },
     {
       "name": "postcss",
-      "SPDXID": "SPDXRef-Package-postcss-8.5.28",
-      "versionInfo": "8.5.28",
+      "SPDXID": "SPDXRef-Package-postcss-8.5.32",
+      "versionInfo": "8.5.32",
       "packageFileName": "node_modules/postcss",
       "description": "Tool for transforming styles with JS plugins",
-      "downloadLocation": "https://registry.npmjs.org/postcss/-/postcss-8.5.28.tgz",
+      "downloadLocation": "https://registry.npmjs.org/postcss/-/postcss-8.5.32.tgz",
       "filesAnalyzed": false,
       "homepage": "https://postcss.org/",
       "licenseDeclared": "MIT",
@@ -2849,13 +2777,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/postcss@8.5.28"
+          "referenceLocator": "pkg:npm/postcss@8.5.32"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "451bb3a83b6de58f61deabb3e615a12be4cf9ec995b3a5b0494e8b90931e6381ecb54103b984c6f1425275ac0c4739b302d57e284a06f0ddd0836a8bcb9bccfc"
+          "checksumValue": "2c994a08201414a3ae6718a951d630d4dcc821312c3dc832386f4b92f449bee2a3fdb4736ee458d00457bcbd29586a6c66f9fc8e4bbe2cc7a9d9e534b1e1e9f2"
         }
       ]
     },
@@ -2933,11 +2861,11 @@
     },
     {
       "name": "rollup",
-      "SPDXID": "SPDXRef-Package-rollup-4.63.2",
-      "versionInfo": "4.63.2",
+      "SPDXID": "SPDXRef-Package-rollup-4.68.2",
+      "versionInfo": "4.68.2",
       "packageFileName": "node_modules/rollup",
       "description": "Next-generation ES module bundler",
-      "downloadLocation": "https://registry.npmjs.org/rollup/-/rollup-4.63.2.tgz",
+      "downloadLocation": "https://registry.npmjs.org/rollup/-/rollup-4.68.2.tgz",
       "filesAnalyzed": false,
       "homepage": "https://rollupjs.org/",
       "licenseDeclared": "MIT",
@@ -2945,13 +2873,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/rollup@4.63.2"
+          "referenceLocator": "pkg:npm/rollup@4.68.2"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "9797b292c578b4f063ea527211adfb63320e092395ee5919cc41d47698d665bb43ef04dc1589846174a09b96d3e2f57e7592dbf6b046d56f4644e386e0d4b813"
+          "checksumValue": "c73b78e6b28ec7312eaa34dd9064c811a78f72af714442e5148d6ea1ace529aa7c4fa6c434990e35209f84ae753fa5c54e2c5ae2ba2c3dc0c78a149d76e5e775"
         }
       ]
     },
@@ -3342,107 +3270,107 @@
   "relationships": [
     {
       "spdxElementId": "SPDXRef-DOCUMENT",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DESCRIBES"
     },
     {
       "spdxElementId": "SPDXRef-Package-pinia-4.0.3",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue-3.5.43",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue-router-4.6.4",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-headlessui.vue-1.7.23",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-redocly.cli-2.53.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "spdxElementId": "SPDXRef-Package-redocly.cli-2.77.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-vitejs.plugin-vue-6.0.9",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "spdxElementId": "SPDXRef-Package-vitejs.plugin-vue-6.0.10",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-gettext-extractor-vue-5.2.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-gettext-parser-9.1.1",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-glob-13.0.6",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-kitsu-11.1.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-sass-1.105.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-sass-loader-17.0.1",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vite-7.3.6",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue-resizable-2.1.7",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue3-gettext-4.0.1",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-otpauth-9.5.2",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-qrcode.vue-3.11.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-studip-attendance-0.3.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-babel.types-7.29.8",
-      "relatedSpdxElement": "SPDXRef-Package-babel.parser-7.29.9",
+      "spdxElementId": "SPDXRef-Package-babel.types-7.29.11",
+      "relatedSpdxElement": "SPDXRef-Package-babel.parser-7.29.13",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-babel.helper-string-parser-7.29.7",
-      "relatedSpdxElement": "SPDXRef-Package-babel.types-7.29.8",
+      "spdxElementId": "SPDXRef-Package-babel.helper-string-parser-7.29.13",
+      "relatedSpdxElement": "SPDXRef-Package-babel.types-7.29.11",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-babel.helper-validator-identifier-7.29.7",
-      "relatedSpdxElement": "SPDXRef-Package-babel.types-7.29.8",
+      "relatedSpdxElement": "SPDXRef-Package-babel.types-7.29.11",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -3451,7 +3379,7 @@
       "relationshipType": "PREREQUISITE_FOR"
     },
     {
-      "spdxElementId": "SPDXRef-Package-tanstack.vue-virtual-3.13.39",
+      "spdxElementId": "SPDXRef-Package-tanstack.vue-virtual-3.13.52",
       "relatedSpdxElement": "SPDXRef-Package-headlessui.vue-1.7.23",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -3481,18 +3409,13 @@
       "relationshipType": "OPTIONAL_DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-parcel.watcher-linux-x64-musl-2.6.0",
-      "relatedSpdxElement": "SPDXRef-Package-parcel.watcher-2.6.0",
-      "relationshipType": "OPTIONAL_DEPENDENCY_OF"
-    },
-    {
       "spdxElementId": "SPDXRef-Package-vue-3.5.43",
-      "relatedSpdxElement": "SPDXRef-Package-tanstack.vue-virtual-3.13.39",
+      "relatedSpdxElement": "SPDXRef-Package-tanstack.vue-virtual-3.13.52",
       "relationshipType": "PREREQUISITE_FOR"
     },
     {
-      "spdxElementId": "SPDXRef-Package-tanstack.virtual-core-3.17.11",
-      "relatedSpdxElement": "SPDXRef-Package-tanstack.vue-virtual-3.13.39",
+      "spdxElementId": "SPDXRef-Package-tanstack.virtual-core-3.19.11",
+      "relatedSpdxElement": "SPDXRef-Package-tanstack.vue-virtual-3.13.52",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -3501,32 +3424,32 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-types.node-26.5.1",
+      "spdxElementId": "SPDXRef-Package-types.node-26.6.6",
       "relatedSpdxElement": "SPDXRef-Package-types.glob-7.2.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-undici-types-8.9.0",
-      "relatedSpdxElement": "SPDXRef-Package-types.node-26.5.1",
+      "relatedSpdxElement": "SPDXRef-Package-types.node-26.6.6",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vite-7.3.6",
-      "relatedSpdxElement": "SPDXRef-Package-vitejs.plugin-vue-6.0.9",
+      "relatedSpdxElement": "SPDXRef-Package-vitejs.plugin-vue-6.0.10",
       "relationshipType": "PREREQUISITE_FOR"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue-3.5.43",
-      "relatedSpdxElement": "SPDXRef-Package-vitejs.plugin-vue-6.0.9",
+      "relatedSpdxElement": "SPDXRef-Package-vitejs.plugin-vue-6.0.10",
       "relationshipType": "PREREQUISITE_FOR"
     },
     {
-      "spdxElementId": "SPDXRef-Package-rolldown.pluginutils-1.0.1",
-      "relatedSpdxElement": "SPDXRef-Package-vitejs.plugin-vue-6.0.9",
+      "spdxElementId": "SPDXRef-Package-rolldown.pluginutils-1.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-vitejs.plugin-vue-6.0.10",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-babel.parser-7.29.9",
+      "spdxElementId": "SPDXRef-Package-babel.parser-7.29.13",
       "relatedSpdxElement": "SPDXRef-Package-vue.compiler-core-3.5.43",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -3561,7 +3484,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-babel.parser-7.29.9",
+      "spdxElementId": "SPDXRef-Package-babel.parser-7.29.13",
       "relatedSpdxElement": "SPDXRef-Package-vue.compiler-sfc-3.5.43",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -3596,7 +3519,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-postcss-8.5.28",
+      "spdxElementId": "SPDXRef-Package-postcss-8.5.32",
       "relatedSpdxElement": "SPDXRef-Package-vue.compiler-sfc-3.5.43",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -3696,23 +3619,23 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-follow-redirects-1.16.0",
-      "relatedSpdxElement": "SPDXRef-Package-axios-1.20.0",
+      "spdxElementId": "SPDXRef-Package-follow-redirects-1.16.3",
+      "relatedSpdxElement": "SPDXRef-Package-axios-1.21.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-form-data-4.0.6",
-      "relatedSpdxElement": "SPDXRef-Package-axios-1.20.0",
+      "relatedSpdxElement": "SPDXRef-Package-axios-1.21.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-https-proxy-agent-5.0.1",
-      "relatedSpdxElement": "SPDXRef-Package-axios-1.20.0",
+      "relatedSpdxElement": "SPDXRef-Package-axios-1.21.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-proxy-from-env-2.1.0",
-      "relatedSpdxElement": "SPDXRef-Package-axios-1.20.0",
+      "relatedSpdxElement": "SPDXRef-Package-axios-1.21.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -3781,8 +3704,8 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-iconv-lite-0.6.3",
-      "relatedSpdxElement": "SPDXRef-Package-encoding-0.1.13",
+      "spdxElementId": "SPDXRef-Package-iconv-lite-0.7.3",
+      "relatedSpdxElement": "SPDXRef-Package-encoding-0.1.14",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -4046,7 +3969,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-encoding-0.1.13",
+      "spdxElementId": "SPDXRef-Package-encoding-0.1.14",
       "relatedSpdxElement": "SPDXRef-Package-gettext-parser-9.1.1",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -4087,7 +4010,7 @@
     },
     {
       "spdxElementId": "SPDXRef-Package-safer-buffer-2.1.2",
-      "relatedSpdxElement": "SPDXRef-Package-iconv-lite-0.6.3",
+      "relatedSpdxElement": "SPDXRef-Package-iconv-lite-0.7.3",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -4106,7 +4029,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-axios-1.20.0",
+      "spdxElementId": "SPDXRef-Package-axios-1.21.0",
       "relatedSpdxElement": "SPDXRef-Package-kitsu-11.1.0",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -4146,7 +4069,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-lru-cache-11.5.2",
+      "spdxElementId": "SPDXRef-Package-lru-cache-11.5.3",
       "relatedSpdxElement": "SPDXRef-Package-path-scurry-2.0.2",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -4176,18 +4099,18 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nanoid-3.3.19",
-      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.28",
+      "spdxElementId": "SPDXRef-Package-nanoid-3.3.20",
+      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.32",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-picocolors-1.1.1",
-      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.28",
+      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.32",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-source-map-js-1.2.2",
-      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.28",
+      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.32",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -4196,23 +4119,13 @@
       "relationshipType": "PREREQUISITE_FOR"
     },
     {
-      "spdxElementId": "SPDXRef-Package-types.estree-1.0.9",
-      "relatedSpdxElement": "SPDXRef-Package-rollup-4.63.2",
+      "spdxElementId": "SPDXRef-Package-types.estree-1.0.10",
+      "relatedSpdxElement": "SPDXRef-Package-rollup-4.68.2",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-napi-rs.lzma-linux-x64-gnu-1.5.1",
-      "relatedSpdxElement": "SPDXRef-Package-rollup-4.63.2",
-      "relationshipType": "OPTIONAL_DEPENDENCY_OF"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-rollup.rollup-linux-x64-gnu-4.63.2",
-      "relatedSpdxElement": "SPDXRef-Package-rollup-4.63.2",
-      "relationshipType": "OPTIONAL_DEPENDENCY_OF"
-    },
-    {
-      "spdxElementId": "SPDXRef-Package-rollup.rollup-linux-x64-musl-4.63.2",
-      "relatedSpdxElement": "SPDXRef-Package-rollup-4.63.2",
+      "spdxElementId": "SPDXRef-Package-rollup.rollup-linux-x64-gnu-4.68.2",
+      "relatedSpdxElement": "SPDXRef-Package-rollup-4.68.2",
       "relationshipType": "OPTIONAL_DEPENDENCY_OF"
     },
     {
@@ -4221,7 +4134,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-immutable-5.1.9",
+      "spdxElementId": "SPDXRef-Package-immutable-5.1.10",
       "relatedSpdxElement": "SPDXRef-Package-sass-1.105.0",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -4251,7 +4164,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-types.node-26.5.1",
+      "spdxElementId": "SPDXRef-Package-types.node-26.6.6",
       "relatedSpdxElement": "SPDXRef-Package-vite-7.3.6",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -4276,12 +4189,12 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-postcss-8.5.28",
+      "spdxElementId": "SPDXRef-Package-postcss-8.5.32",
       "relatedSpdxElement": "SPDXRef-Package-vite-7.3.6",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-rollup-4.63.2",
+      "spdxElementId": "SPDXRef-Package-rollup-4.68.2",
       "relatedSpdxElement": "SPDXRef-Package-vite-7.3.6",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -4346,7 +4259,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-lilconfig-3.1.3",
+      "spdxElementId": "SPDXRef-Package-lilconfig-3.1.4",
       "relatedSpdxElement": "SPDXRef-Package-vue3-gettext-4.0.1",
       "relationshipType": "DEPENDENCY_OF"
     },

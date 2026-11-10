@@ -1,52 +1,76 @@
 {
   "auditReportVersion": 2,
   "vulnerabilities": {
-    "follow-redirects": {
-      "name": "follow-redirects",
-      "severity": "high",
+    "glob": {
+      "name": "glob",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1244013,
+          "name": "glob",
+          "dependency": "glob",
+          "title": "Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal",
+          "url": "https://github.com/advisories/GHSA-3g3m-2fjr-6pw4",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=9.0.0 <=14.0.1"
+        },
+        "minimatch"
+      ],
+      "effects": [
+        "vue3-gettext"
+      ],
+      "range": "9.0.0 - 14.0.1",
+      "nodes": [
+        "node_modules/glob"
+      ],
+      "fixAvailable": {
+        "name": "glob",
+        "version": "14.0.4",
+        "isSemVerMajor": true
+      }
+    },
+    "minimatch": {
+      "name": "minimatch",
+      "severity": "moderate",
       "isDirect": false,
       "via": [
         {
-          "source": 1242604,
-          "name": "follow-redirects",
-          "dependency": "follow-redirects",
-          "title": "follow-redirects array-form headers bypass cross-origin credential stripping",
-          "url": "https://github.com/advisories/GHSA-q3jh-wrc6-jgq8",
-          "severity": "high",
+          "source": 1244623,
+          "name": "minimatch",
+          "dependency": "minimatch",
+          "title": "minimatch has potential denial of service via globparts amplification",
+          "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+          "severity": "moderate",
           "cwe": [
-            "CWE-200",
-            "CWE-212"
+            "CWE-405"
           ],
           "cvss": {
             "score": 0,
             "vectorString": null
           },
-          "range": ">=1.16.0 <1.16.1"
-        },
-        {
-          "source": 1242605,
-          "name": "follow-redirects",
-          "dependency": "follow-redirects",
-          "title": "follow-redirects sensitiveHeaders regex escaping can expose credential headers",
-          "url": "https://github.com/advisories/GHSA-8r9p-f939-6h3c",
-          "severity": "high",
-          "cwe": [
-            "CWE-185",
-            "CWE-200"
-          ],
-          "cvss": {
-            "score": 0,
-            "vectorString": null
-          },
-          "range": ">=1.16.0 <1.16.1"
+          "range": ">=7.0.0 <11.0.1"
         }
       ],
-      "effects": [],
-      "range": "1.16.0",
-      "nodes": [
-        "node_modules/follow-redirects"
+      "effects": [
+        "glob"
       ],
-      "fixAvailable": true
+      "range": "7.0.0 - 11.0.0",
+      "nodes": [
+        "node_modules/minimatch"
+      ],
+      "fixAvailable": {
+        "name": "glob",
+        "version": "14.0.4",
+        "isSemVerMajor": true
+      }
     },
     "vite": {
       "name": "vite",
@@ -142,8 +166,26 @@
       ],
       "fixAvailable": {
         "name": "vite",
-        "version": "7.3.7",
+        "version": "7.3.8",
         "isSemVerMajor": false
+      }
+    },
+    "vue3-gettext": {
+      "name": "vue3-gettext",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "glob"
+      ],
+      "effects": [],
+      "range": ">=2.5.0-alpha.1",
+      "nodes": [
+        "node_modules/vue3-gettext"
+      ],
+      "fixAvailable": {
+        "name": "vue3-gettext",
+        "version": "2.4.0",
+        "isSemVerMajor": true
       }
     }
   },
@@ -151,10 +193,10 @@
     "vulnerabilities": {
       "info": 0,
       "low": 0,
-      "moderate": 0,
-      "high": 2,
+      "moderate": 3,
+      "high": 1,
       "critical": 0,
-      "total": 2
+      "total": 4
     },
     "dependencies": {
       "prod": 28,
