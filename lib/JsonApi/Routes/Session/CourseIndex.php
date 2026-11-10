@@ -62,7 +62,14 @@ class CourseIndex extends JsonApiController
         [$offset, $limit] = $this->getOffsetAndLimit();
 
         SessionHandler::synchronizeCourseDates($course->id);
-        $sessions = AttendanceSession::findBySeminar_id($course->id);
+        // Sessions for removed dates are retained for history, but must not
+        // consume page slots in a list that only displays existing dates.
+        $sessions = AttendanceSession::findBySQL(
+            'JOIN termine ON termine.termin_id = elan_attendance_sessions.termin_id
+             WHERE elan_attendance_sessions.seminar_id = ?
+             ORDER BY termine.date, elan_attendance_sessions.id',
+            [$course->id]
+        );
         $total = count($sessions);
         $data = array_slice($sessions, $offset, $limit);
 
