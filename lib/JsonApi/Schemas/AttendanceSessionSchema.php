@@ -35,6 +35,17 @@ class AttendanceSessionSchema extends \JsonApi\Schemas\SchemaProvider
     /**
      * {@inheritdoc}
      */
+    public function checkAllowedIncludes(ContextInterface $context): void
+    {
+        // Assign the inherited property: it is untyped in 5.4 and typed in newer cores.
+        $this->allowedIncludes = [self::REL_TERMIN, self::REL_COURSE];
+
+        parent::checkAllowedIncludes($context);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getId($resource): ?string
     {
         return $resource->id;

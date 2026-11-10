@@ -18,7 +18,7 @@ trait Schemas
 {
     public function registerSchemas(): array
     {
-        return [
+        $schemas = [
             \StudipAttendance\Models\AttendanceAuditLog::class => \StudipAttendance\JsonApi\Schemas\AttendanceAuditLogSchema::class,
             \StudipAttendance\Models\AttendanceEntry::class => \StudipAttendance\JsonApi\Schemas\AttendanceEntrySchema::class,
             \StudipAttendance\Models\AttendanceReport::class => \StudipAttendance\JsonApi\Schemas\AttendanceReportSchema::class,
@@ -26,5 +26,13 @@ trait Schemas
             \StudipAttendance\Models\AttendanceThreshold::class => \StudipAttendance\JsonApi\Schemas\AttendanceThresholdSchema::class,
             \StudipAttendance\Models\AttendanceViewPreset::class => \StudipAttendance\JsonApi\Schemas\AttendanceViewPresetSchema::class,
         ];
+
+        // Stud.IP 5.4 only maps CourseEvent; attendance relations use CourseDate.
+        $coreSchemas = (new \JsonApi\SchemaMap())();
+        if (!isset($coreSchemas[\CourseDate::class])) {
+            $schemas[\CourseDate::class] = \StudipAttendance\JsonApi\Schemas\CourseDateSchema::class;
+        }
+
+        return $schemas;
     }
 }
