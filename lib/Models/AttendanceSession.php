@@ -101,7 +101,7 @@ class AttendanceSession extends SimpleORMap implements AuditLogInterface
         return self::countBySql('termin_id = ?', [$terminId]) === 1;
     }
 
-    public static function findOneByTermin_id(string $terminId): self
+    public static function findOneByTermin_id(string $terminId): ?self
     {
         return self::findOneBySQL('termin_id = ?', [$terminId]);
     }

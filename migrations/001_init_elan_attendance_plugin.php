@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../lib/Helpers/CronjobRegistration.php';
 /**
  * InitElanAttendancePlugin
  *
@@ -12,14 +13,6 @@
  */
 final class InitElanAttendancePlugin extends Migration
 {
-    const PLUGIN_CRONJOBS_DIR_PATH = 'public/plugins_packages/elan-ev/ElanAttendancePlugin/cronjobs';
-    // TODO: how often should the cronjobs be processed?
-    const CRONJOBS = [
-        'attendance_sessions_sync.php' => [59,1,null,null],
-        'attendance_view_presets_process.php' => [59,1,null,null],
-        'attendance_report_process.php' => [59,1,null,null],
-    ];
-
     const PRE_BEGIN_BUFFER_MINUTES = 5;
     const POST_BEGIN_BUFFER_MINUTES = 5;
     const TOTP_TIMEWINDOW_SECONDS = 30;
@@ -127,18 +120,7 @@ final class InitElanAttendancePlugin extends Migration
         );
 
         // Add cronjobs.
-        $scheduler = CronjobScheduler::getInstance();
-        foreach (self::CRONJOBS as $cronjobFilename => $period) {
-            $cronjobPath =  self::PLUGIN_CRONJOBS_DIR_PATH . '/' . $cronjobFilename;
-            if (file_exists($GLOBALS['STUDIP_BASE_PATH'] . '/' . $cronjobPath)) {
-                $task_id = $scheduler->registerTask($cronjobPath, true);
-
-                if ($task_id && !empty($period)) {
-                    [$minute, $hour, $day, $month] = $period;
-                    $scheduler->schedulePeriodic($task_id, $minute, $hour, $day, $month);
-                }
-            }
-        }
+        \StudipAttendance\Helpers\CronjobRegistration::register();
 
         // Add global configs.
         Config::get()->create('ATTENDANCE_PRE_BEGIN_BUFFER', [
@@ -177,14 +159,7 @@ final class InitElanAttendancePlugin extends Migration
         $db->exec("DROP TABLE IF EXISTS `elan_attendance_thresholds`");
 
         // Remove cronjobs.
-        $scheduler = CronjobScheduler::getInstance();
-        foreach (array_keys(self::CRONJOBS) as $cronjobFilename) {
-            $cronjobPath =  self::PLUGIN_CRONJOBS_DIR_PATH . '/' . $cronjobFilename;
-            if (file_exists($GLOBALS['STUDIP_BASE_PATH'] . '/' . $cronjobPath)) {
-                $task_id = CronjobTask::findOneByFilename($cronjobPath)->task_id;
-                $scheduler->unregisterTask($task_id);
-            }
-        }
+        \StudipAttendance\Helpers\CronjobRegistration::unregister();
 
         // Remove Configs.
         Config::get()->delete('ATTENDANCE_PRE_BEGIN_BUFFER');

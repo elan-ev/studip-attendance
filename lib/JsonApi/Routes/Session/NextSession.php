@@ -18,6 +18,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use StudipAttendance\Helpers\TeacherWidgetHelper;
+use StudipAttendance\Helpers\SessionHandler;
 use StudipAttendance\Models\AttendanceSession;
 use StudipAttendance\Models\AttendanceEntry;
 
@@ -40,6 +41,7 @@ class NextSession extends NonJsonApiController
         $nextCourseDateForStudent = TeacherWidgetHelper::getNextTerminIdForStudent($user->id);
         $payload = [];
         if ($nextCourseDateForTeacher) {
+            SessionHandler::ensureSessionExistsFrom($nextCourseDateForTeacher);
             $session = AttendanceSession::findOneByTermin_id($nextCourseDateForTeacher->termin_id);
             $course = $session ? $session->course : null;
 
@@ -67,6 +69,7 @@ class NextSession extends NonJsonApiController
             ];
         }
         if ($nextCourseDateForStudent) {
+            SessionHandler::ensureSessionExistsFrom($nextCourseDateForStudent);
             $session = AttendanceSession::findOneByTermin_id($nextCourseDateForStudent->termin_id);
             $course = $session ? $session->course : null;
             $session_id = $session ? $session->id : null;

@@ -19,6 +19,7 @@ use JsonApi\JsonApiController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Seminar;
+use StudipAttendance\Helpers\SessionHandler;
 use StudipAttendance\JsonApi\Routes\Authority;
 use StudipAttendance\JsonApi\Schemas\AttendanceSessionSchema;
 use StudipAttendance\Models\AttendanceSession;
@@ -60,6 +61,7 @@ class CourseIndex extends JsonApiController
 
         [$offset, $limit] = $this->getOffsetAndLimit();
 
+        SessionHandler::synchronizeCourseDates($course->id);
         $sessions = AttendanceSession::findBySeminar_id($course->id);
         $total = count($sessions);
         $data = array_slice($sessions, $offset, $limit);

@@ -66,7 +66,24 @@ class SessionHandler
             $session->termin_id = $courseDate->termin_id;
             $session->seminar_id = $courseDate->range_id;
             $session->status = AttendanceSession::STATUS_IDLE;
-            $session->store();
+            try {
+                $session->store();
+            } catch (\PDOException $error) {
+                // A parallel course request or cron run may have inserted it
+                // after our existence check. Keep that session unchanged.
+                if ($error->getCode() !== '23000' || !AttendanceSession::isRecorded($courseDate->termin_id)) {
+                    throw $error;
+                }
+            }
+        }
+    }
+
+    public static function synchronizeCourseDates(string $courseId): void
+    {
+        // Include past dates as well: an existing course must work immediately
+        // after activation, even if no date notification reached this plugin.
+        foreach (CourseDate::findBySQL('range_id = ?', [$courseId]) as $date) {
+            self::ensureSessionExistsFrom($date);
         }
     }
 
@@ -93,12 +110,7 @@ class SessionHandler
             }
         }
 
-        $currentDates = CourseDate::findBySQL('range_id = ?', [$course->getId()]);
-        if (!empty($currentDates)) {
-            foreach ($currentDates as $date) {
-                self::ensureSessionExistsFrom($date);
-            }
-        }
+        self::synchronizeCourseDates($course->getId());
     }
 
     public static function validateCheckin(int $sessionId, string $userId, string $token): int

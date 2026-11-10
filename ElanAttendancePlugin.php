@@ -62,7 +62,7 @@ class ElanAttendancePlugin extends StudIPPlugin implements SystemPlugin, Standar
         if (!$courseDate) {
             $updateSession = true;
         } elseif ($isExpired) {
-            $updateSession = (bool) TeacherWidgetHelper::getNextTerminIdForUser($user);
+            $updateSession = (bool) TeacherWidgetHelper::getNextTerminIdForTeacher($user->id);
         } else {
             $updateSession = false;
         }
